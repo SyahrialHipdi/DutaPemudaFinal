@@ -74,14 +74,15 @@
                         <div class="card px-lg-5 px-3" style="border-radius: 15px;">
                             <div class="card-body py-3 ">
 
-                                <form method="POST" action="formPp" id="myForm" class="form-card mt-4 needs-validation"
-                                    novalidate>
+                                {{-- form start --}}
+                                <form method="POST" action="/user/register" id="myForm"
+                                    class="form-card mt-4 needs-validation" novalidate>
                                     @csrf
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Nama lengkap<span class="text-danger">
                                                     *</span></label>
-                                            <input class="form-control" type="text" id="nama" name="nama_lengkap"
+                                            <input class="form-control" type="text" id="nama" name="nama"
                                                 placeholder="" required>
                                             <div class="invalid-feedback">Nama lengkap wajib diisi.</div>
                                         </div>
@@ -128,7 +129,7 @@
                                                 </div>
 
                                                 <div class="flex-fill mr-3">
-                                                    <select class="form-control w-100" id="tgl_lahir_dd" name="tgl_lahir_mm"
+                                                    <select class="form-control w-100" id="tgl_lahir_mm" name="tgl_lahir_mm"
                                                         required>
                                                         <option value="">dd</option>
                                                         @for ($i = 1; $i <= 12; $i++)
@@ -139,7 +140,7 @@
                                                 </div>
 
                                                 <div class="flex-fill mr-3">
-                                                    <select class="form-control w-100" id="tgl_lahir_dd"
+                                                    <select class="form-control w-100" id="tgl_lahir_yyyy"
                                                         name="tgl_lahir_yyyy" required>
                                                         <option value="">dd</option>
                                                         @for ($i = 1990; $i <= date('Y'); $i++)
@@ -185,32 +186,48 @@
                                             </select>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
+
+                                        {{-- <div class="form-group col-sm-6 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">RW<span class="text-danger">
                                                     *</span></label>
                                             <input class="form-control" type="number" max="999" min="0"
                                                 id="rw" name="rw" placeholder="" required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">RT<span class="text-danger">
+                                        </div> --}}
+
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">RT/RW<span class="text-danger">
                                                     *</span></label>
-                                            <input class="form-control" type="number" max="999" min="0"
-                                                id="rt" name="rt" placeholder="" required>
+                                            <input class="form-control" type="text" max="999" min="0"
+                                                id="rt_rw" name="rt_rw" placeholder="001/002" required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">alamat<span class="text-danger">
+                                                    *</span></label>
+                                            <input class="form-control" type="text" id="alamat" name="alamat"
+                                                placeholder="001/002" required>
+                                            <div class="invalid-feedback">Wajib diisi.</div>
+                                        </div>
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">alamat<span class="text-danger">
+                                                    *</span></label>
+                                            <input class="form-control" type="text" id="kodePos" name="kodePos"
+                                                placeholder="001/002" required>
+                                            <div class="invalid-feedback">Wajib diisi.</div>
+                                        </div>
+
                                     </div>
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Proposal kepeloporan
-                                                <small>(link
-                                                    gdrive)</small><span class="text-danger"> *</span></label>
-                                            <input class="form-control" type="text" id="link_proposal"
-                                                name="link_proposal" placeholder="" required>
+                                                <small>(link gdrive)</small><span class="text-danger"> *</span></label>
+                                            <input class="form-control" type="text" id="proposal" name="proposal"
+                                                placeholder="" required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-between text-left">
+                                    {{-- <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Upload foto KTP <small>(max
                                                     200kb)</small><span class="text-danger">
@@ -219,7 +236,7 @@
                                                 placeholder="" required>
                                             <div class="invalid-feedback">Wajib upload foto KTP.</div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     {{-- <div class="form-check mt-3">
@@ -231,14 +248,12 @@
                                     </div> --}}
 
                                     <div class="form-check text-left ml-5 my-4">
-                                        <input class="form-check-input" type="checkbox" id="invalidCheck" required>
+                                        <input name="cek" class="form-check-input" type="checkbox" id="invalidCheck"
+                                            required>
                                         <label class="">
                                             Saya menyatakan bahwa seluruh data yang saya isi adalah benar.
                                         </label>
                                     </div>
-
-
-
                             </div>
                             <div id="alert-warning-2" class="alert alert-danger d-none" role="alert">
                                 Silakan lengkapi data anda.
