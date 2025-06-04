@@ -49,14 +49,6 @@ Route::prefix('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->middleware('auth:web')->name('user.dashboard');
-<<<<<<< Updated upstream
-=======
-    Route::get('/ubahPassword', function () {
-        return view('user.ubahPassword');
-    })->middleware('auth:web')->name('user.ubahPassword');
-
-
->>>>>>> Stashed changes
 
     Route::get('/show', function () {
         $user = Auth::user();
@@ -70,13 +62,8 @@ Route::prefix('user')->group(function () {
 
     Route::get('/edit', function () {
         $user = Auth::user();
-<<<<<<< Updated upstream
         return view('user.edit',compact('user'));
     })->middleware('auth:web')->name('user.edit');
-=======
-        return view('user.edit', compact('user'));
-    })->middleware('auth:web');
->>>>>>> Stashed changes
 
     Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 });
