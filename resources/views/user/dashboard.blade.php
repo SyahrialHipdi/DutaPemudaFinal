@@ -7,6 +7,17 @@
                 <div class="col-md-6">
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline mt-5">
+                        @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+        <a href="/user/edit">
+            <div class="alert alert-primary">Klik Disini untuk ganti password</div>
+        </a>
+        @endif
+        @if (session('berhasil'))
+        <div class="alert alert-success">{{ session('berhasil') }}</div>
+            
+
+    @endif
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 <img class="profile-user-img img-fluid img-circle" src="img/user.png"
@@ -38,7 +49,7 @@
                                 </li>
                             </ul>
 
-                            <a href="{{ route('user.ubahPassword') }}" class="btn btn-primary btn-block"><b>Ubah Password</b></a>
+                            <a href="{{ route('user.edit') }}" class="btn btn-primary btn-block"><b>Ubah Password</b></a>
                         </div>
                         <!-- /.card-body -->
                     </div>

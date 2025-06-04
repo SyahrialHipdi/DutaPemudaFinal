@@ -49,11 +49,6 @@ Route::prefix('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->middleware('auth:web')->name('user.dashboard');
-    Route::get('/ubahPassword', function () {
-        return view('user.ubahPassword');
-    })->middleware('auth:web')->name('user.ubahPassword');
-
-    
 
     Route::get('/show', function () {
         $user = Auth::user();
@@ -68,7 +63,7 @@ Route::prefix('user')->group(function () {
     Route::get('/edit', function () {
         $user = Auth::user();
         return view('user.edit',compact('user'));
-    })->middleware('auth:web');
+    })->middleware('auth:web')->name('user.edit');
 
     Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 });

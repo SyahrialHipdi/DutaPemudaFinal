@@ -1,29 +1,46 @@
-@extends('layouts.app')
-
-@section('title', 'User Dashboard')
-
+@extends('layouts.pendaftar')
+@section('title', 'ubah password')
 @section('content')
 
-<form action="{{ route('user.update', $user->id) }}" method="POST">
-        @csrf
-        @method('PUT')
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="card card-primary card-outline mt-5">
+                        <div class="card-body box-profile">
+                            <form action="{{ route('user.update', $user->id) }}" method="POST">
+                                 @csrf
+                                @method('PUT')
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-control-label" for="password">Password Baru</label>
+                                    <input type="password" id="password" class="form-control form-control-lg" name="password" />
+                                </div>
 
-        <label for="password">Password baru:</label>
-        <input type="text" name="password" id="password" value="" required>
-        <input type="text" name="password_confirmation" id="password_confirmation" value="" required>
-        <br><br>
+                                <div data-mdb-input-init class="form-outline mb-4">
+                                    <label class="form-control-label" for="password_confirmation">Konfirmasi Password Baru</label>
+                                    <input type="password" id="password_confirmation" class="form-control form-control-lg" name="password_confirmation" />
+                                </div>
 
-        <button type="submit">Update</button>
+                                {{-- <div class="d-flex justify-content-center flex-column">
+                                    <a href="{{ route('user.dashboard') }}" class="btn btn-primary btn-block"><b>Ubah
+                                            Password</b></a>
+                                </div> --}}
+
+                                <button type="submit">Update</button>
         <a href="/user/dashboard">
             <button type="button">Batal</button>
         </a>
-    </form>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col -->
+
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
 @endsection
-
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-
-                                            {{-- @error('cek')
-            <div style="color:red;">{{ $message }}</div>
-                            @enderror --}}

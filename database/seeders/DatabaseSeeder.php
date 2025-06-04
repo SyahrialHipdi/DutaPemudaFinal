@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Lomba;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -35,6 +36,12 @@ class DatabaseSeeder extends Seeder
         'username' => 'juri@example.com',
         'role' => 'juri',
         'password' => '12345',
+        ]);
+
+        Lomba::create([
+        'nama_lomba' => 'Pemuda Pelopor',
+        'tahun' => '2025',
+        'deskripsi' => 'Pemuda Pelopor 2025',
         ]);
     }
 }
