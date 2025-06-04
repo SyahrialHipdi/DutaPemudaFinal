@@ -62,7 +62,7 @@ Route::prefix('user')->group(function () {
 
     Route::get('/edit', function () {
         $user = Auth::user();
-        return view('user.edit',compact('user'));
+        return view('user.edit', compact('user'));
     })->middleware('auth:web')->name('user.edit');
 
     Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
