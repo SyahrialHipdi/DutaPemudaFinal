@@ -45,25 +45,38 @@ Route::prefix('user')->group(function () {
     Route::post('/register', [UserAuthController::class, 'register']);
     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     Route::get('/show/{user}', [UserController::class, 'show'])->name('user.show');
-    
+
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->middleware('auth:web')->name('user.dashboard');
+<<<<<<< Updated upstream
+=======
+    Route::get('/ubahPassword', function () {
+        return view('user.ubahPassword');
+    })->middleware('auth:web')->name('user.ubahPassword');
+
+
+>>>>>>> Stashed changes
 
     Route::get('/show', function () {
         $user = Auth::user();
-        return view('user.show',compact('user'));
+        return view('user.show', compact('user'));
     })->middleware('auth:web');
 
     Route::get('/progress', function () {
         $user = Auth::user();
-        return view('user.progress',compact('user'));
+        return view('user.progress', compact('user'));
     })->middleware('auth:web');
 
     Route::get('/edit', function () {
         $user = Auth::user();
+<<<<<<< Updated upstream
         return view('user.edit',compact('user'));
     })->middleware('auth:web')->name('user.edit');
+=======
+        return view('user.edit', compact('user'));
+    })->middleware('auth:web');
+>>>>>>> Stashed changes
 
     Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 });
@@ -77,7 +90,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegisterForm'])->name('admin.register');
     Route::post('/register', [AdminAuthController::class, 'register']);
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
-    
+
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     })->middleware('auth:admin')->name('admin.dashboard');
@@ -86,16 +99,16 @@ Route::prefix('admin')->group(function () {
         return view('admin.index');
     })->middleware('auth:admin');
 
-        Route::middleware(['auth:admin', 'admin.role:admin'])->group(function () {
+    Route::middleware(['auth:admin', 'admin.role:admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
         // Route khusus admin
     });
-    
+
     Route::middleware(['auth:admin', 'admin.role:verifikator'])->group(function () {
         Route::get('/verifikator/dashboard', [VerifikatorController::class, 'dashboard']);
         // Route khusus verifikator
     });
-    
+
     Route::middleware(['auth:admin', 'admin.role:juri'])->group(function () {
         Route::get('/juri/dashboard', [JuriController::class, 'dashboard']);
         // Route khusus juri

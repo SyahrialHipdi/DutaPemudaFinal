@@ -64,7 +64,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    {{-- <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a> --}}
+                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    {{-- <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a> --}}
+                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    {{-- <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a> --}}
+                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +198,8 @@
                         <div class="col-lg-10 col-md-12">
                             <h5>PPAP dan PPAN</h5>
                             <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
-                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff" id="kotak">
+                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff"
+                                id="kotak">
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
                                     <span id="days2" class="value">0</span>
                                     <span class="label">Hari</span>
@@ -360,28 +361,29 @@
     </section>
     <!-- End Blog Area -->
 
-<script>
-    //Target Countdown
-const targetDate = new Date(new Date().getFullYear(),6,10,0,0,0);
-function updateCountdown(){
-    const now = new Date();
-    const diff = targetDate - now;
+    <script>
+        //Target Countdown
+        const targetDate = new Date(new Date().getFullYear(), 6, 10, 0, 0, 0);
 
-    if (diff <= 0){
-        document.getElementById('kotak').innerHTML = "Hallo";
-    }
-    const day = Math.floor(diff/(1000*60*60*24));
-    const hours = Math.floor((diff/(1000*60*60))%24);
-    const minutes = Math.floor((diff/(1000*60))%60);
-    const seconds = Math.floor((diff/(1000))%60);
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
 
-    document.getElementById('days').innerText = day;
-    document.getElementById('hours').innerText = hours;
-    document.getElementById('minutes').innerText = minutes;
-    document.getElementById('seconds').innerText = seconds;
-}
+            if (diff <= 0) {
+                document.getElementById('kotak').innerHTML = "Hallo";
+            }
+            const day = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / (1000)) % 60);
 
-updateCountdown();
-setInterval(updateCountdown,60);
-</script>    
+            document.getElementById('days').innerText = day;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 60);
+    </script>
 @endsection

@@ -2,414 +2,405 @@
 <html lang="en">
 
 <head>
-    <title>Duta Pemuda</title>
-    <!-- Meta -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="author" content="Phoenixcoded" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title')</title>
 
-    {{-- google fonts --}}
-    <link
-        href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
-        rel="stylesheet" />
-
-    <!-- Favicon icon -->
+    <!-- Favicon -->
     <link rel="icon" href="img/favicon.png" />
 
-    <!-- vendor css -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}" />
-    {{-- <link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}" /> --}}
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-    {{-- datatables --}}
-    <link href="{{asset('css/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
-
-    <style>
-        .pcoded-header .mobile-menu span,
-        .pcoded-header .mobile-menu span::before,
-        .pcoded-header .mobile-menu span::after {
-            background-color: #000000 !important;
-        }
-    </style>
-
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/pendaftar/adminlte.min.css') }}" />
     @stack('styles')
 </head>
 
-<body class="">
-    <!-- [ navigation menu ] start -->
-    <nav class="pcoded-navbar">
-        <div class="navbar-wrapper">
-            <div class="navbar-content scroll-div">
-                <div class="">
-                    <div class="collapse" id="nav-user-link">
-                        <ul class="list-unstyled">
-                            <li class="list-group-item">
-                                <a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a>
-                            </li>
-                        </ul>
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fa fa-bars"></i></a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="../../index3.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                        <i class="fa fa-search"></i>
+                    </a>
+                    <div class="navbar-search-block">
+                        <form class="form-inline">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                                    aria-label="Search">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fa fa-comments"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 mr-3 img-circle">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Brad Diesel
+                                        <span class="float-right text-sm text-danger"><i class="fa fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">Call me whenever you can...</p>
+                                    <p class="text-sm text-muted"><i class="fa fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        John Pierce
+                                        <span class="float-right text-sm text-muted"><i class="fa fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">I got your message bro</p>
+                                    <p class="text-sm text-muted"><i class="fa fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <!-- Message Start -->
+                            <div class="media">
+                                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar"
+                                    class="img-size-50 img-circle mr-3">
+                                <div class="media-body">
+                                    <h3 class="dropdown-item-title">
+                                        Nora Silvester
+                                        <span class="float-right text-sm text-warning"><i
+                                                class="fa fa-star"></i></span>
+                                    </h3>
+                                    <p class="text-sm">The subject goes here</p>
+                                    <p class="text-sm text-muted"><i class="fa fa-clock mr-1"></i> 4 Hours Ago</p>
+                                </div>
+                            </div>
+                            <!-- Message End -->
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+                    </div>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">15 Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-envelope mr-2"></i> 4 new messages
+                            <span class="float-right text-muted text-sm">3 mins</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-users mr-2"></i> 8 friend requests
+                            <span class="float-right text-muted text-sm">12 hours</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fa fa-file mr-2"></i> 3 new reports
+                            <span class="float-right text-muted text-sm">2 days</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fa fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
+                        role="button">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="../../index3.html" class="brand-link">
+                <img src="../../dist/img/favicon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">Admin Duta Pemuda
+                </span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block">Syahrial Hipdi</a>
                     </div>
                 </div>
 
-                <ul class="nav pcoded-inner-navbar">
-                    {{-- <li class="nav-item pcoded-menu-caption">
-                        <label>Navigation</label>
-                    </li> --}}
-                    <li class="nav-item mt-4">
-                        {{-- <a href="{{ route('admin.dashboard') }}" class="nav-link"><span class="pcoded-micon"><i
-                                    class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a> --}}
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#!" class="nav-link"><span class="pcoded-micon"><i
-                                    class="feather icon-layout"></i></span><span class="pcoded-mtext">Kelola
-                                akun</span></a>
-                        <ul class="pcoded-submenu">
-                            <li>
-                                {{-- <a href="{{ route('editor') }}">Editor</a> --}}
-                            </li>
-                            <li>
-                                <a href="layout-horizontal.html" target="_blank">Peserta</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item pcoded-hasmenu">
-                        <a href="#!" class="nav-link"><span class="pcoded-micon"><i
-                                    class="feather icon-box"></i></span><span class="pcoded-mtext">Kelola
-                                Pendaftaran</span></a>
-                        <ul class="pcoded-submenu">
-                            <li><a href="bc_alert.html">Pemuda Pelopor</a></li>
-                            <li><a href="bc_button.html">PPAP</a></li>
-                            <li><a href="bc_badges.html">PPAN</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <!-- SidebarSearch Form -->
+                <div class="form-inline">
+                    <div class="input-group" data-widget="sidebar-search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <div class="input-group-append">
+                            <button class="btn btn-sidebar">
+                                <i class="fa fa-search fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="../../index.html" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <i class="nav-icon fa fa-circle"></i>
+                                <p>
+                                    Admin
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="data-juri.html" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Juri
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="data-verifikator.html" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>
+                                            Verifikator
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="data-admincustom.html" class="nav-link active">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Admin Custom
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-circle"></i>
+                                <p>
+                                    Pendaftar
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>PP
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="fa fa-dot-circle nav-icon"></i>
+                                                <p>2025</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>
+                                            PPAN
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="pendaftar/2025/ppan25.html" class="nav-link">
+                                                <i class="fa fa-dot-circle nav-icon"></i>
+                                                <p>2025</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>PPAP
+                                            <i class="right fa fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="pendaftar/2025/ppap25.html" class="nav-link">
+                                                <i class="fa fa-dot-circle nav-icon"></i>
+                                                <p>2025</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                </nav>
+                <!-- /.sidebar-menu -->
             </div>
-        </div>
-    </nav>
-    <!-- [ navigation menu ] end -->
-    <!-- [ Header ] start -->
-    <header class="navbar pcoded-header navbar-expand-lg navbar-dark header-light">
-        <div class="m-header">
-            <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-            <a href="#!" class="b-brand">
-                <img src="{{asset('img/logo.png')}}" alt="" width="65%" class="logo" />
-            </a>
-            <a href="#!" class="mob-toggler">
-                <i class="feather icon-more-vertical"></i>
-            </a>
-        </div>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu profile-notification">
-                            <ul class="pro-body">
-                                <li>
-                                    <a href="user-profile.html" class="dropdown-item"><i class="fas fa-circle"></i>
-                                        Profile</a>
-                                </li>
-                                <li>
-                                    <a href="email_inbox.html" class="dropdown-item"><i class="fas fa-circle"></i> My
-                                        Messages</a>
-                                </li>
-                                <li>
-                                    <a href="auth-signin.html" class="dropdown-item"><i class="fas fa-circle"></i>
-                                        Lock
-                                        Screen</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <div class="dropdown mega-menu">
-                        <a class="dropdown-toggle h-drop" href="#" data-toggle="dropdown">
-                            Mega
-                        </a>
-                        <div class="dropdown-menu profile-notification">
-                            <div class="row no-gutters">
-                                <div class="col">
-                                    <h6 class="mega-title">UI Element</h6>
-                                    <ul class="pro-body">
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Alert</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Button</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Badges</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Cards</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Modal</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="fas fa-circle"></i>
-                                                Tabs & pills</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <h6 class="mega-title">Forms</h6>
-                                    <ul class="pro-body">
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Elements</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Validation</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Masking</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Wizard</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Picker</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-minus"></i>
-                                                Select</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <h6 class="mega-title">Application</h6>
-                                    <ul class="pro-body">
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i class="feather icon-mail"></i>
-                                                Email</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-clipboard"></i>
-                                                Task</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-check-square"></i>
-                                                To-Do</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-image"></i>
-                                                Gallery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-help-circle"></i>
-                                                Helpdesk</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col">
-                                    <h6 class="mega-title">Extension</h6>
-                                    <ul class="pro-body">
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-file-plus"></i>
-                                                Editor</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-file-minus"></i>
-                                                Invoice</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-calendar"></i>
-                                                Full calendar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-upload-cloud"></i>
-                                                File upload</a>
-                                        </li>
-                                        <li>
-                                            <a href="#!" class="dropdown-item"><i
-                                                    class="feather icon-scissors"></i>
-                                                Image cropper</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li>
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="icon feather icon-bell"></i>
-                            <span class="badge badge-pill badge-danger">5</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right notification">
-                            <div class="noti-head">
-                                <h6 class="d-inline-block m-b-0">
-                                    Notifications
-                                </h6>
-                                <div class="float-right">
-                                    <a href="#!" class="m-r-10">mark as read</a>
-                                    <a href="#!">clear all</a>
-                                </div>
-                            </div>
-                            <ul class="noti-body">
-                                <li class="n-title">
-                                    <p class="m-b-0">NEW</p>
-                                </li>
-                                <li class="notification">
-                                    <div class="media">
-                                        {{-- <img class="img-radius" src="assets/images/user/avatar-1.jpg"
-                                            alt="Generic placeholder image" /> --}}
-                                        <div class="media-body">
-                                            <p>
-                                                <strong>John Doe</strong><span class="n-time text-muted"><i
-                                                        class="icon feather icon-clock m-r-10"></i>5 min</span>
-                                            </p>
-                                            <p>New ticket Added</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="n-title">
-                                    <p class="m-b-0">EARLIER</p>
-                                </li>
-                                <li class="notification">
-                                    <div class="media">
-                                        {{-- <img class="img-radius" src="assets/images/user/avatar-2.jpg"
-                                            alt="Generic placeholder image" /> --}}
-                                        <div class="media-body">
-                                            <p>
-                                                <strong>Joseph William</strong><span class="n-time text-muted"><i
-                                                        class="icon feather icon-clock m-r-10"></i>10 min</span>
-                                            </p>
-                                            <p>
-                                                Prchace New Theme and make
-                                                payment
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="media">
-                                        {{-- <img class="img-radius" src="assets/images/user/avatar-1.jpg"
-                                            alt="Generic placeholder image" /> --}}
-                                        <div class="media-body">
-                                            <p>
-                                                <strong>Sara Soudein</strong><span class="n-time text-muted"><i
-                                                        class="icon feather icon-clock m-r-10"></i>12 min</span>
-                                            </p>
-                                            <p>currently login</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="media">
-                                        {{-- <img class="img-radius" src="assets/images/user/avatar-2.jpg"
-                                            alt="Generic placeholder image" /> --}}
-                                        <div class="media-body">
-                                            <p>
-                                                <strong>Joseph William</strong><span class="n-time text-muted"><i
-                                                        class="icon feather icon-clock m-r-10"></i>30 min</span>
-                                            </p>
-                                            <p>
-                                                Prchace New Theme and make
-                                                payment
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="noti-footer">
-                                <a href="#!">show all</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="dropdown drp-user">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="feather icon-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right profile-notification">
-                            <div class="pro-head">
-                                {{-- <img src="assets/images/user/avatar-1.jpg" class="img-radius"
-                                    alt="User-Profile-Image" /> --}}
-                                <span>John Doe</span>
-                                <a href="auth-signin.html" class="dud-logout" title="Logout">
-                                    <i class="feather icon-log-out"></i>
-                                </a>
-                            </div>
-                            <ul class="pro-body">
-                                <li>
-                                    <a href="user-profile.html" class="dropdown-item"><i
-                                            class="feather icon-user"></i>
-                                        Profile</a>
-                                </li>
-                                <li>
-                                    <a href="email_inbox.html" class="dropdown-item"><i
-                                            class="feather icon-mail"></i>
-                                        My Messages</a>
-                                </li>
-                                <li>
-                                    <a href="auth-signin.html" class="dropdown-item"><i
-                                            class="feather icon-lock"></i>
-                                        Lock Screen</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </header>
-    <!-- [ Header ] end -->
+            <!-- /.sidebar -->
+        </aside>
 
-    {{-- main content --}}
-    @yield('content')
-    {{-- end main content --}}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>DataTables</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">DataTables</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
 
-    <!-- Muat jQuery terlebih dahulu -->
+            {{-- main content --}}
+            @yield('content')
+            {{-- ./main content --}}
+
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 3.2.0
+            </div>
+            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery Min JS -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/vendor-all.min.js') }}"></script>
-    <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('js/datatables/datatables-demo.js') }}"></script>
-    <script src="{{ asset('js/plugins/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/pcoded.min.js') }}"></script>
-
-
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('js/plugins/bootstrap.bundle.min.js') }}"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-bs4/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-responsive/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-responsive/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-buttons/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-buttons/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables-buttons/buttons.colVis.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('js/pendaftar/adminlte.min.js') }}"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="{{ asset('js/pendaftar/demo.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
 </body>
 
 </html>

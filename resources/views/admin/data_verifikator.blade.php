@@ -20,7 +20,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Password</th>
-                                        <th>Role</th>
+                                        <th>Priviledge</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>

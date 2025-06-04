@@ -13,8 +13,8 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('css/pendaftar/adminlte.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/pendaftar/adminlte.min.css') }}" />
     <!-- Theme style -->
     @stack('styles')
 </head>
@@ -111,10 +111,10 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/plugins/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{asset('js/pendaftar/adminlte.min.js')}}"></script>
-    <script src="{{asset('js/pendaftar/demo.js')}}"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/pendaftar/adminlte.min.js') }}"></script>
+    <script src="{{ asset('js/pendaftar/demo.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src=""></script>
     <!-- AdminLTE App -->
