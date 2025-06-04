@@ -114,7 +114,11 @@
                         </div>
                         <div class="col-lg-2 col-12 ">
                             <div class="get-quote float-right">
-                                <a href="{{ route('user.login') }}" class="btn">Login</a>
+                                @auth
+        <a href="{{ route('user.dashboard') }}" class="btn">Profile</a>
+    @else
+        <a href="{{ route('user.login') }}" class="btn">Login</a>
+    @endauth
                             </div>
                         </div>
                     </div>
