@@ -172,22 +172,22 @@
                             <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
                                 style="background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff">
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="days2" class="value">0</span>
+                                    <span id="days" class="value">0</span>
                                     <span class="label">Hari</span>
                                 </div>
                                 <div class="display-4 mx-2">:</div>
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="hours2" class="value">00</span>
+                                    <span id="hours" class="value">00</span>
                                     <span class="label">Jam</span>
                                 </div>
                                 <div class="display-4 mx-2">:</div>
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="minutes2" class="value">00</span>
+                                    <span id="minutes" class="value">00</span>
                                     <span class="label">Menit</span>
                                 </div>
                                 <div class="display-4 mx-2">:</div>
                                 <div class="d-flex flex-column countdown-unit text-center px-3">
-                                    <span id="seconds2" class="value">00</span>
+                                    <span id="seconds" class="value">00</span>
                                     <span class="label">Detik</span>
                                 </div>
                             </div>
@@ -198,7 +198,7 @@
                         <div class="col-lg-10 col-md-12">
                             <h5>PPAP dan PPAN</h5>
                             <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
-                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff">
+                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff" id="kotak">
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
                                     <span id="days2" class="value">0</span>
                                     <span class="label">Hari</span>
@@ -360,4 +360,28 @@
     </section>
     <!-- End Blog Area -->
 
+<script>
+    //Target Countdown
+const targetDate = new Date(new Date().getFullYear(),6,10,0,0,0);
+function updateCountdown(){
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0){
+        document.getElementById('kotak').innerHTML = "Hallo";
+    }
+    const day = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff/(1000*60*60))%24);
+    const minutes = Math.floor((diff/(1000*60))%60);
+    const seconds = Math.floor((diff/(1000))%60);
+
+    document.getElementById('days').innerText = day;
+    document.getElementById('hours').innerText = hours;
+    document.getElementById('minutes').innerText = minutes;
+    document.getElementById('seconds').innerText = seconds;
+}
+
+updateCountdown();
+setInterval(updateCountdown,60);
+</script>    
 @endsection

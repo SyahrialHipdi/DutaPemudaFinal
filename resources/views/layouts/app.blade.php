@@ -99,10 +99,10 @@
                                             <a href="{{ route('home') }}">Beranda</a>
                                         </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            <a href="/kategori">Kategori</a>
+                                            <a href="{{route('kategori')}}">Kategori</a>
                                         </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            <a href="/kategori">FAQ</a>
+                                            <a href="{{route('kategori')}}">FAQ</a>
                                         </li>
                                         <li class="{{ request()->is('pages*') ? 'active' : '' }}">
                                             <a href="/berita">Berita</a>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 // Landing Page Route
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/kategori', [LandingPageController::class, 'kategori'])->name('kategori');
 
 Route::prefix('admin')->middleware(['auth:admin', 'admin.role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -48,6 +49,9 @@ Route::prefix('user')->group(function () {
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->middleware('auth:web')->name('user.dashboard');
+    Route::get('/ubahPassword', function () {
+        return view('user.ubahPassword');
+    })->middleware('auth:web')->name('user.ubahPassword');
 
     
 

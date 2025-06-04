@@ -21,7 +21,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $peserta = User::findOrFail($id);
-        return view('user.edit', compact('user'));
+        return view('user.ubahPassword', compact('user'));
     }
 
     public function update(Request $request, $id)
