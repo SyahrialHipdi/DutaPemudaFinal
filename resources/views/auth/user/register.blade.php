@@ -168,6 +168,7 @@
                                             <select class="form-control w-100" id="kota" name="kota" required>
                                                 <option value="">--Pilih Kota--</option>
                                             </select>
+                                            <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                         <div class="form-group col-sm-6 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Kecamatan<span class="text-danger">
@@ -203,17 +204,17 @@
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">alamat<span class="text-danger">
+                                            <label class="form-control-label h6 px-3">Alamat<span class="text-danger">
                                                     *</span></label>
                                             <input class="form-control" type="text" id="alamat" name="alamat"
-                                                placeholder="001/002" required>
+                                                required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">alamat<span class="text-danger">
+                                            <label class="form-control-label h6 px-3">Kode Pos<span class="text-danger">
                                                     *</span></label>
                                             <input class="form-control" type="text" id="kodePos" name="kodePos"
-                                                placeholder="001/002" required>
+                                                required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
 

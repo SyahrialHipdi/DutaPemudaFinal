@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -73,28 +74,28 @@ class UserAuthController extends Controller
         $hashedPassword = Hash::make($password);
 
         if (!checkdate((int)$request->tgl_lahir_mm, (int)$request->tgl_lahir_dd, (int)$request->tgl_lahir_yyyy)) {
-        return back()->withErrors(['tanggal' => 'Tanggal tidak valid.']);
-    }
+            return back()->withErrors(['tanggal' => 'Tanggal tidak valid.']);
+        }
 
-    $tglLahircek = Carbon::createFromFormat('Y-m-d', $tanggal_lengkap);
+        $tglLahircek = Carbon::createFromFormat('Y-m-d', $tanggal_lengkap);
 
-    $batasUsiaMax = Carbon::now()->subYears(30);
-    $batasUsiaMin = Carbon::now()->subYears(17);
+        $batasUsiaMax = Carbon::now()->subYears(30);
+        $batasUsiaMin = Carbon::now()->subYears(17);
 
-    if ($tglLahircek < $batasUsiaMax) {
-        return back()->withErrors(['tanggal' => 'Usia maksimal adalah 30 tahun.']);
-    }
+        if ($tglLahircek < $batasUsiaMax) {
+            return back()->withErrors(['tanggal' => 'Usia maksimal adalah 30 tahun.']);
+        }
 
-    if ($tglLahircek > $batasUsiaMin) {
-        return back()->withErrors(['tanggal' => 'Usia minimal adalah 17 tahun.']);
-    }
+        if ($tglLahircek > $batasUsiaMin) {
+            return back()->withErrors(['tanggal' => 'Usia minimal adalah 17 tahun.']);
+        }
 
-    $photoPath = null;
-    if ($request->hasFile('ktp')) {
-        $photoFile = $request->file('ktp');
-        $photoName = Str::random(20) . '.' . $photoFile->getClientOriginalExtension();
-        $photoPath = $photoFile->storeAs('ktp', $photoName, 'public');
-    }
+        $photoPath = null;
+        if ($request->hasFile('ktp')) {
+            $photoFile = $request->file('ktp');
+            $photoName = Str::random(20) . '.' . $photoFile->getClientOriginalExtension();
+            $photoPath = $photoFile->storeAs('ktp', $photoName, 'public');
+        }
 
         $user = User::create([
             'nik' => $request->nik,

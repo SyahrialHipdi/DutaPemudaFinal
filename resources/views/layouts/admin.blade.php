@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}">
+    {{-- nice select --}}
+    <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" />
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/pendaftar/adminlte.min.css') }}" />
     @stack('styles')
@@ -341,13 +345,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>DataTables</h1>
+                            <h1>Data Admin</h1>
                         </div>
                         <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
-                            </ol>
+                            <button class="btn btn-primary float-right">
+                                Tambah Admin
+                            </button>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -389,6 +392,9 @@
     <script src="{{ asset('js/plugins/jszip/jszip.min.js') }}"></script>
     <script src="{{ asset('js/plugins/pdfmake/pdfmake.min.js') }}"></script>
     <script src="{{ asset('js/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    {{-- nice select --}}
+    <script src="{{ asset('js/niceselect.js') }}"></script>
+
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.colVis.min.js') }}"></script>
@@ -397,14 +403,15 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('js/pendaftar/demo.js') }}"></script>
     <!-- Page specific script -->
-    <script>
+    {{-- <script>
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["excel"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
             $('#example2').DataTable({
                 "paging": true,
                 "lengthChange": false,
@@ -414,6 +421,12 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+        });
+    </script> --}}
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+            $('select').niceSelect();
         });
     </script>
 </body>
