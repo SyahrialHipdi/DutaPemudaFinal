@@ -10,10 +10,9 @@ class Lomba extends Model
 {
     //
     protected $fillable = [
-        'name',
-        'username',
-        'role',
-        'password',
+        'nama_lomba',
+        'tahun',
+        'deskripsi',
     ];
 
     public function pendaftaran(): HasMany

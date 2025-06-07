@@ -245,9 +245,24 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{route('admin.data_lomba')}}" class="nav-link">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>
+                                            Lomba
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="data-admincustom.html" class="nav-link active">
                                         <i class="fa fa-circle nav-icon"></i>
-                                        <p>Admin Custom
+                                        <p>Nilai
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="data-admincustom.html" class="nav-link active">
+                                        <i class="fa fa-circle nav-icon"></i>
+                                        <p>Komponen Penilaian
                                         </p>
                                     </a>
                                 </li>

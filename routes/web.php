@@ -82,12 +82,20 @@ Route::prefix('admin')->group(function () {
         return view('admin.dashboard');
     })->middleware('auth:admin')->name('admin.dashboard');
 
+    Route::get('/data_lomba', function () {
+        return view('admin.data_lomba');
+    })->middleware('auth:admin')->name('admin.data_lomba');
+
     Route::get('/index', function () {
         return view('admin.index');
     })->middleware('auth:admin');
 
     Route::middleware(['auth:admin', 'admin.role:admin'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
+        Route::get('/data_lomba', [AdminController::class, 'lomba'])->name('admin.data_lomba');
+        Route::get('/tambah_lomba', [AdminController::class, 'lombaTambah'])->name('admin.tambah_lomba');
+        Route::post('/tambah_lomba', [AdminController::class, 'lombaCreate'])->name('admin.create_lomba');
+        Route::get('/show_lomba/{id}', [AdminController::class, 'lombaShow'])->name('admin.show_lomba');
         // Route khusus admin
     });
 
