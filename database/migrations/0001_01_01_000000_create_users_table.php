@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('proposal',100);
             $table->enum('status', ['pending', 'verified', 'rejected'])->default('pending');
             $table->text('rejection_reason')->nullable();
-            // $table->string('KTP',100);
+            $table->string('ktp');
             // $table->string('bidang',20);
             $table->timestamps();
         });

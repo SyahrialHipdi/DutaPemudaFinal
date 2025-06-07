@@ -24,29 +24,49 @@
                                     alt="User profile picture" />
                             </div>
 
-                            <h3 class="profile-username text-center">User</h3>
+                            <h3 class="profile-username text-center">{{ Auth::guard('web')->user()->nama }}</h3>
 
                             <p class="text-muted text-center">Pemuda Pelopor</p>
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                     <b>Email</b>
-                                    <a class="float-right">example@gmail.com</a>
+                                    <a class="float-right">{{ Auth::guard('web')->user()->email }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>No whatsapp</b> <a class="float-right">13,287</a>
+                                    <b>No whatsapp</b> <a class="float-right">{{ Auth::guard('web')->user()->whatsapp }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>NIK</b> <a class="float-right">3321121212121212</a>
+                                    <b>NIK</b> <a class="float-right">{{ Auth::guard('web')->user()->nik }}</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Alamat</b> <a class="float-right">Purbalingga</a>
+                                    <b>Provinsi</b> <a class="float-right">{{ Auth::guard('web')->user()->provinsiWIlayah->name }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>kota</b> <a class="float-right">{{ Auth::guard('web')->user()->kabupatenWIlayah->name }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>kecamatan</b> <a class="float-right">{{ Auth::guard('web')->user()->kecamatanWIlayah->name }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>desa</b> <a class="float-right">{{ Auth::guard('web')->user()->desaWIlayah->name }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>rt_rw</b> <a class="float-right">{{ Auth::guard('web')->user()->rt_rw }}</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>alamat</b> <a class="float-right">{{ Auth::guard('web')->user()->alamat }}</a>
                                 </li>
 
                                 <li class="list-group-item">
-                                    <b>Tahun</b>
-                                    <a class="float-right">2018</a>
+                                    <b>Lahir</b>
+                                    <a class="float-right">{{ Auth::guard('web')->user()->tanggalLahir }}</a>
                                 </li>
+                                @if(Auth::guard('web')->user()->ktp)
+    <img src="{{ asset('storage/' . Auth::guard('web')->user()->ktp) }}" alt="Foto Profil" class="img-fluid rounded" style="max-width: 200px;">
+@else
+    <p>Foto belum diunggah.</p>
+@endif
                             </ul>
 
                             <a href="{{ route('user.edit') }}" class="btn btn-primary btn-block"><b>Ubah Password</b></a>

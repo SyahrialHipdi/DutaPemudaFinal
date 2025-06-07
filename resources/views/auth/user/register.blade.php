@@ -76,7 +76,7 @@
 
                                 {{-- form start --}}
                                 <form method="POST" action="/user/register" id="myForm"
-                                    class="form-card mt-4 needs-validation" novalidate>
+                                    class="form-card mt-4 needs-validation" novalidate enctype="multipart/form-data">
                                     @csrf
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
@@ -223,6 +223,15 @@
                                             <label class="form-control-label h6 px-3">Proposal kepeloporan
                                                 <small>(link gdrive)</small><span class="text-danger"> *</span></label>
                                             <input class="form-control" type="text" id="proposal" name="proposal"
+                                                placeholder="" required>
+                                            <div class="invalid-feedback">Wajib diisi.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">Poto KTP
+                                                <small>(KTP)</small><span class="text-danger"> *</span></label>
+                                            <input class="form-control" type="file" id="ktp" name="ktp"
                                                 placeholder="" required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>

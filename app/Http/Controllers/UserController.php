@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function show(User $user){
         // $user = User::findOrFail($id);
-        $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah'])->get();
+        $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
         return view('user.show',compact('user'));
     }
 

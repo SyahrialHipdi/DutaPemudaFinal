@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserAuthController extends Controller
 {
@@ -58,7 +59,9 @@ class UserAuthController extends Controller
         $request->validate([
             // 'nama' => 'required|string|max:255',
             'nik' => 'required|string|max:255|unique:users',
+            'ktp' => 'nullable|mimes:jpg,jpeg,png|max:2048',
             'cek' => 'accepted',
+
             // 'password' => 'required|string|min:8|confirmed',
         ]);
         $tanggal_lengkap = $request->tgl_lahir_yyyy . '-' . $request->tgl_lahir_mm . '-' . $request->tgl_lahir_dd;
@@ -86,7 +89,12 @@ class UserAuthController extends Controller
         return back()->withErrors(['tanggal' => 'Usia minimal adalah 17 tahun.']);
     }
 
-    
+    $photoPath = null;
+    if ($request->hasFile('ktp')) {
+        $photoFile = $request->file('ktp');
+        $photoName = Str::random(20) . '.' . $photoFile->getClientOriginalExtension();
+        $photoPath = $photoFile->storeAs('ktp', $photoName, 'public');
+    }
 
         $user = User::create([
             'nik' => $request->nik,
@@ -103,6 +111,7 @@ class UserAuthController extends Controller
             'alamat' => $request->alamat,
             'kodePos' => $request->kodePos,
             'proposal' => $request->proposal,
+            'ktp' => $photoPath,
         ]);
 
         Auth::guard('web')->login($user);

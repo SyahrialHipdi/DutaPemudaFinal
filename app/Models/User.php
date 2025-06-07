@@ -28,7 +28,7 @@ class User extends Authenticatable
         'alamat',
         'kodePos',
         'proposal',
-        // 'KTP',
+        'ktp',
         'status',
         'rejected_reason',
         // 'bidang',
@@ -52,8 +52,6 @@ class User extends Authenticatable
     return $this->belongsTo(Admin::class, 'verified_by');
 }
 
-// app/Models/User.php
-
 // public function getProvinsiNamaAttribute()
 // {
 //     return TrefRegion::where('code', $this->provinsi)->value('name');
@@ -64,15 +62,6 @@ class User extends Authenticatable
 //     return TrefRegion::where('code', $this->kota)->value('name');
 // }
 
-// public function getKecamatanNamaAttribute()
-// {
-//     return TrefRegion::where('code', $this->kecamatan)->value('name');
-// }
-
-// public function getDesaNamaAttribute()
-// {
-//     return TrefRegion::where('code', $this->desa)->value('name');
-// }
     public function provinsiWilayah()
 {
     return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
@@ -86,6 +75,10 @@ public function kabupatenWilayah()
 public function kecamatanWilayah()
 {
     return $this->belongsTo(TrefRegion::class, 'kecamatan', 'code');
+}
+public function desaWilayah()
+{
+    return $this->belongsTo(TrefRegion::class, 'desa', 'code');
 }
 
 public function pendaftaranLomba(): HasMany
