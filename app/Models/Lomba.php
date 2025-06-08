@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lomba extends Model
 {
+     protected $table = 'lombas';
     //
     protected $fillable = [
         'nama_lomba',
@@ -15,8 +16,18 @@ class Lomba extends Model
         'deskripsi',
     ];
 
+    public function pendaftaranLomba()
+{
+    return $this->hasMany(PendaftaranLomba::class);
+}
+
     public function pendaftaran(): HasMany
     {
         return $this->hasMany(PendaftaranLomba::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot(['alamat', 'email'])->withTimestamps();
     }
 }

@@ -8,12 +8,27 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\PPController;
+use App\Http\Controllers\PPAPController;
+use App\Http\Controllers\Lomba;
+use App\Http\Controllers\LombaController;
+use App\Http\Controllers\PendafataranLombaController;
+use App\Http\Controllers\PendaftaranLomba;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
+Route::get('/index', [LombaController::class, 'index']);
+Route::get('/lomba/form/{id}', [LombaController::class, 'showForm'])->name('lomba.form');
+// Route::get('/competition/form/{id}', [LombaController::class, 'showForm'])->name('competition.form');
+Route::post('/competition/register', [PendafataranLombaController::class, 'store'])->name('competition.register');
 
 // Landing Page Route
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
 Route::get('/kategori', [LandingPageController::class, 'kategori'])->name('kategori');
+Route::get('/RegisterPP', [PPController::class, 'showRegisterForm'])->name('auth.user.registerPP');
+Route::post('/RegisterPP', [PPController::class, 'register']);
+Route::get('/RegisterPPAP', [PPAPController::class, 'showRegisterForm'])->name('auth.user.registerPPAP');
+Route::post('/RegisterPPAP', [PPAPController::class, 'register']);
 
 Route::prefix('admin')->middleware(['auth:admin', 'admin.role:admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');

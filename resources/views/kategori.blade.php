@@ -13,19 +13,22 @@
                         <h6 class="text-muted text-center mb-5">Pilih program yang kamu inginkan.</h6>
                         {{-- kolom kategori --}}
                         <div class="mx-lg-5 mx-md-3 mx-1">
-                            <div class="program-item mb-5 d-flex flex-row align-items-center"
-                                onclick="window.location.href='pendaftaranPp'">
-                                <img src="img/logo_pp.png" alt="" width="47px" class="mr-3">
+                            
+                            <a href="{{route('auth.user.registerPP')}}">
+                            <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
                                 <h6>Pemuda Pelopor (PP)</h6>
                             </div>
+                            </a>
 
-                            <div class="program-item mb-5 d-flex flex-row align-items-center"
-                                onclick="window.location.href='pendaftaranPpap'">
-                                <img src="img/logo_ppap.png" alt="" width="52px" class="mr-3">
+                            <a href="{{route('auth.user.registerPPAP')}}">
+                            <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
                                 <h6>Pertukaran Pemuda Antar Provinsi (PPAP)</h6>
                             </div>
+                            </a>
                             
-                            <a href="{{route('user.register')}}">
+                            <a href="{{route('auth.user.registerPPAP')}}">
                             <div class="program-item mb-5 d-flex flex-row align-items-center">
                                 <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
                                 <h6>Pertukaran Pemuda Antar Negara (PPAN)</h6>

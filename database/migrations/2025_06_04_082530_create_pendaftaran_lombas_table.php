@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('pendaftaran_lombas', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('lomba_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('lomba_id')->constrained()->onDelete('cascade');
+            $table->json('extra_data'); // Simpan field khusus per lomba di sini
             $table->timestamps();
         });
     }
