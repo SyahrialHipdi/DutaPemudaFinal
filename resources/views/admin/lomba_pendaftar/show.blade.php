@@ -23,10 +23,22 @@
                             $dataIsian = json_decode($user->pivot->data_isian, true);
                         @endphp
                         <ul>
+        @foreach($dataIsian as $k => $v)
+            <li>
+                <strong>{{ ucfirst(str_replace('_', ' ', $k)) }}:</strong>
+                @if(is_string($v) && \Illuminate\Support\Str::endsWith($v, ['jpg', 'jpeg', 'png', 'pdf']))
+                    <a href="{{ asset('storage/' . $v) }}" target="_blank">Lihat File</a>
+                @else
+                    {{ $v }}
+                @endif
+            </li>
+        @endforeach
+    </ul>
+                        {{-- <ul>
                             @foreach($dataIsian as $k => $v)
                                 <li><strong>{{ ucfirst($k) }}:</strong> {{ $v }}</li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                     </td>
                 </tr>
             @endforeach
@@ -34,4 +46,4 @@
     </table>
 @endif
 
-<p><a href="{{ route('admin.lomba.pendaftar.index') }}">← Kembali ke Daftar Lomba</a></p>
+<p><a href="{{ route('admin.lomba_pendaftar.indexx') }}">← Kembali ke Daftar Lomba</a></p>

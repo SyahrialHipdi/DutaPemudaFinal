@@ -57,20 +57,53 @@ class LombaController extends Controller
         return view('admin.lomba.create');
     }
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'nama_lomba' => 'required|string|max:255',
-            'tahun' => 'required|digits:4|integer',
-            'deskripsi' => 'nullable|string',
-            'syarat_lomba' => 'required|array|min:1',
-            'syarat_lomba.*' => 'required|string',
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $data = $request->validate([
+    //         'nama_lomba' => 'required|string|max:255',
+    //         'tahun' => 'required|digits:4|integer',
+    //         'deskripsi' => 'nullable|string',
+    //         'syarat_lomba' => 'required|array|min:1',
+    //         'syarat_lomba.*' => 'required|string',
+    //     ]);
 
-        Lomba::create($data);
+    //     Lomba::create($data);
 
-        return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil ditambahkan.');
-    }
+    //     return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil ditambahkan.');
+    // }
+
+        public function store(Request $request)
+        {
+            $request->validate([
+                'nama_lomba' => 'required|string|max:255',
+                'tahun' => 'required|integer',
+                'deskripsi' => 'nullable|string',
+                'syarat_lomba' => 'array',
+                'syarat_lomba.*.field' => 'nullable|string',
+                'syarat_lomba.*.type' => 'nullable|string',
+            ]);
+
+            $syarat = $request->input('syarat_lomba', []);
+            $syarat_lomba = [];
+
+            foreach ($syarat as $item) {
+                $field = trim($item['field'] ?? '');
+                $type = trim($item['type'] ?? 'text');
+
+                if ($field !== '') {
+                    $syarat_lomba[] = "$field:$type";
+                }
+            }
+
+            Lomba::create([
+                'nama_lomba' => $request->nama_lomba,
+                'tahun' => $request->tahun,
+                'deskripsi' => $request->deskripsi,
+                'syarat_lomba' => $syarat_lomba,
+            ]);
+
+            return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil ditambahkan.');
+        }
 
     public function edit($id)
     {
@@ -78,19 +111,54 @@ class LombaController extends Controller
         return view('admin.lomba.edit', compact('lomba'));
     }
 
+    // public function update(Request $request, $id)
+    // {
+    //     $lomba = Lomba::findOrFail($id);
+
+    //     $data = $request->validate([
+    //         'nama_lomba' => 'required|string|max:255',
+    //         'tahun' => 'required|digits:4|integer',
+    //         'deskripsi' => 'nullable|string',
+    //         'syarat_lomba' => 'required|array|min:1',
+    //         'syarat_lomba.*' => 'required|string',
+    //     ]);
+
+    //     $lomba->update($data);
+
+    //     return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil diperbarui.');
+    // }
+
     public function update(Request $request, $id)
     {
-        $lomba = Lomba::findOrFail($id);
-
-        $data = $request->validate([
+        $request->validate([
             'nama_lomba' => 'required|string|max:255',
-            'tahun' => 'required|digits:4|integer',
+            'tahun' => 'required|integer',
             'deskripsi' => 'nullable|string',
-            'syarat_lomba' => 'required|array|min:1',
-            'syarat_lomba.*' => 'required|string',
+            'syarat_lomba' => 'array',
+            'syarat_lomba.*.field' => 'nullable|string',
+            'syarat_lomba.*.type' => 'nullable|string',
         ]);
 
-        $lomba->update($data);
+        $lomba = Lomba::findOrFail($id);
+
+        $syarat = $request->input('syarat_lomba', []);
+        $syarat_lomba = [];
+
+        foreach ($syarat as $item) {
+            $field = trim($item['field'] ?? '');
+            $type = trim($item['type'] ?? 'text');
+
+            if ($field !== '') {
+                $syarat_lomba[] = "$field:$type";
+            }
+        }
+
+        $lomba->update([
+            'nama_lomba' => $request->nama_lomba,
+            'tahun' => $request->tahun,
+            'deskripsi' => $request->deskripsi,
+            'syarat_lomba' => $syarat_lomba,
+        ]);
 
         return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil diperbarui.');
     }

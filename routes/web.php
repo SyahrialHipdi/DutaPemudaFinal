@@ -20,21 +20,14 @@ use App\Http\Controllers\LombaPesertaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'login']);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomba.index');
     Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
     Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
 });
-
-
-// Route::middleware(['auth'])->prefix('admin')->group(function () {
-//     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
-//     Route::get('/lomba-pendaftar/{id}', [AdminLombaPendaftarController::class, 'show'])->name('admin.lomba.pendaftar.show');
-// });
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'login']);
-
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -43,8 +36,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
     Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
     Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
-    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
+    
+    Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
+    Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
 });
+// Route::middleware(['auth'])->prefix('admin')->group(function () {
+//     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
+//     Route::get('/lomba-pendaftar/{id}', [AdminLombaPendaftarController::class, 'show'])->name('admin.lomba.pendaftar.show');
+// });
 
 // Landing Page Route
 // Route::get('/', [LandingPageController::class, 'index'])->name('home');

@@ -5,7 +5,7 @@
         <li>
             <strong>{{ $lomba->nama_lomba }} ({{ $lomba->tahun }})</strong> - 
             {{ $lomba->users_count }} pendaftar
-            | <a href="{{ route('admin.lomba.pendaftar.show', $lomba->id) }}">Lihat Detail</a>
+            | <a href="{{ route('admin.lomba_pendaftar.show', $lomba->id) }}">Lihat Detail</a>
         </li>
     @endforeach
 </ul>

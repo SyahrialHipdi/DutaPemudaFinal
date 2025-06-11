@@ -28,7 +28,7 @@ class Lomba extends Model
 
         public function users()
 {
-    return $this->belongsToMany(User::class,'lomba_users')->withPivot('data_isian')->withTimestamps();
+    return $this->belongsToMany(User::class,'lomba_pesertas')->withPivot('data_isian')->withTimestamps();
 }
 
 //     public function pendaftaranLomba()
