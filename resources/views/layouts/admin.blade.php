@@ -269,7 +269,8 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('admin.lomba_pendaftar.indexx') }}"
+                                class="nav-link {{ request()->routeIs('admin.lomba_pendaftar.*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-user-plus"></i>
                                 Pendaftar
                             </a>

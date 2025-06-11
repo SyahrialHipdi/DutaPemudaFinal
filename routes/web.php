@@ -20,6 +20,8 @@ use App\Http\Controllers\LombaPesertaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
+Route::get('/', [AuthController::class, 'index']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -29,28 +31,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
 });
 
-<<<<<<< Updated upstream
-Route::middleware(['auth'])->prefix('admin')->group(function() {
-=======
-
-// Route::middleware(['auth'])->prefix('admin')->group(function () {
-//     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
-//     Route::get('/lomba-pendaftar/{id}', [AdminLombaPendaftarController::class, 'show'])->name('admin.lomba.pendaftar.show');
-// });
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'login']);
-
-
 Route::middleware(['auth'])->prefix('admin')->group(function () {
->>>>>>> Stashed changes
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
     Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
     Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
     Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
     Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
-    
+    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
+
+    Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
+    Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
+});
+
+Route::middleware(['auth'])->prefix('peserta')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
+    Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
+    Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
+    Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
+    Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
+    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
+
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
 });

@@ -64,7 +64,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
+                                    <a href="{{ route('lomba.index') }}" class="btn">Daftar Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
+                                    {{-- <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                 </h1>
                                 <p><a href="#">Info Selengkapnya >></a></p>
                                 <div class="button">
-                                    <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a>
+                                    {{-- <a href="{{ route('kategori') }}" class="btn">Daftar Sekarang</a> --}}
                                 </div>
                             </div>
                         </div>
@@ -198,8 +198,7 @@
                         <div class="col-lg-10 col-md-12">
                             <h5>PPAP dan PPAN</h5>
                             <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
-                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff"
-                                id="kotak">
+                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff" id="kotak">
                                 <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
                                     <span id="days2" class="value">0</span>
                                     <span class="label">Hari</span>

@@ -43,4 +43,9 @@ class AuthController extends Controller
             // 'password' => 'Email/Username atau password salah',
         ]);
     }
+
+    public function index()
+    {
+        return view('landing-page');
+    }
 }
