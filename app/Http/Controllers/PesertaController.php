@@ -4,29 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+
 class PesertaController extends Controller
 {
-    
-    public function show(User $user){
+
+    public function index(User $user)
+    {
         // $user = User::findOrFail($id);
         // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
         // $user = User::();
-        return view('peserta.show',compact('user'));
+        return view('peserta.index', compact('user'));
     }
-    public function edit($id)
+
+    public function show(User $user)
     {
-        $peserta = User::findOrFail($id);
+        // $user = User::findOrFail($id);
+        // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
+        // $user = User::();
+        return view('peserta.show', compact('user'));
+    }
+
+    public function edit(Request $request)
+    {
+        $user = Auth::user();
+        // $peserta = User::findOrFail($id);
         return view('peserta.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'password' =>  'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/',
-        ]);
+        $user = Auth::user();
+        // $request->validate([
+        //     'password' =>  'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/',
+        // ]);
 
-        $peserta = User::findOrFail($id);
-        $peserta->update($request->only('password'));
+        // $peserta = User::findOrFail($id);
+        $user->update($request->only('password'));
 
         return redirect()->route('peserta.dashboard')->with('berhasil', 'Password berhasil diperbarui.');
     }

@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [AuthController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -47,8 +47,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::middleware(['auth'])->prefix('peserta')->group(function () {
     Route::get('/dashboard', [PesertaController::class, 'show'])->name('peserta.dashboard');
-    Route::get('/edit', [LombaController::class, 'edit'])->name('peserta.edit');
-    Route::put('/edit', [LombaController::class, 'update'])->name('peserta.update');
+    Route::get('/index', [PesertaController::class, 'index'])->name('peserta.index');
+    Route::get('/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
+    Route::put('/edit', [PesertaController::class, 'update'])->name('peserta.update');
     // Route::get('/lomba/create', [LombaController::class, 'create'])->name('peserta.lomba.create');
 });
 // Route::middleware(['auth'])->prefix('admin')->group(function () {

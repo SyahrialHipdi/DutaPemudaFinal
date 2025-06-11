@@ -33,8 +33,8 @@ class AuthController extends Controller
                 'admin' => redirect()->intended('/admin/dashboard'),
                 'verifikator' => redirect()->intended('/verifikator/dashboard'),
                 'juri' => redirect()->intended('/juri/dashboard'),
-                'peserta' => redirect()->intended('/peserta/dashboard'),
-                default => redirect('/peserta/dashboard')
+                'peserta' => redirect()->intended('/peserta/index'),
+                default => redirect('/peserta/index')
             };
         }
 
