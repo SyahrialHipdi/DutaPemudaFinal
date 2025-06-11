@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminLombaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LombaDaftarController;
 use App\Http\Controllers\LombaPesertaController;
+use App\Http\Controllers\PesertaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,16 +46,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 });
 
 Route::middleware(['auth'])->prefix('peserta')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
-    Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
-    Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
-    Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
-    Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
-    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
-
-    Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
-    Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
+    Route::get('/dashboard', [PesertaController::class, 'show'])->name('peserta.dashboard');
+    Route::get('/edit', [LombaController::class, 'edit'])->name('peserta.edit');
+    Route::put('/edit', [LombaController::class, 'update'])->name('peserta.update');
+    // Route::get('/lomba/create', [LombaController::class, 'create'])->name('peserta.lomba.create');
 });
 // Route::middleware(['auth'])->prefix('admin')->group(function () {
 //     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
