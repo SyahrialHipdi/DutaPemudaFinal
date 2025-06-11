@@ -225,6 +225,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="lomba" class="nav-link">
+                                <i class="nav-icon fa fa-tachometer"></i>
+                                <p>
+                                    Lomba
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fa fa-circle"></i>
                                 <p>
@@ -249,7 +257,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.data_lomba')}}" class="nav-link">
+                                    {{-- <a href="{{route('admin.data_lomba')}}" class="nav-link"> --}}
                                         <i class="fa fa-circle nav-icon"></i>
                                         <p>
                                             Lomba

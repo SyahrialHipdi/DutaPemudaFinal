@@ -1,55 +1,16 @@
 <?php
-
-// app/Http/Controllers/LombaController.php
-
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Lomba;
 use Illuminate\Http\Request;
 
-class LombaController extends Controller
+class AdminLombaController extends Controller
 {
     public function index()
     {
         $lombas = Lomba::all();
         return view('admin.lomba.index', compact('lombas'));
-    }
-
-    public function show($id)
-    {
-        $lomba = Lomba::findOrFail($id);
-        return view('admin.lomba.show', compact('lomba'));
-    }
-
-    public function daftarForm($id)
-    {
-        $lomba = Lomba::findOrFail($id);
-        return view('admin.lomba.daftar', compact('lomba'));
-    }
-
-    public function daftarSubmit(Request $request, $id)
-    {
-        $lomba = Lomba::findOrFail($id);
-
-        // Buat rules validasi dinamis berdasarkan syarat_lomba
-        $rules = [];
-        foreach ($lomba->syarat_lomba as $field) {
-            $rules[$field] = 'required';
-            // bisa ditambah validasi spesifik sesuai field, misal 'email' => 'required|email'
-            if ($field === 'email') {
-                $rules[$field] = 'required|email';
-            }
-            if ($field === 'usia') {
-                $rules[$field] = 'required|integer|min:1';
-            }
-        }
-
-        $validated = $request->validate($rules);
-
-        // Simpan data pendaftaran, misalnya di tabel pendaftaran (belum dibuat)
-        // Untuk demo, kita hanya return data yg diterima
-
-        return redirect()->route('lomba.index')->with('success', 'Pendaftaran berhasil!');
     }
 
     public function create()
