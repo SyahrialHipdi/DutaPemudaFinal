@@ -29,7 +29,21 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
 });
 
+<<<<<<< Updated upstream
 Route::middleware(['auth'])->prefix('admin')->group(function() {
+=======
+
+// Route::middleware(['auth'])->prefix('admin')->group(function () {
+//     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
+//     Route::get('/lomba-pendaftar/{id}', [AdminLombaPendaftarController::class, 'show'])->name('admin.lomba.pendaftar.show');
+// });
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
+Route::post('/login', [AuthController::class, 'login']);
+
+
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+>>>>>>> Stashed changes
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
     Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
@@ -159,3 +173,7 @@ Route::get('/provinsi', [LocationController::class, 'getProvinsi']);
 Route::get('/kota/{kodeProvinsi}', [LocationController::class, 'getKota']);
 Route::get('/kecamatan/{kodeKota}', [LocationController::class, 'getKecamatan']);
 Route::get('/desa/{kodeKecamatan}', [LocationController::class, 'getDesa']);
+
+Route::get('admin/create', function () {
+    return view('admin.lomba.create');
+})->name('admin/create');

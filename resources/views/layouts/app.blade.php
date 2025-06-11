@@ -95,8 +95,7 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="{{ request()->is('/') ? 'active' : '' }}">
-                                            {{-- <a href="{{ route('home') }}">Beranda</a> --}}
-                                        </li>
+                                            {{-- <a href="{{ route('home') }}">Beranda</a> --}} </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
                                             {{-- <a href="{{ route('kategori') }}">Kategori</a> --}}
                                         </li>
@@ -177,8 +176,7 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Alur
+                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Alur
                                                 seleksi</a>
                                         </li>
                                         <li>

@@ -15,6 +15,7 @@
         <textarea name="deskripsi">{{ old('deskripsi', $lomba->deskripsi ?? '') }}</textarea>
     </div>
 
+<<<<<<< Updated upstream
     <div>
         <label>Syarat Lomba</label><br>
         {{-- <div id="syarat-container">
@@ -69,6 +70,44 @@
 
     <br>
     <button type="submit">Simpan</button>
+=======
+<div>
+    <label>Syarat Lomba</label><br>
+    {{-- <div id="syarat-container">
+        @php
+            $syarat = old('syarat_lomba', $lomba->syarat_lomba ?? []);
+        @endphp
+        @foreach ($syarat as $s)
+        <input type="text" name="syarat_lomba[]" value="{{ $s }}"><br>
+        @endforeach
+        <input type="text" name="syarat_lomba[]" placeholder="Tambah syarat">
+    </div> --}}
+    <div id="syarat-container">
+        @php
+            $syarat = old('syarat_lomba', $lomba->syarat_lomba ?? []);
+        @endphp
+        @foreach ($syarat as $s)
+            <div class="syarat-item">
+                <input type="text" name="syarat_lomba[]" value="{{ $s }}">
+                <div class="btn btn-sm btn-danger">
+                    <button type="button" onclick="removeSyarat(this)">Hapus</button>
+                </div>
+            </div>
+        @endforeach
+        <div class="syarat-item">
+            <input type="text" name="syarat_lomba[]" placeholder="Tambah syarat">
+            <button type="button" class="btn btn-sm btn-danger" onclick="removeSyarat(this)"">Hapus</button>
+        </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-info mt-3" onclick="addSyarat()">+ Tambah</button>
+</div>
+
+<div class="row justify-content-start mt-4">
+    <div class="form-group col-sm-3 button">
+        <button type="submit" class="btn" style="width: 100%">Kirim</button>
+    </div>
+</div>
+>>>>>>> Stashed changes
 
 <script>
     let syaratIndex = {{ count($syarat) }};
@@ -80,6 +119,7 @@
         div.style.marginBottom = '10px';
 
         div.innerHTML = `
+<<<<<<< Updated upstream
             <input type="text" name="syarat_lomba[${syaratIndex}][field]" placeholder="Nama Field">
             <select name="syarat_lomba[${syaratIndex}][type]">
                 <option value="text">Text</option>
@@ -89,6 +129,10 @@
                 <option value="email">Email</option>
             </select>
             <button type="button" onclick="removeSyarat(this)">Hapus</button>
+=======
+            <input type="text" name="syarat_lomba[]" placeholder="Tambah syarat">
+            <button type="button" class="btn btn-sm btn-danger mt-2" onclick="removeSyarat(this)"">Hapus</button>
+>>>>>>> Stashed changes
         `;
 
         container.appendChild(div);
@@ -99,4 +143,7 @@
         button.parentElement.remove();
     }
 </script>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

@@ -13,27 +13,42 @@
                         <h6 class="text-muted text-center mb-5">Pilih program yang kamu inginkan.</h6>
                         {{-- kolom kategori --}}
                         <div class="mx-lg-5 mx-md-3 mx-1">
-                            
-                            <a href="{{route('auth.user.registerPP')}}">
-                            <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
-                                <h6>Pemuda Pelopor (PP)</h6>
-                            </div>
-                            </a>
+                            <<<<<<< Updated upstream <a href="{{ route('auth.user.registerPP') }}">
+                                <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                    <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                    <h6>Pemuda Pelopor (PP)</h6>
+                                </div>
+                                =======
+                                <a href="{{ route('user.register') }}">
+                                    <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                        <img src="img/logo_pp.png" alt="" width="47px" class="mr-3">
+                                        <h6>Pemuda Pelopor (PP)</h6>
+                                    </div>
+                                    >>>>>>> Stashed changes
+                                </a>
 
-                            <a href="{{route('auth.user.registerPPAP')}}">
-                            <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
-                                <h6>Pertukaran Pemuda Antar Provinsi (PPAP)</h6>
-                            </div>
-                            </a>
-                            
-                            <a href="{{route('auth.user.registerPPAP')}}">
-                            <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
-                                <h6>Pertukaran Pemuda Antar Negara (PPAN)</h6>
-                            </div>
-                            </a>
+                                <a href="{{ route('auth.user.registerPPAP') }}">
+                                    <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                        <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                        <h6>Pertukaran Pemuda Antar Provinsi (PPAP)</h6>
+                                    </div>
+                                    <<<<<<< Updated upstream </a>
+
+                                        <a href="{{ route('auth.user.registerPPAP') }}">
+                                            <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                                <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                                <h6>Pertukaran Pemuda Antar Negara (PPAN)</h6>
+                                            </div>
+                                            =======
+
+                                            <a href="{{ route('user.register') }}">
+                                                <div class="program-item mb-5 d-flex flex-row align-items-center">
+                                                    <img src="img/logo_ppan.png" alt="" width="52px"
+                                                        class="mr-3">
+                                                    <h6>Pertukaran Pemuda Antar Negara (PPAN)</h6>
+                                                </div>
+                                                >>>>>>> Stashed changes
+                                            </a>
                         </div>
                     </div>
                 </div>
