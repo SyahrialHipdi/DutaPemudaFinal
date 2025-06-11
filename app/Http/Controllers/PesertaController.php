@@ -43,6 +43,14 @@ class PesertaController extends Controller
         // $peserta = User::findOrFail($id);
         $user->update($request->only('password'));
 
-        return redirect()->route('peserta.dashboard')->with('berhasil', 'Password berhasil diperbarui.');
+        return redirect()->route('peserta.index')->with('berhasil', 'Password berhasil diperbarui.');
+    }
+
+    public function progress(Request $request)
+    {
+        $user = Auth::user(); // user yang sedang login
+        $lombas = $user->lombas; // ambil relasi lomba dari user
+
+        return view('peserta.progress', compact('lombas'));
     }
 }

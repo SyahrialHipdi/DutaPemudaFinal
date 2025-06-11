@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomba.index');
     Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
     Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -50,7 +51,10 @@ Route::middleware(['auth'])->prefix('peserta')->group(function () {
     Route::get('/index', [PesertaController::class, 'index'])->name('peserta.index');
     Route::get('/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
     Route::put('/edit', [PesertaController::class, 'update'])->name('peserta.update');
+    Route::get('/progress', [PesertaController::class, 'progress'])->name('peserta.progress');
     // Route::get('/lomba/create', [LombaController::class, 'create'])->name('peserta.lomba.create');
+
+
 });
 // Route::middleware(['auth'])->prefix('admin')->group(function () {
 //     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
