@@ -14,16 +14,22 @@ class Lomba extends Model
         'nama_lomba',
         'tahun',
         'deskripsi',
+        'syarat_lomba',
     ];
 
-    protected $cast = [
+    protected $casts = [
         'syarat_lomba' => 'array',
     ];
     
-    public function users()
-    {
-        return $this->belongsToMany(User::class)->withPivot(['data_isian'])->withTimestamps();
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class)->withPivot(['data_isian'])->withTimestamps();
+    // }
+
+        public function users()
+{
+    return $this->belongsToMany(User::class,'lomba_users')->withPivot('data_isian')->withTimestamps();
+}
 
 //     public function pendaftaranLomba()
 // {

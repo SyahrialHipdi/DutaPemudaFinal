@@ -1,35 +1,12 @@
-<form method="POST" action="{{ route('competition.register') }}">
+<h2>Form Pendaftaran: {{ $lomba->nama_lomba }}</h2>
+
+<form method="POST" action="{{ route('lomba.submit', $lomba->id) }}">
     @csrf
 
-    <input type="hidden" name="competition_id" value="{{ $competitionId }}">
-    {{-- <input type="hidden" name="competition_id" value="{{ $competitionId }}"> --}}
-
-    <div>
-        <label>Email</label>
-        <input type="email" name="email" required class="form-control">
-    </div>
-
-    <div>
-        <label>Password</label>
-        <input type="password" name="password" required class="form-control">
-    </div>
-
-    @foreach ($formSchema['fields'] as $field)
-        <div>
-            <label>{{ $field['label'] }}</label>
-
-            @if ($field['type'] === 'textarea')
-                <textarea name="extra_data[{{ $field['name'] }}]" 
-                          class="form-control" 
-                          {{ $field['required'] ? 'required' : '' }}></textarea>
-            @else
-                <input type="{{ $field['type'] }}" 
-                       name="extra_data[{{ $field['name'] }}]" 
-                       class="form-control"
-                       {{ $field['required'] ? 'required' : '' }}>
-            @endif
-        </div>
+    @foreach($lomba->syarat_lomba as $syarat)
+        <label>{{ ucfirst($syarat) }}</label><br>
+        <input type="text" name="data_isian[{{ $syarat }}]" value="{{ old("data_isian.$syarat") }}"><br><br>
     @endforeach
 
-    <button type="submit">Daftar</button>
+    <button type="submit">Kirim Pendaftaran</button>
 </form>

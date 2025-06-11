@@ -44,6 +44,18 @@ class DatabaseSeeder extends Seeder
         'role' => 'juri',
         'password' => '12345',
         ]);
+        User::create([
+        // 'name' => 'Juri',
+        'email' => 'syahrial@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        // 'name' => 'Juri',
+        'email' => 'hipdi@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
 
         // Lomba::create([
         // 'nama_lomba' => 'Pemuda Pelopor',

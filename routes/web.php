@@ -16,14 +16,15 @@ use App\Http\Controllers\PendafataranLombaController;
 use App\Http\Controllers\AdminLombaController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\LombaDaftarController;
+use App\Http\Controllers\LombaPesertaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/daftar-lomba', [LombaDaftarController::class, 'index'])->name('lomba.daftar.index');
-//     Route::get('/daftar-lomba/{id}', [LombaDaftarController::class, 'form'])->name('lomba.daftar.form');
-//     Route::post('/daftar-lomba/{id}', [LombaDaftarController::class, 'submit'])->name('lomba.daftar.submit');
-// });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomba.index');
+    Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
+    Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
+});
 
 
 // Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -33,15 +34,16 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'login']);
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-// Route::post('/login', [UserAuthController::class, 'login']);
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function() {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
-    // Route::get('/lomba/form/{id}', [LombaController::class, 'showForm'])->name('lomba.form');
-    // Route::get('/competition/form/{id}', [LombaController::class, 'showForm'])->name('competition.form');
-    // Route::post('/competition/register', [PendafataranLombaController::class, 'store'])->name('competition.register');
+    Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
+    Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
+    Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
+    Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
+    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
 });
 
 // Landing Page Route

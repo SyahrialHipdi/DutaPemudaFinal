@@ -32,6 +32,12 @@ class User extends Authenticatable
         ];
     }
 
+        public function lombas()
+{
+    return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('data_isian')->withTimestamps();
+    // return $this->belongsToMany(Lomba::class)->withPivot('data_isian')->withTimestamps();
+}
+
     public function pendaftaranLomba()
 {
     return $this->hasMany(PendaftaranLomba::class);
