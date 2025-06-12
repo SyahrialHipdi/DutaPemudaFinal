@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('penilaians', function (Blueprint $table) {
+        Schema::create('lomba_juris', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('juri_id'); // user_id dari juri
-            $table->foreignId('peserta_id'); // user_id dari peserta
+            $table->foreignId('user_id'); // juri
             $table->foreignId('lomba_id');
-            $table->integer('nilai'); // atau float, bisa ditambah kriteria
-            $table->text('komentar')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('penilaians');
+        Schema::dropIfExists('lomba_juris');
     }
 };

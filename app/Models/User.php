@@ -32,11 +32,33 @@ class User extends Authenticatable
         ];
     }
 
-        public function lombas()
-{
-    return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('data_isian')->withTimestamps();
-    // return $this->belongsToMany(Lomba::class)->withPivot('data_isian')->withTimestamps();
-}
+    public function lombas()
+    {
+        return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('data_isian')->withTimestamps();
+        // return $this->belongsToMany(Lomba::class)->withPivot('data_isian')->withTimestamps();
+    }
+
+    public function lombaDijuri()
+    {
+        return $this->belongsToMany(Lomba::class, 'lomba_juris');
+    }
+
+    public function lombaDiikuti()
+    {
+        return $this->belongsToMany(Lomba::class, 'lomba_pesertas');
+    }
+
+    public function penilaianDiberikan()
+    {
+        return $this->hasMany(Penilaian::class, 'juri_id');
+    }
+
+
+
+
+
+
+
 
     public function pendaftaranLomba()
 {

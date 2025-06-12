@@ -223,6 +223,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.user.dashboard') }}"
+                                class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-trophy"></i>
+                                User
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.lomba.index') }}"
                                 class="nav-link {{ request()->routeIs('admin.lomba.*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-trophy"></i>

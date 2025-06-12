@@ -44,6 +44,26 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
+    
+    Route::get('/user', [AdminController::class, 'dashboard'])->name('admin.user.dashboard');
+    Route::get('/user/create', [AdminController::class, 'create'])->name('admin.user.create');
+    Route::post('/user/create', [AdminController::class, 'store'])->name('admin.user.store');
+    Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
+    Route::post('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+
+});
+
+Route::middleware(['auth'])->prefix('juri')->group(function () {
+    Route::get('/index', [JuriController::class, 'index'])->name('juri.index');
+    Route::get('/create/{lomba}/{peserta}', [JuriController::class, 'create'])->name('juri.create');
+    Route::post('/create/{lomba}/{peserta}', [JuriController::class, 'store'])->name('juri.store');
+    // Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
+    // Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
+    // Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
+    // Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
+    // Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
+    // Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
 });
 
 Route::middleware(['auth'])->prefix('peserta')->group(function () {
@@ -53,8 +73,6 @@ Route::middleware(['auth'])->prefix('peserta')->group(function () {
     Route::put('/edit', [PesertaController::class, 'update'])->name('peserta.update');
     Route::get('/progress', [PesertaController::class, 'progress'])->name('peserta.progress');
     // Route::get('/lomba/create', [LombaController::class, 'create'])->name('peserta.lomba.create');
-
-
 });
 // Route::middleware(['auth'])->prefix('admin')->group(function () {
 //     Route::get('/lomba-pendaftar', [AdminLombaPendaftarController::class, 'index'])->name('admin.lomba.pendaftar.index');
