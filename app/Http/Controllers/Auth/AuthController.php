@@ -32,7 +32,7 @@ class AuthController extends Controller
             return match ($user->role) {
                 'admin' => redirect()->intended('/admin/dashboard'),
                 'verifikator' => redirect()->intended('/verifikator/dashboard'),
-                'juri' => redirect()->intended('/juri/dashboard'),
+                'juri' => redirect()->intended('/juri/index'),
                 'peserta' => redirect()->intended('/peserta/index'),
                 default => redirect('/peserta/index')
             };

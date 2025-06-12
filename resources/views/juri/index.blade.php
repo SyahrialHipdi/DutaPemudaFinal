@@ -11,7 +11,7 @@
 </ul> --}}
 
 
-@extends('layouts.admin')
+@extends('layouts.juri')
 @section('title', 'lomba')
 @section('content')
 

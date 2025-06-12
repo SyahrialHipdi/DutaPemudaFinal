@@ -217,69 +217,16 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
-                            <a href="../../index.html" class="nav-link">
+                            <a href="{{ route('juri.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.user.dashboard') }}"
-                                class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+                            <a href="{{ route('juri.index') }}"
+                                class="nav-link {{ request()->routeIs('juri.index.*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-trophy"></i>
-                                User
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.lomba.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.lomba.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-trophy"></i>
-                                Lomba
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-users"></i>
-                                Admin
-                                <i class="right fa fa-angle-left"></i>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="data-juri.html" class="nav-link">
-                                        <i class="fa fa-user nav-icon"></i>
-                                        Juri
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="data-verifikator.html" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        Verifikator
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    {{-- <a href="{{ route('admin.data_lomba') }}" class="nav-link"> --}}
-                                    <i class="fa fa-circle nav-icon"></i>
-                                    Lomba
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="data-admincustom.html" class="nav-link active">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        Nilai
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="data-admincustom.html" class="nav-link active">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        Komponen Penilaian
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.lomba_pendaftar.indexx') }}"
-                                class="nav-link {{ request()->routeIs('admin.lomba_pendaftar.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-user-plus"></i>
-                                Pendaftar
+                                PenilaianLomba
                             </a>
                         </li>
                         <li class="nav-item">
@@ -288,6 +235,13 @@
                                 <button class="ml-4 btn btn-sm btn-danger" type="submit">LOGOUT</button>
                             </form>
                         </li>
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('admin.lomba.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.lomba.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-trophy"></i>
+                                Lomba
+                            </a>
+                        </li> --}}
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>

@@ -104,6 +104,22 @@
                                     @csrf
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">Email</label>
+                                            <input class="form-control" type="text" id="email" name="email"
+                                                placeholder="" required>
+                                            <div class="invalid-feedback">EMail.</div>
+                                        </div>
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">Password</label>
+                                            <input class="form-control" type="password" id="password" name="password"
+                                                placeholder="" required>
+                                            <div class="invalid-feedback">PAssworda anjay.</div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    <div class="row justify-content-between text-left">
+                                        <div class="form-group col-sm-12 flex-column d-flex">
                                             @foreach ($lomba->syarat_lomba as $syarat)
                                                 @php
                                                     $parts = explode(':', $syarat);
@@ -130,13 +146,7 @@
                                     </div>
 
                                     {{-- <div class="row justify-content-between text-left">
-                                        <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">NIK<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="nik" name="nik"
-                                                placeholder="" required>
-                                            <div class="invalid-feedback">NIK wajib diisi.</div>
-                                        </div>
+
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3 mb-1">Tanggal Lahir<span
                                                     class="text-danger"> *</span></label>
@@ -194,37 +204,6 @@
                                             <select class="form-control w-100" id="kota" name="kota" required>
                                                 <option value="">--Pilih Kota--</option>
                                             </select>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Kecamatan<span class="text-danger">
-                                                    *</span></label>
-                                            <select class="form-control w-100" id="kecamatan" name="kecamatan" required>
-                                                <option value="">--Pilih Kecamatan--</option>
-                                            </select>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Desa/Kelurahan<span
-                                                    class="text-danger">
-                                                    *</span></label>
-                                            <select class="form-control w-100" id="desa" name="desa" required>
-                                                <option value="">--Pilih Desa--</option>
-                                            </select>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">RT/RW<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" max="999" min="0"
-                                                id="rt_rw" name="rt_rw" placeholder="001/002" required>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Alamat<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="alamat" name="alamat"
-                                                required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
                                         <div class="form-group col-sm-12 flex-column d-flex">

@@ -82,7 +82,7 @@
                         <div class="col-lg-3 col-md-3 col-12">
                             <!-- Start Logo -->
                             <div class="logo">
-                                {{-- <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#" width="60%" /></a> --}}
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#" width="60%" /></a>
                             </div>
                             <!-- End Logo -->
                             <!-- Mobile Nav -->
@@ -95,12 +95,12 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="{{ request()->is('/') ? 'active' : '' }}">
-                                            {{-- <a href="{{ route('home') }}">Beranda</a> --}} </li>
+                                            <a href="{{ route('home') }}">Beranda</a> </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            {{-- <a href="{{ route('kategori') }}">Kategori</a> --}}
+                                            <a href="{{ route('lomba.index') }}">Kategori</a>
                                         </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            {{-- <a href="{{ route('kategori') }}">FAQ</a> --}}
+                                            <a href="#">FAQ</a>
                                         </li>
                                         <li class="{{ request()->is('pages*') ? 'active' : '' }}">
                                             <a href="/berita">Berita</a>
@@ -113,7 +113,7 @@
                         <div class="col-lg-2 col-12 ">
                             <div class="get-quote float-right">
                                 @auth
-                                    {{-- <a href="{{ route('user.dashboard') }}" class="btn">Profile</a> --}}
+                                    <a href="{{ route('peserta.index') }}" class="btn">Profile</a>
                                 @else
                                     <a href="{{ route('auth.login') }}" class="btn">Login</a>
                                 @endauth
