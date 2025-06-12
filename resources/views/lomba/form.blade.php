@@ -107,17 +107,17 @@
                                             <label class="form-control-label h6 px-3">Email</label>
                                             <input class="form-control" type="text" id="email" name="email"
                                                 placeholder="" required>
-                                            <div class="invalid-feedback">EMail.</div>
+                                            <div class="invalid-feedback">Emaail wajib isi.</div>
                                         </div>
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Password</label>
                                             <input class="form-control" type="password" id="password" name="password"
                                                 placeholder="" required>
-                                            <div class="invalid-feedback">PAssworda anjay.</div>
+                                            <div class="invalid-feedback">isi password.</div>
                                         </div>
                                     </div>
 
-                                    
+
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             @foreach ($lomba->syarat_lomba as $syarat)

@@ -82,7 +82,8 @@
                         <div class="col-lg-3 col-md-3 col-12">
                             <!-- Start Logo -->
                             <div class="logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#" width="60%" /></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#"
+                                        width="60%" /></a>
                             </div>
                             <!-- End Logo -->
                             <!-- Mobile Nav -->
@@ -95,7 +96,8 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="{{ request()->is('/') ? 'active' : '' }}">
-                                            <a href="{{ route('home') }}">Beranda</a> </li>
+                                            <a href="{{ route('home') }}">Beranda</a>
+                                        </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
                                             <a href="{{ route('lomba.index') }}">Kategori</a>
                                         </li>
@@ -113,7 +115,35 @@
                         <div class="col-lg-2 col-12 ">
                             <div class="get-quote float-right">
                                 @auth
-                                    <a href="{{ route('peserta.index') }}" class="btn">Profile</a>
+                                    {{-- <a href="{{ route('peserta.index') }}" class="btn">Profile</a> --}}
+                                    <ul class="flex space-x-4 items-center">
+                                        <li class="nav-item dropdown">
+                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
+                                                role="button" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false" v-pre>
+                                                <i class="fa fa-user"></i>
+                                            </a>
+
+                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" href="{{ route('peserta.index') }}">
+                                                    Profile
+                                                </a>
+
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                                    onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                    <i class="fa fa-sign-out mr-2"></i>Logout
+                                                </a>
+
+                                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
+                                                    class="d-none">
+                                                    @csrf
+                                                </form>
+                                            </div>
+                                        </li>
+
+                                    </ul>
                                 @else
                                     <a href="{{ route('auth.login') }}" class="btn">Login</a>
                                 @endauth
@@ -143,7 +173,8 @@
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, nostrum?</p>
                             <ul class="social">
                                 <li>
-                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
+                                            alt=""></a>
                                 </li>
                                 <li>
                                     <a href="#"><img src="{{ asset('img/logo-digiyok.png') }}"
@@ -176,7 +207,8 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Alur
+                                            <a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Alur
                                                 seleksi</a>
                                         </li>
                                         <li>

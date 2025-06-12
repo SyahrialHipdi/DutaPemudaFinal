@@ -33,8 +33,50 @@
                     <a href="{{ route('home') }}" class="nav-link">Home</a>
                 </li>
             </ul>
+
+            <!-- Right navbar links -->
+
+            {{-- profile --}}
+            <ul class="navbar-nav ml-auto flex space-x-4 items-center">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <i class="fa fa-user"></i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+            </ul>
+
         </nav>
         <!-- /.navbar -->
+
+
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -45,7 +87,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="img/favicon.png" class="img-circle elevation-2" alt="User Image" />
+                        <img src="{{ asset('img/favicon.png') }}" class="img-circle elevation-2" alt="User Image" />
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Duta Pemuda</a>
@@ -75,12 +117,6 @@
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 <p>Unduh Sertifikat</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <form action="{{ route('auth.logout') }}" method="post">
-                                @csrf
-                                <button class="ml-4 btn btn-sm btn-danger" type="submit">LOGOUT</button>
-                            </form>
                         </li>
 
                     </ul>

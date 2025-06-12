@@ -21,11 +21,9 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Lomba</h1>
+                        <h1>Data Peserta</h1>
                     </div>
-                    <a href="{{ route('admin.lomba.create') }}" class="col-sm-6">
-                        <button class="btn btn-primary float-right">Tambah Lomba</button>
-                    </a>
+
                 </div>
             </div><!-- /.container-fluid -->
         </section>
