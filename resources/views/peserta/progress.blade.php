@@ -1,0 +1,71 @@
+@extends('layouts.pendaftar')
+@section('title', 'Profile')
+@section('content')
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Data Lomba</h1>
+                    </div>
+                    <a href="{{ route('admin.lomba.create') }}" class="col-sm-6">
+                        <button class="btn btn-primary float-right">Tambah Lomba</button>
+                    </a>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <table id="example" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Lomba</th>
+                                            {{-- <th>Tahap</th> --}}
+                                            <th>Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($lombas as $lomba)
+                                            <tr>
+                                                <td>{{ $lomba->nama_lomba }} </td>
+                                                <td>
+                                                    <button class="btn btn-warning btn-sm">pending</button>
+                                                </td>
+                                                {{-- <td>
+                                                    <a href="{{ route('admin.lomba.edit', $lomba->id) }}"
+                                                        class="btn btn-sm btn-warning">Edit</a>
+                                                    <form action="{{ route('admin.lomba.destroy', $lomba->id) }}"
+                                                        method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                    </form>
+                                                </td> --}}
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+    </div>
+@endsection

@@ -9,6 +9,10 @@ class pendaftaranLomba extends Model
 {
     protected $table = 'pendaftaran_lomba';
 
+protected $casts = [
+    'extra_data' => 'array',
+];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -18,4 +22,5 @@ class pendaftaranLomba extends Model
     {
         return $this->belongsTo(Lomba::class);
     }
+    
 }

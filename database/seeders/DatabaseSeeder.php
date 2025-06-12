@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+
 use App\Models\Admin;
 use App\Models\Lomba;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -16,32 +16,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-
-        Admin::create([
-        'name' => 'Super Admin',
-        'username' => 'admin@example.com',
-        'role' => 'admin',
-        'password' => '12345',
+        $this->call([
+            LombaSeeder::class,
+            UserSeeder::class,
+            LombaJuriSeeder::class,
+            LombaPesertaSeeder::class,
         ]);
+        
 
-        Admin::create([
-        'name' => 'Verifikator',
-        'username' => 'verifikator@example.com',
-        'role' => 'verifikator',
-        'password' => '12345',
-        ]);
-
-        Admin::create([
-        'name' => 'Juri',
-        'username' => 'juri@example.com',
-        'role' => 'juri',
-        'password' => '12345',
-        ]);
-
-        Lomba::create([
-        'nama_lomba' => 'Pemuda Pelopor',
-        'tahun' => '2025',
-        'deskripsi' => 'Pemuda Pelopor 2025',
-        ]);
+        // Lomba::create([
+        // 'nama_lomba' => 'Pemuda Pelopor',
+        // 'tahun' => '2025',
+        // 'deskripsi' => 'Pemuda Pelopor 2025',
+        // ]);
     }
 }

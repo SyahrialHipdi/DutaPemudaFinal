@@ -8,17 +8,20 @@
                 <div class="col-md-6">
                     <div class="card card-primary card-outline mt-5">
                         <div class="card-body box-profile">
-                            <form action="{{ route('user.update', $user->id) }}" method="POST">
-                                 @csrf
+                            <form action="{{ route('peserta.update', $user->id) }}" method="POST">
+                                @csrf
                                 @method('PUT')
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-control-label" for="password">Password Baru</label>
-                                    <input type="password" id="password" class="form-control form-control-lg" name="password" />
+                                    <input type="password" id="password" class="form-control form-control-lg"
+                                        name="password" />
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-control-label" for="password_confirmation">Konfirmasi Password Baru</label>
-                                    <input type="password" id="password_confirmation" class="form-control form-control-lg" name="password_confirmation" />
+                                    <label class="form-control-label" for="password_confirmation">Konfirmasi Password
+                                        Baru</label>
+                                    <input type="password" id="password_confirmation" class="form-control form-control-lg"
+                                        name="password_confirmation" />
                                 </div>
 
                                 {{-- <div class="d-flex justify-content-center flex-column">
@@ -27,9 +30,9 @@
                                 </div> --}}
 
                                 <button type="submit">Update</button>
-        <a href="/user/dashboard">
-            <button type="button">Batal</button>
-        </a>
+                                <a href="/peserta/dashboard">
+                                    <button type="button">Batal</button>
+                                </a>
                             </form>
                         </div>
                     </div>

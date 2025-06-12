@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('juri_id');
-            $table->string('lomba_id');
-            $table->string('komponen_id');
-            $table->integer('nilai');
-            $table->text('komentar');
+            $table->foreignId('juri_id'); // user_id dari juri
+            $table->foreignId('peserta_id'); // user_id dari peserta
+            $table->foreignId('lomba_id');
+            $table->integer('nilai'); // atau float, bisa ditambah kriteria
+            $table->text('komentar')->nullable();
             $table->timestamps();
         });
     }

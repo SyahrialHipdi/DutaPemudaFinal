@@ -59,27 +59,28 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('user.dashboard') }}" class="nav-link">
+                            <a href="{{ route('peserta.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('user.dashboard') }}" class="nav-link">
+                            <a href="{{ route('peserta.progress') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 <p>Lihat Progres</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('user.dashboard') }}" class="nav-link">
+                            <a href="{{ route('peserta.dashboard') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 <p>Unduh Sertifikat</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('user.dashboard') }}" class="nav-link">
-                                <button class="btn btn-sm btn-danger">LOGOUT</button>
-                            </a>
+                            <form action="{{ route('auth.logout') }}" method="post">
+                                @csrf
+                                <button class="ml-4 btn btn-sm btn-danger" type="submit">LOGOUT</button>
+                            </form>
                         </li>
 
                     </ul>

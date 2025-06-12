@@ -190,7 +190,7 @@
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">Syahrial Hipdi</a>
@@ -203,7 +203,7 @@
                         <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                             aria-label="Search">
                         <div class="input-group-append">
-                            <button class="btn btn-sidebar">
+                            <button class="btn btn-sidebar" style="padding: 0 25px">
                                 <i class="fa fa-search fa-fw"></i>
                             </button>
                         </div>
@@ -216,121 +216,77 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item">
+                        <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
                             <a href="../../index.html" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
-                                <p>
-                                    Dashboard
-                                </p>
+                                Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>
-                                    Admin
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
+                            <a href="{{ route('admin.user.dashboard') }}"
+                                class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-trophy"></i>
+                                User
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.lomba.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.lomba.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-trophy"></i>
+                                Lomba
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-users"></i>
+                                Admin
+                                <i class="right fa fa-angle-left"></i>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="data-juri.html" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        <p>Juri
-                                        </p>
+                                        <i class="fa fa-user nav-icon"></i>
+                                        Juri
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="data-verifikator.html" class="nav-link">
                                         <i class="fa fa-circle nav-icon"></i>
-                                        <p>
-                                            Verifikator
-                                        </p>
+                                        Verifikator
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.data_lomba')}}" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        <p>
-                                            Lomba
-                                        </p>
+                                    {{-- <a href="{{ route('admin.data_lomba') }}" class="nav-link"> --}}
+                                    <i class="fa fa-circle nav-icon"></i>
+                                    Lomba
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="data-admincustom.html" class="nav-link active">
                                         <i class="fa fa-circle nav-icon"></i>
-                                        <p>Nilai
-                                        </p>
+                                        Nilai
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="data-admincustom.html" class="nav-link active">
                                         <i class="fa fa-circle nav-icon"></i>
-                                        <p>Komponen Penilaian
-                                        </p>
+                                        Komponen Penilaian
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-circle"></i>
-                                <p>
-                                    Pendaftar
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
+                            <a href="{{ route('admin.lomba_pendaftar.indexx') }}"
+                                class="nav-link {{ request()->routeIs('admin.lomba_pendaftar.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-user-plus"></i>
+                                Pendaftar
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        <p>PP
-                                            <i class="right fa fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="fa fa-dot-circle nav-icon"></i>
-                                                <p>2025</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        <p>
-                                            PPAN
-                                            <i class="right fa fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="pendaftar/2025/ppan25.html" class="nav-link">
-                                                <i class="fa fa-dot-circle nav-icon"></i>
-                                                <p>2025</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle nav-icon"></i>
-                                        <p>PPAP
-                                            <i class="right fa fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="pendaftar/2025/ppap25.html" class="nav-link">
-                                                <i class="fa fa-dot-circle nav-icon"></i>
-                                                <p>2025</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('auth.logout') }}" method="post">
+                                @csrf
+                                <button class="ml-4 btn btn-sm btn-danger" type="submit">LOGOUT</button>
+                            </form>
                         </li>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -338,29 +294,11 @@
             <!-- /.sidebar -->
         </aside>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Data Admin</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <button class="btn btn-primary float-right">
-                                Tambah Admin
-                            </button>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
+        {{-- main content --}}
+        @yield('content')
+        {{-- ./main content --}}
 
-            {{-- main content --}}
-            @yield('content')
-            {{-- ./main content --}}
 
-        </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
