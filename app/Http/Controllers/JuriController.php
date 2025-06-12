@@ -37,7 +37,11 @@ class JuriController extends Controller
         $juri = Auth::user();
 
         // Ambil semua lomba yang juri ini ditugaskan
-        $lombas = $juri->lombaDijuri()->with('users')->get();
+        // $lombas = $juri->lombaDijuri()->with('users')->get();
+        $lombas = $juri->lombaDijuri()->with(['users', 'penilaians' => function ($query) use ($juri) {
+    $query->where('juri_id', $juri->id);
+}])->get();
+
 
         return view('juri.index', compact('lombas'));
     }

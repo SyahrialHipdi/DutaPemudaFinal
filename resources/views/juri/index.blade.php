@@ -41,7 +41,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama User</th>
+                                            <th>Nilai</th>
                                             <th>Email</th>
                                             {{-- <th>lomba</th> --}}
                                             <th>Data Isian</th>
@@ -50,14 +50,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($lombas as $lomba)
+@foreach ($lombas as $lomba)
     <tr>
         <td colspan="5"><strong>Lomba: {{ $lomba->nama_lomba }}</strong></td>
     </tr>
     @foreach ($lomba->users as $index => $user)
+     @php
+            // Cari penilaian juri yang sedang login terhadap peserta ini
+            $penilaian = $lomba->penilaians
+                ->where('juri_id', auth()->id())
+                ->where('peserta_id', $user->id)
+                ->first();
+        @endphp
         <tr>
             <td>{{ $index + 1 }}</td>
-            <td>{{ $user->name ?? '-' }}</td>
+            <td>
+                {{-- {{ $user->name ?? '-' }} --}}
+                 @if ($penilaian)
+                    <strong>Nilai:</strong> {{ $penilaian->nilai }}<br>
+                    <strong>Komentar:</strong> {{ $penilaian->komentar }}
+                @else
+                    <span class="text-danger">Belum dinilai</span>
+                @endif
+            </td>
             <td>{{ $user->email }}</td>
             <td>
                 @php
