@@ -47,6 +47,58 @@
     <link rel="stylesheet" href="{{ asset('css/form.css') }}" />
 
     @stack('styles')
+
+    {{-- Letakkan ini di bagian paling bawah file Blade Anda --}}
+    @push('styles')
+        <style>
+            /* Memberi gaya pada panel dropdown utama */
+            .profile-dropdown-menu {
+                padding: 0;
+                border: 1px solid #eee;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                border-radius: 8px !important;
+                margin-top: 10px !important;
+            }
+
+            /* Memberi gaya pada header dropdown */
+            .dropdown-header-custom {
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdown-header-custom h6 {
+                margin-bottom: 0.25rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .dropdown-header-custom p {
+                margin-bottom: 0;
+                font-size: 13px;
+            }
+
+            /* Memberi gaya pada setiap item di dropdown */
+            .profile-dropdown-menu .dropdown-item {
+                padding: 0.75rem 1.5rem;
+                font-size: 14px;
+                color: #555;
+                transition: all 0.2s ease-in-out;
+            }
+
+            /* Efek hover yang halus */
+            .profile-dropdown-menu .dropdown-item:hover {
+                background-color: #1a76d1;
+                /* Warna biru dari tema Anda */
+                color: #ffffff;
+            }
+
+            /* Merapikan ikon di dalam item dropdown */
+            .profile-dropdown-menu .dropdown-item .fa {
+                width: 20px;
+                /* Memberi ruang agar teks sejajar */
+            }
+        </style>
+    @endpush
 </head>
 
 <body>
@@ -115,36 +167,51 @@
                         <div class="col-lg-2 col-12 ">
                             <div class="get-quote float-right">
                                 @auth
-                                    {{-- <a href="{{ route('peserta.index') }}" class="btn">Profile</a> --}}
-                                    <ul class="flex space-x-4 items-center">
-                                        <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#"
-                                                role="button" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false" v-pre>
-                                                <i class="fa fa-user"></i>
+                                    {{-- Dropdown untuk pengguna yang sudah login --}}
+                                    <div class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle btn" href="#"
+                                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            v-pre style="padding: 8px 20px; color: white;">
+                                            {{-- Menampilkan ikon dan nama pengguna --}}
+                                            <i class="fa fa-user-circle mr-2"></i>
+                                            <span>{{ Auth::user()->display_name }}</span>
+                                        </a>
+
+                                        {{-- Panel Dropdown yang akan muncul --}}
+                                        <div class="dropdown-menu dropdown-menu-right profile-dropdown-menu"
+                                            aria-labelledby="navbarDropdown">
+
+                                            {{-- Link ke Halaman Profil --}}
+                                            <a class="dropdown-item btn" href="{{ route('peserta.index') }}">
+                                                <i class="fa fa-user-o mr-2"></i> Profil Saya
                                             </a>
 
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                                <a class="dropdown-item" href="{{ route('peserta.index') }}">
-                                                    Profile
-                                                </a>
+                                            {{-- Link ke Halaman Dashboard (Dinamis) --}}
+                                            @php
+                                                $dashboardRoute = match (Auth::user()->role) {
+                                                    'admin' => route('admin.dashboard'),
+                                                    'juri' => route('juri.index'),
+                                                    'peserta' => route('peserta.index'),
+                                                    default => route('home'),
+                                                };
+                                            @endphp
 
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="{{ route('auth.logout') }}"
-                                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                    <i class="fa fa-sign-out mr-2"></i>Logout
-                                                </a>
 
-                                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
-                                                    class="d-none">
-                                                    @csrf
-                                                </form>
-                                            </div>
-                                        </li>
+                                            <div class="dropdown-divider"></div>
 
-                                    </ul>
+                                            {{-- Tombol Logout --}}
+                                            <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-sign-out mr-2"></i> Logout
+                                            </a>
+                                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </div>
                                 @else
+                                    {{-- Jika belum login, tampilkan tombol Login --}}
                                     <a href="{{ route('auth.login') }}" class="btn">Login</a>
                                 @endauth
                             </div>

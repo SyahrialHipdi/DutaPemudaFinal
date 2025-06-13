@@ -14,14 +14,14 @@
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-control-label" for="password">Password Baru</label>
                                     <input type="password" id="password" class="form-control form-control-lg"
-                                        name="password" />
+                                        name="password" required />
                                 </div>
 
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-control-label" for="password_confirmation">Konfirmasi Password
                                         Baru</label>
                                     <input type="password" id="password_confirmation" class="form-control form-control-lg"
-                                        name="password_confirmation" />
+                                        name="password_confirmation" required />
                                 </div>
 
                                 {{-- <div class="d-flex justify-content-center flex-column">
@@ -29,9 +29,9 @@
                                             Password</b></a>
                                 </div> --}}
 
-                                <button type="submit">Update</button>
+                                <button class="btn btn-sm btn-warning" type="submit">Update</button>
                                 <a href="/peserta/dashboard">
-                                    <button type="button">Batal</button>
+                                    <button class="btn btn-sm btn-danger" type="button">Batal</button>
                                 </a>
                             </form>
                         </div>

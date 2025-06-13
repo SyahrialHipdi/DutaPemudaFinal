@@ -83,13 +83,15 @@
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('admin.lomba.edit', $lomba->id) }}"
-                                                        class="btn btn-sm btn-warning">Edit</a>
+                                                        class="btn btn-sm btn-warning">
+                                                        <i class="fa fa-pencil mr-2"></i>Edit</a>
                                                     <form action="{{ route('admin.lomba.destroy', $lomba->id) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                            onclick="return confirm('Yakin ingin menghapus?')"><i
+                                                                class="fa fa-trash mr-2"></i>Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>

@@ -22,7 +22,7 @@
     {{-- nice select --}}
     <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" />
+    {{-- <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" /> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/pendaftar/adminlte.min.css') }}" />
     @stack('styles')
@@ -233,7 +233,7 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
-            $('select').niceSelect();
+            // $('select').niceSelect();
         });
     </script>
 </body>
