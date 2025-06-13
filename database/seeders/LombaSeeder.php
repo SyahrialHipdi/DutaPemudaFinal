@@ -17,7 +17,7 @@ class LombaSeeder extends Seeder
             'nama_lomba' => 'PP 2025',
             'tahun' => 2025,
             'deskripsi' => 'Pemuda Pelopor 2025',
-            'syarat_lomba' => ['Nama:text', 'alamat:text'],
+            'syarat_lomba' => ['Nama:text', 'Provinsi:text', 'Kota:text', 'Kecamatan:text', 'Desa:text' ],
         ]);
 
         Lomba::create([

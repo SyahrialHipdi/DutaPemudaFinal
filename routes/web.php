@@ -50,7 +50,7 @@ Route::middleware(['auth','role:admin'])->prefix('admin')->group(function () {
     Route::post('/user/create', [AdminController::class, 'store'])->name('admin.user.store');
     Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
-    Route::post('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+    Route::delete('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
 
 });
 

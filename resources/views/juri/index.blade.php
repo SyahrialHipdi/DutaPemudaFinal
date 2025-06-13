@@ -36,7 +36,10 @@
                     <div class="col-12">
                         <div class="card">
                             <!-- /.card-header -->
+                            @foreach ($lombas as $lomba)
+                            
                             <div class="card-body">
+                                <h4 colspan="5"><strong>Lomba: {{ $lomba->nama_lomba }}</strong></h4>
                                 <table id="example" class="table table-bordered">
                                     <thead>
                                         <tr>
@@ -46,14 +49,10 @@
                                             {{-- <th>lomba</th> --}}
                                             <th>Data Isian</th>
                                             <th>aksi</th>
-
+                    
                                         </tr>
                                     </thead>
                                     <tbody>
-@foreach ($lombas as $lomba)
-    <tr>
-        <td colspan="5"><strong>Lomba: {{ $lomba->nama_lomba }}</strong></td>
-    </tr>
     @foreach ($lomba->users as $index => $user)
      @php
             // Cari penilaian juri yang sedang login terhadap peserta ini
