@@ -72,24 +72,24 @@
                 <ul class="flex space-x-4 items-center">
                     <!-- Authentication Links -->
 
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="fa fa-user"></i>
+
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fa fa-user"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('auth.logout') }}"
-                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                        <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
 
-                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
 
                 </ul>
             </ul>
@@ -135,8 +135,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        <li class="nav-header">MENU UTAMA</li>
                         <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
                             <a href="{{ route('juri.index') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>

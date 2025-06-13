@@ -97,32 +97,21 @@
                 width: 20px;
                 /* Memberi ruang agar teks sejajar */
             }
+
+            .navbar-avatar {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+                /* Mencegah gambar menjadi gepeng */
+                margin-right: 8px;
+                border: 2px solid #f0f0f0;
+            }
         </style>
     @endpush
 </head>
 
 <body>
-    <!-- Preloader -->
-    <!-- End Preloader -->
-
-    <!-- Cp whatsapp -->
-    {{-- <div class="pro-features">
-        <a class="get-pro" href="https://wa.me/6282328059577?text=Mas%20mau%20nanya%20dong!!"><img src="img/wa-icon.png"
-                alt="wa-icon" width="60%"></a>
-        {{-- <li class="big-title">Pro Version Available on Themeforest</li>
-        <li class="title">Pro Version Features</li>
-        <li>2+ premade home pages</li>
-        <li>20+ html pages</li>
-        <li>Color Plate With 12+ Colors</li>
-        <li>Sticky Header / Sticky Filters</li>
-        <li>Working Contact Form With Google Map</li>
-        <div class="button">
-            <a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879"
-                target="_blank" class="btn">Pro Version Demo</a>
-            <a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank"
-                class="btn">Buy Pro Version</a>
-        </div>
-    </div> --}}
 
     <!-- Header Area -->
     <header class="header">
@@ -164,29 +153,35 @@
                             </div>
                             <!--/ End Main Menu -->
                         </div>
-                        <div class="col-lg-2 col-12 ">
+                        <div class="col-lg-2 col-12 mt-2">
                             <div class="get-quote float-right">
                                 @auth
-                                    {{-- Dropdown untuk pengguna yang sudah login --}}
                                     <div class="nav-item dropdown">
-                                        <a id="navbarDropdown" class="nav-link dropdown-toggle btn" href="#"
+
+                                        {{-- TOMBOL TRIGGER DROPDOWN --}}
+                                        <a id="navbarDropdown"
+                                            class="nav-link btn dropdown-toggle d-flex align-items-center" href="#"
                                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            v-pre style="padding: 8px 20px; color: white;">
-                                            {{-- Menampilkan ikon dan nama pengguna --}}
-                                            <i class="fa fa-user-circle mr-2"></i>
-                                            <span>{{ Auth::user()->display_name }}</span>
+                                            v-pre style="padding: 5px 15px; color: white;">
+
+                                            {{-- Menampilkan Avatar Pengguna, atau Ikon Default --}}
+                                            {{-- Ganti 'avatar' dengan nama kolom foto profil di tabel users Anda jika berbeda --}}
+                                            @if (Auth::user()->avatar)
+                                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar"
+                                                    class="navbar-avatar">
+                                            @else
+                                                Profile
+                                            @endif
+
+
                                         </a>
 
-                                        {{-- Panel Dropdown yang akan muncul --}}
+                                        {{-- PANEL DROPDOWN YANG AKAN MUNCUL --}}
                                         <div class="dropdown-menu dropdown-menu-right profile-dropdown-menu"
                                             aria-labelledby="navbarDropdown">
 
-                                            {{-- Link ke Halaman Profil --}}
-                                            <a class="dropdown-item btn" href="{{ route('peserta.index') }}">
-                                                <i class="fa fa-user-o mr-2"></i> Profil Saya
-                                            </a>
+                                            <div class="dropdown-divider"></div>
 
-                                            {{-- Link ke Halaman Dashboard (Dinamis) --}}
                                             @php
                                                 $dashboardRoute = match (Auth::user()->role) {
                                                     'admin' => route('admin.dashboard'),
@@ -196,14 +191,17 @@
                                                 };
                                             @endphp
 
+                                            <a class="dropdown-item" href="{{ $dashboardRoute }}">
+                                                <i class="fa fa-th-large mr-2"></i> Dashboard
+                                            </a>
 
                                             <div class="dropdown-divider"></div>
 
-                                            {{-- Tombol Logout --}}
                                             <a class="dropdown-item" href="{{ route('auth.logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 <i class="fa fa-sign-out mr-2"></i> Logout
                                             </a>
+
                                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
                                                 class="d-none">
                                                 @csrf

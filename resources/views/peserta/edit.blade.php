@@ -30,7 +30,7 @@
                                 </div> --}}
 
                                 <button class="btn btn-sm btn-warning" type="submit">Update</button>
-                                <a href="/peserta/dashboard">
+                                <a href="/peserta/index">
                                     <button class="btn btn-sm btn-danger" type="button">Batal</button>
                                 </a>
                             </form>

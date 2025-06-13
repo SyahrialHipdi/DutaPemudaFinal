@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 
-Route::middleware(['auth','role:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/lomba', [LombaController::class, 'index'])->name('admin.lomba.index');
     Route::get('/lomba/create', [LombaController::class, 'create'])->name('admin.lomba.create');
@@ -44,23 +44,30 @@ Route::middleware(['auth','role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
-    
+
     Route::get('/user', [AdminController::class, 'dashboard'])->name('admin.user.dashboard');
     Route::get('/user/create', [AdminController::class, 'create'])->name('admin.user.create');
     Route::post('/user/create', [AdminController::class, 'store'])->name('admin.user.store');
     Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
     Route::delete('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
-
 });
 
-Route::middleware(['auth','role:juri'])->prefix('juri')->group(function () {
+Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
     Route::get('/index', [JuriController::class, 'index'])->name('juri.index');
     Route::get('/create/{lomba}/{peserta}', [JuriController::class, 'create'])->name('juri.create');
     Route::post('/create/{lomba}/{peserta}', [JuriController::class, 'store'])->name('juri.store');
 });
 
-Route::middleware(['auth','role:peserta'])->prefix('peserta')->group(function () {
+Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->name('verifikator.')->group(function () {
+    Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('dashboard');
+    Route::get('/peserta', [VerifikatorController::class, 'index'])->name('peserta.index');
+    Route::get('/peserta/{user}/detail', [VerifikatorController::class, 'show'])->name('peserta.show');
+    Route::post('/peserta/{user}/verify', [VerifikatorController::class, 'verify'])->name('peserta.verify');
+    Route::post('/peserta/{user}/reject', [VerifikatorController::class, 'reject'])->name('peserta.reject');
+});
+
+Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function () {
     Route::get('/dashboard', [PesertaController::class, 'show'])->name('peserta.dashboard');
     Route::get('/index', [PesertaController::class, 'index'])->name('peserta.index');
     Route::get('/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
