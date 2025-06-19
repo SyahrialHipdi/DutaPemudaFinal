@@ -61,9 +61,15 @@
                                                     <td>{{ $index + 1 }}</td>
                                                     <td>
                                                         {{-- {{ $user->name ?? '-' }} --}}
-                                                        @if ($penilaian)
-                                                            <strong>Nilai:</strong> {{ $penilaian->nilai }}<br>
-                                                            <strong>Komentar:</strong> {{ $penilaian->komentar }}
+                                                        @if ($penilaian && is_array($penilaian->nilai))
+                                                            @foreach ($penilaian->nilai as $komponen => $nilai)
+                                                                <div><strong>{{ ucfirst($komponen) }}:</strong>
+                                                                    {{ $nilai }}</div>
+                                                            @endforeach
+                                                            @if ($penilaian->komentar)
+                                                                <div><strong>Komentar:</strong> {{ $penilaian->komentar }}
+                                                                </div>
+                                                            @endif
                                                         @else
                                                             <span class="text-danger">Belum dinilai</span>
                                                         @endif

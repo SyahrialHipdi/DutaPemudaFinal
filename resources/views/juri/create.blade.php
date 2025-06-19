@@ -26,11 +26,19 @@
 
                                  <form action="{{ route('juri.store', [$lomba->id, $peserta->id]) }}" method="POST">
                                      @csrf
+                                     @foreach ($lomba->komponen_penilaian as $komponen)
                                      <div class="mb-3">
-                                         <label for="nilai" class="form-label">Nilai (0–100)</label>
-                                         <input type="number" name="nilai" id="nilai" class="form-control" required
-                                             min="0" max="100" value="{{ old('nilai') }}">
-                                     </div>
+
+                                         <label>{{ ucfirst($komponen) }}</label>
+                                         <input type="number" name="nilai[{{ $komponen }}]" class="form-control mb-2"
+                                         min="0" max="100" required>
+                                        </div>
+                                         {{-- <div class="mb-3">
+                                             <label for="nilai" class="form-label">Nilai (0–100)</label>
+                                             <input type="number" name="nilai" id="nilai" class="form-control"
+                                                 required min="0" max="100" value="{{ old('nilai') }}">
+                                         </div> --}}
+                                     @endforeach
 
                                      <div class="mb-3">
                                          <label for="komentar" class="form-label">Komentar (opsional)</label>

@@ -54,10 +54,39 @@
             </div>
         @endforeach
     </div>
-
     <button type="button" class="btn btn-success btn-sm mt-2" onclick="addSyarat()">
         <i class="fa fa-plus"></i> Tambah Syarat
     </button>
+
+
+    <div class="form-group">
+    <label class="form-label">Komponen Penilaian</label>
+    <div id="komponen-container">
+        @php
+            $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
+        @endphp
+
+        @forelse ($nilai as $item)
+            <div class="input-group mb-2">
+                <input type="text" name="komponen_penilaian[]" class="form-control"
+                    placeholder="Contoh: Public Speaking" value="{{ $item }}">
+                <button type="button" class="btn btn-outline-danger btn-remove-komponen">-</button>
+            </div>
+        @empty
+            <div class="input-group mb-2">
+                <input type="text" name="komponen_penilaian[]" class="form-control"
+                    placeholder="Contoh: Public Speaking">
+                <button type="button" class="btn btn-outline-danger btn-remove-komponen">-</button>
+            </div>
+        @endforelse
+    </div>
+
+    <button type="button" class="btn btn-outline-primary btn-add-komponen mt-2">
+        + Tambah Komponen
+    </button>
+</div>
+
+
 </div>
 
 <hr>
@@ -66,7 +95,7 @@
     <button class="btn btn-primary" type="submit">Simpan Lomba</button>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     let syaratIndex = {{ count($syarat) }};
 
@@ -103,4 +132,21 @@
         // Karena sekarang dibungkus oleh div kolom, kita perlu menghapus parent dari parent-nya (yaitu .row)
         button.parentElement.parentElement.remove();
     }
+
+    $(document).ready(function() {
+        // Tambah komponen penilaian
+        $(document).on('click', '.btn-add-komponen', function() {
+            $('#komponen-container').append(`
+                <div class="input-group mb-2">
+                    <input type="text" name="komponen_penilaian[]" class="form-control" placeholder="Contoh: Public Speaking" required>
+                    <button type="button" class="btn btn-outline-danger btn-remove-komponen">-hapus</button>
+                </div>
+            `);
+        });
+
+        // Hapus komponen penilaian
+        $(document).on('click', '.btn-remove-komponen', function() {
+            $(this).closest('.input-group').remove();
+        });
+    });
 </script>

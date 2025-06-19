@@ -103,6 +103,8 @@
                                                     'surat',
                                                     'ijazah',
                                                     'sertifikat',
+                                                    'nama',
+                                                    'alamat',
                                                 ];
                                                 $is_file = false;
                                                 foreach ($file_keywords as $keyword) {

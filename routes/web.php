@@ -51,6 +51,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
     Route::delete('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
+    
+    Route::get('/ranking', [AdminController::class, 'daftarLomba'])->name('admin.ranking.index');
+    Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
 });
 
 Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {

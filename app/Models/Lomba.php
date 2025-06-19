@@ -15,10 +15,12 @@ class Lomba extends Model
         'tahun',
         'deskripsi',
         'syarat_lomba',
+        'komponen_penilaian',
     ];
 
     protected $casts = [
         'syarat_lomba' => 'array',
+        'komponen_penilaian' => 'array',
     ];
     
     // public function users()
@@ -40,7 +42,7 @@ class Lomba extends Model
     // Penilaian dalam lomba ini
     public function penilaians()
     {
-        return $this->hasMany(Penilaian::class);
+        return $this->hasMany(Penilaian::class, 'lomba_id');
     }
 
 

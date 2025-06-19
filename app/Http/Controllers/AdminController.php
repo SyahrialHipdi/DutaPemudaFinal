@@ -8,6 +8,7 @@ use App\Models\Lomba;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Komponen;
+use App\Models\penilaian;
 
 class AdminController extends Controller
 {
@@ -104,5 +105,97 @@ public function destroy($id)
         return redirect()->route('admin.user.dashboard')->with('success', 'User dihapus.');
     }
 
+public function daftarLomba()
+    {
+        $lombas = Lomba::all();
+        return view('admin.ranking.daftar-lomba', compact('lombas'));
+    }
+
+    // public function rankingLomba(Lomba $lomba)
+    // {
+    //     $penilaians = $lomba->penilaians()->with('peserta')->get();
+
+    //     $pesertaNilai = [];
+
+    //     foreach ($penilaians as $penilaian) {
+    //         $nilaiArray = is_array($penilaian->nilai) ? $penilaian->nilai : json_decode($penilaian->nilai, true);
+    //         if (!$nilaiArray) continue;
+
+    //         $total = array_sum($nilaiArray);
+    //         $count = count($nilaiArray);
+    //         $avg = $count > 0 ? $total / $count : 0;
+
+    //         $id = $penilaian->peserta_id;
+
+    //         // Jika peserta sudah ada, gunakan nilai tertinggi (atau update strategi akumulasi lain)
+    //         if (!isset($pesertaNilai[$id])) {
+    //             $pesertaNilai[$id] = [
+    //                 'nama' => $penilaian->peserta->name ?? 'Peserta #' . $id,
+    //                 'total' => $avg,
+    //                 'count' => 1,
+    //             ];
+    //         } else {
+    //             $pesertaNilai[$id]['total'] += $avg;
+    //             $pesertaNilai[$id]['count']++;
+    //         }
+    //     }
+
+    //     $ranking = [];
+    //     foreach ($pesertaNilai as $pesertaId => $data) {
+    //         $rata = $data['count'] > 0 ? $data['total'] / $data['count'] : 0;
+    //         $ranking[] = [
+    //             'peserta_id' => $pesertaId,
+    //             'nama' => $data['nama'],
+    //             'rata_rata' => round($rata, 2),
+    //         ];
+    //     }
+
+    //     // Urutkan berdasarkan rata-rata tertinggi
+    //     usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
+
+    //     return view('admin.ranking.lihat', compact('lomba', 'ranking'));
+    // }
+
+
+    public function rankingLomba($lombaId)
+{
+    $penilaians = Penilaian::where('lomba_id', $lombaId)->get();
+
+    $pesertaNilai = [];
+
+    foreach ($penilaians as $penilaian) {
+        $pesertaId = $penilaian->peserta_id;
+        $nilaiArray = $penilaian->nilai;
+
+        if (!isset($pesertaNilai[$pesertaId])) {
+            $pesertaNilai[$pesertaId] = [
+                'total' => 0,
+                'count' => 0,
+                'nama' => $penilaian->peserta->email ?? 'Peserta #' . $pesertaId,
+            ];
+        }
+
+        if (is_array($nilaiArray)) {
+            $pesertaNilai[$pesertaId]['total'] += array_sum($nilaiArray);
+            $pesertaNilai[$pesertaId]['count'] += count($nilaiArray);
+        }
+    }
+
+    // Hitung rata-rata dan simpan
+    $ranking = [];
+    foreach ($pesertaNilai as $pesertaId => $data) {
+        $rata = $data['count'] > 0 ? $data['total'] / $data['count'] : 0;
+        $ranking[] = [
+            'peserta_id' => $pesertaId,
+            'nama' => $data['nama'],
+            'rata_rata' => round($rata, 2),
+        ];
+    }
+
+    // Urutkan dari rata-rata tertinggi
+    usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
+
+    return view('admin.ranking.show', compact('ranking'));
+}
 
 }

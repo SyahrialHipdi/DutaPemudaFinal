@@ -38,7 +38,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama User</th>
                                             <th>Email</th>
                                             <th>Data Isian</th>
 
@@ -48,7 +47,6 @@
                                         @foreach ($lomba->users as $index => $user)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $user->name ?? '-' }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
                                                     @php

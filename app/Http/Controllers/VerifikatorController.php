@@ -10,21 +10,22 @@ class VerifikatorController extends Controller
     public function dashboard()
     {
         // Ambil statistik untuk ditampilkan di dashboard
-        $stats = [
-            'total' => User::where('role', 'peserta')->count(),
-            'menunggu' => User::where('role', 'peserta')->where('status', 'menunggu')->count(),
-            'diverifikasi' => User::where('role', 'peserta')->where('status', 'verified')->count(),
-            'ditolak' => User::where('role', 'peserta')->where('status', 'rejected')->count(),
-        ];
+        // $stats = [
+        //     'total' => User::where('role', 'peserta')->count(),
+        //     'menunggu' => User::where('role', 'peserta')->where('status', 'menunggu')->count(),
+        //     'diverifikasi' => User::where('role', 'peserta')->where('status', 'verified')->count(),
+        //     'ditolak' => User::where('role', 'peserta')->where('status', 'rejected')->count(),
+        // ];
 
-        // Ambil 5 peserta terbaru yang butuh verifikasi
-        $peserta_terbaru = User::where('role', 'peserta')
-            ->where('status', 'menunggu')
-            ->latest()
-            ->take(5)
-            ->get();
+        // // Ambil 5 peserta terbaru yang butuh verifikasi
+        // $peserta_terbaru = User::where('role', 'peserta')
+        //     ->where('status', 'menunggu')
+        //     ->latest()
+        //     ->take(5)
+        //     ->get();
 
-        return view('verifikator.dashboard', compact('stats', 'peserta_terbaru'));
+        // return view('verifikator.dashboard', compact('stats', 'peserta_terbaru'));
+        return view('verifikator.dashboard');
     }
 
     public function index()

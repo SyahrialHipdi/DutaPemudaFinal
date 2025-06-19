@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('juri_id'); // user_id dari juri
             $table->foreignId('peserta_id'); // user_id dari peserta
             $table->foreignId('lomba_id');
-            $table->integer('nilai'); // atau float, bisa ditambah kriteria
+            $table->json('nilai'); // atau float, bisa ditambah kriteria
             $table->text('komentar')->nullable();
             $table->timestamps();
         });

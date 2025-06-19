@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\komponen;
 use App\Models\Lomba;
 use Illuminate\Http\Request;
 
@@ -66,6 +67,9 @@ class LombaController extends Controller
             'syarat_lomba' => 'array',
             'syarat_lomba.*.field' => 'nullable|string',
             'syarat_lomba.*.type' => 'nullable|string',
+            'komponen_penilaian' => 'array',
+            'komponen_penilaian.*' => 'nullable',
+
         ]);
 
         $syarat = $request->input('syarat_lomba', []);
@@ -80,11 +84,13 @@ class LombaController extends Controller
             }
         }
 
+         $komponen_penilaian = array_filter(array_map('trim', $request->input('komponen_penilaian', [])));
         Lomba::create([
             'nama_lomba' => $request->nama_lomba,
             'tahun' => $request->tahun,
             'deskripsi' => $request->deskripsi,
             'syarat_lomba' => $syarat_lomba,
+            'komponen_penilaian' => $komponen_penilaian,
         ]);
 
         return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil ditambahkan.');
@@ -96,23 +102,6 @@ class LombaController extends Controller
         return view('admin.lomba.edit', compact('lomba'));
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $lomba = Lomba::findOrFail($id);
-
-    //     $data = $request->validate([
-    //         'nama_lomba' => 'required|string|max:255',
-    //         'tahun' => 'required|digits:4|integer',
-    //         'deskripsi' => 'nullable|string',
-    //         'syarat_lomba' => 'required|array|min:1',
-    //         'syarat_lomba.*' => 'required|string',
-    //     ]);
-
-    //     $lomba->update($data);
-
-    //     return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil diperbarui.');
-    // }
-
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -122,6 +111,8 @@ class LombaController extends Controller
             'syarat_lomba' => 'array',
             'syarat_lomba.*.field' => 'nullable|string',
             'syarat_lomba.*.type' => 'nullable|string',
+            'komponen_penilaian' => 'nullable',
+            'komponen_penilaian.*' => 'nullable',
         ]);
 
         $lomba = Lomba::findOrFail($id);
@@ -137,12 +128,14 @@ class LombaController extends Controller
                 $syarat_lomba[] = "$field:$type";
             }
         }
+        $komponen = $request->input('komponen_penilaian', []);
 
         $lomba->update([
             'nama_lomba' => $request->nama_lomba,
             'tahun' => $request->tahun,
             'deskripsi' => $request->deskripsi,
             'syarat_lomba' => $syarat_lomba,
+            'komponen_penilaian' => $komponen, 
         ]);
 
         return redirect()->route('admin.lomba.index')->with('success', 'Lomba berhasil diperbarui.');

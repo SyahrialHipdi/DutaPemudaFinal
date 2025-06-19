@@ -61,6 +61,7 @@
                                             <th>Tahun</th>
                                             <th>Deskripsi</th>
                                             <th>Syarat</th>
+                                            <th>Komponen Penilaian</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -75,6 +76,18 @@
                                                         $syarat = old('syarat_lomba', $lomba->syarat_lomba ?? []);
                                                     @endphp
                                                     @foreach ($syarat as $s)
+                                                        <div class="syarat-item">
+                                                            <ull>
+                                                                <li>{{ $s }}</li>
+                                                            </ull>
+                                                        </div>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    @php
+                                                        $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
+                                                    @endphp
+                                                    @foreach ($nilai as $s)
                                                         <div class="syarat-item">
                                                             <ull>
                                                                 <li>{{ $s }}</li>

@@ -19,7 +19,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $stats['total'] }}</h3>
+                                {{-- <h3>{{ $stats['total'] }}</h3> --}}
                                 <p>Total Peserta</p>
                             </div>
                             <div class="icon"><i class="fas fa-users"></i></div>
@@ -28,7 +28,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ $stats['menunggu'] }}</h3>
+                                {{-- <h3>{{ $stats['menunggu'] }}</h3> --}}
                                 <p>Menunggu Verifikasi</p>
                             </div>
                             <div class="icon"><i class="fas fa-clock"></i></div>
@@ -37,7 +37,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>{{ $stats['diverifikasi'] }}</h3>
+                                {{-- <h3>{{ $stats['diverifikasi'] }}</h3> --}}
                                 <p>Telah Diverifikasi</p>
                             </div>
                             <div class="icon"><i class="fas fa-user-check"></i></div>
@@ -46,7 +46,7 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>{{ $stats['ditolak'] }}</h3>
+                                {{-- <h3>{{ $stats['ditolak'] }}</h3> --}}
                                 <p>Ditolak</p>
                             </div>
                             <div class="icon"><i class="fas fa-user-times"></i></div>
@@ -69,7 +69,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($peserta_terbaru as $peserta)
+                                {{-- @forelse($peserta_terbaru as $peserta)
                                     <tr>
                                         <td>{{ $peserta->data_isian['nama_lengkap'] ?? $peserta->name }}</td>
                                         <td>{{ $peserta->email }}</td>
@@ -86,7 +86,7 @@
                                         <td colspan="4" class="text-center">Tidak ada peserta yang perlu diverifikasi
                                             saat ini.</td>
                                     </tr>
-                                @endforelse
+                                @endforelse --}}
                             </tbody>
                         </table>
                     </div>

@@ -133,6 +133,13 @@
                                 <p>Data Pendaftar</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.ranking.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.ranking.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-address-book"></i>
+                                <p>Ranking Lomba</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -153,6 +160,7 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
     </div>
+    
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -168,7 +176,6 @@
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('js/pendaftar/adminlte.min.js') }}"></script>
-
     {{-- Stack untuk script khusus per halaman --}}
     @stack('scripts')
 </body>
