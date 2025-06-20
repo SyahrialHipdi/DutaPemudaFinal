@@ -12,9 +12,6 @@ class PesertaController extends Controller
 
     public function index(User $user)
     {
-        // $user = User::findOrFail($id);
-        // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
-        // $user = User::();
         return view('peserta.index', compact('user'));
     }
 

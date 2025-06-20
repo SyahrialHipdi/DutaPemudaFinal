@@ -16,6 +16,7 @@ class LombaPesertaSeeder extends Seeder
     {
         $userA = User::find(6); 
         $userB = User::find(7); 
+        $userC = User::find(8); 
 
         $lombaX = Lomba::find(1); 
         $lombaY = Lomba::find(1); 
@@ -35,6 +36,17 @@ class LombaPesertaSeeder extends Seeder
             $value = [
                 'nama' => "Hipdi",
                 'alamat' => "Jakarta",
+            ];
+
+            $userB->lombas()->attach($lombaX->id, [
+                'data_isian' => json_encode($value),
+            ]);
+        }
+
+        if ($userC && $lombaX) {
+            $value = [
+                'nama' => "Ahmad",
+                'alamat' => "Bandung",
             ];
 
             $userB->lombas()->attach($lombaX->id, [

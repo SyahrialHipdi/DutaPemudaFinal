@@ -21,28 +21,11 @@ class LombaSeeder extends Seeder
             'komponen_penilaian' => ['proposal', 'publicspeaking'],
         ]);
 
-        // Lomba::create([
-        //     'nama_lomba' => 'PPAP 2025',
-        //     'tahun' => 2025,
-        //     'deskripsi' => 'Pertukaran Pelajar Antar Provinsi 2025',
-        //     'syarat_lomba' => ['Nama:text', 'alasan:text','motto:text'],
-        // ]);
-
-        // $lombas = [
-        //     [
-        //         'nama_lomba' => 'Lomba A',
-        //         'tahun' => 2025,
-        //         'deskripsi' => 'Lomba A adalah lomba menulis esai nasional untuk mahasiswa.',
-        //     ],
-        //     [
-        //         'nama_lomba' => 'Lomba B',
-        //         'tahun' => 2025,
-        //         'deskripsi' => 'Lomba B adalah lomba debat Bahasa Inggris tingkat universitas.',
-        //     ],
-        // ];
-
-        // foreach ($lombas as $lomba) {
-        //     Lomba::create($lomba);
-        // }
+        Lomba::create([
+            'nama_lomba' => 'PPAP 2025',
+            'tahun' => 2025,
+            'deskripsi' => 'Pertukaran Pelajar Antar Provinsi 2025',
+            'syarat_lomba' => ['Nama:text', 'alasan:text','ktp:file'],
+        ]);
     }
 }

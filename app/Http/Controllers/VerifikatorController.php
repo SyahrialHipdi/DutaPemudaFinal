@@ -8,78 +8,20 @@ use Illuminate\Http\Request;
 
 class VerifikatorController extends Controller
 {
-    public function dashboard()
+    public function index()
     {
-        // Ambil statistik untuk ditampilkan di dashboard
-        // $stats = [
-        //     'total' => User::where('role', 'peserta')->count(),
-        //     'menunggu' => User::where('role', 'peserta')->where('status', 'menunggu')->count(),
-        //     'diverifikasi' => User::where('role', 'peserta')->where('status', 'verified')->count(),
-        //     'ditolak' => User::where('role', 'peserta')->where('status', 'rejected')->count(),
-        // ];
-
-        // // Ambil 5 peserta terbaru yang butuh verifikasi
-        // $peserta_terbaru = User::where('role', 'peserta')
-        //     ->where('status', 'menunggu')
-        //     ->latest()
-        //     ->take(5)
-        //     ->get();
-
-        // return view('verifikator.dashboard', compact('stats', 'peserta_terbaru'));
-        return view('verifikator.dashboard');
+        // Menampilkan semua peserta yang sudah mendaftar
+        $peserta = LombaPeserta::with(['user', 'lomba'])->get();
+        return view('verifikator.index', compact('peserta'));
     }
 
-    // public function index()
-    // {
-    //     // Mengambil semua peserta yang relevan (bukan juri atau admin)
-    //     $peserta = LombaPeserta::all();
-    //     return view('verifikator.index', compact('peserta'));
-    // }
+    public function store($id)
+    {
+        $peserta = LombaPeserta::findOrFail($id);
+        $peserta->update([
+            'status' => 'proses'
+        ]);
 
-    public function index()
-{
-    // Menampilkan semua peserta yang sudah mendaftar
-    $peserta = LombaPeserta::with(['user', 'lomba'])->get();
-    return view('verifikator.index', compact('peserta'));
-}
-
-    
-    
-    
-public function store($id)
-{
-    $peserta = LombaPeserta::findOrFail($id);
-    $peserta->update([
-        'status' => 'proses'
-    ]);
-
-    return back()->with('success', 'Peserta berhasil diverifikasi.');
-}
-    // public function show(User $user)
-    // {
-    //     // Decode data isian agar bisa diakses sebagai array di view
-    //     if (is_string($user->data_isian)) {
-    //         $user->data_isian = json_decode($user->data_isian, true) ?? [];
-    //     }
-    //     return view('verifikator.peserta.show', compact('user'));
-    // }
-    // public function verify(User $user)
-    // {
-    //     $user->update([
-    //         'status' => 'verified',
-    //     ]);
-
-    //     return back()->with('success', 'Peserta berhasil diverifikasi.');
-    // }
-    // public function reject(Request $request, User $user)
-    // {
-    //     $request->validate(['alasan_penolakan' => 'required|string|max:500']);
-
-    //     $user->update([
-    //         'status' => 'rejected',
-    //         'alasan_penolakan' => $request->alasan_penolakan,
-    //     ]);
-
-    //     return back()->with('success', 'Peserta berhasil ditolak dengan alasan yang tersimpan.');
-    // }
+        return back()->with('success', 'Peserta berhasil diverifikasi.');
+    }
 }

@@ -22,12 +22,5 @@ class DatabaseSeeder extends Seeder
             LombaJuriSeeder::class,
             LombaPesertaSeeder::class,
         ]);
-        
-
-        // Lomba::create([
-        // 'nama_lomba' => 'Pemuda Pelopor',
-        // 'tahun' => '2025',
-        // 'deskripsi' => 'Pemuda Pelopor 2025',
-        // ]);
     }
 }

@@ -18,8 +18,8 @@ class LocationController extends Controller
     {
         // Ambil semua kota/kabupaten berdasarkan kode provinsi
         $kota = TrefRegion::where('code', 'like', "$kodeProvinsi.%")
-                       ->whereRaw('LENGTH(code) = 5')
-                       ->get();
+            ->whereRaw('LENGTH(code) = 5')
+            ->get();
         return response()->json($kota);
     }
 
@@ -27,8 +27,8 @@ class LocationController extends Controller
     {
         // Ambil semua kecamatan berdasarkan kode kota
         $kecamatan = TrefRegion::where('code', 'like', "$kodeKota.%")
-                            ->whereRaw('LENGTH(code) = 8')
-                            ->get();
+            ->whereRaw('LENGTH(code) = 8')
+            ->get();
         return response()->json($kecamatan);
     }
 
@@ -36,8 +36,8 @@ class LocationController extends Controller
     {
         // Ambil semua kecamatan berdasarkan kode kota
         $desa = TrefRegion::where('code', 'like', "$kodeKecamatan.%")
-                            ->whereRaw('LENGTH(code) = 13')
-                            ->get();
+            ->whereRaw('LENGTH(code) = 13')
+            ->get();
         return response()->json($desa);
     }
 }

@@ -1,23 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\VerifikatorController;
-use App\Http\Controllers\JuriController;
-use App\Http\Controllers\Auth\UserAuthController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\Auth\AdminAuthController;
-use App\Http\Controllers\LandingPageController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PPController;
-use App\Http\Controllers\PPAPController;
-use App\Http\Controllers\Lomba;
-use App\Http\Controllers\LombaController;
-use App\Http\Controllers\PendafataranLombaController;
-use App\Http\Controllers\AdminLombaController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\LombaDaftarController;
-use App\Http\Controllers\LombaPesertaController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\JuriController;
+use App\Http\Controllers\VerifikatorController;
 use App\Http\Controllers\PesertaController;
+use App\Http\Controllers\LombaController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\LombaPesertaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +19,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomba.index');
 Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
 Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
@@ -65,12 +56,6 @@ Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
 Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->group(function () {
     Route::get('/index', [VerifikatorController::class, 'index'])->name('verifikator.index');
     Route::post('/index/{id}', [VerifikatorController::class, 'store'])->name('verifikator.store');
-    // Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('dashboard');
-    // Route::get('/peserta', [VerifikatorController::class, 'index'])->name('peserta.index');
-    // Route::get('/peserta/{user}/detail', [VerifikatorController::class, 'show'])->name('peserta.show');
-
-    // Route::post('/peserta/{user}/verify', [VerifikatorController::class, 'verify'])->name('peserta.verify');
-    // Route::post('/peserta/{user}/reject', [VerifikatorController::class, 'reject'])->name('peserta.reject');
 });
 
 Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function () {
@@ -79,7 +64,6 @@ Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function (
     Route::get('/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
     Route::put('/edit', [PesertaController::class, 'update'])->name('peserta.update');
     Route::get('/progress', [PesertaController::class, 'progress'])->name('peserta.progress');
-    // Route::get('/lomba/create', [LombaController::class, 'create'])->name('peserta.lomba.create');
 });
 
 Route::get('/provinsi', [LocationController::class, 'getProvinsi']);
@@ -87,6 +71,6 @@ Route::get('/kota/{kodeProvinsi}', [LocationController::class, 'getKota']);
 Route::get('/kecamatan/{kodeKota}', [LocationController::class, 'getKecamatan']);
 Route::get('/desa/{kodeKecamatan}', [LocationController::class, 'getDesa']);
 
-Route::get('admin/create', function () {
-    return view('admin.lomba.create');
-})->name('admin/create');
+// Route::get('admin/create', function () {
+//     return view('admin.lomba.create');
+// })->name('admin/create');
