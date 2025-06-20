@@ -38,9 +38,18 @@ class JuriController extends Controller
 
         // Ambil semua lomba yang juri ini ditugaskan
         // $lombas = $juri->lombaDijuri()->with('users')->get();
-        $lombas = $juri->lombaDijuri()->with(['users', 'penilaians' => function ($query) use ($juri) {
-    $query->where('juri_id', $juri->id);
-}])->get();
+//         $lombas = $juri->lombaDijuri()->with(['users', 'penilaians' => function ($query) use ($juri) {
+//     $query->where('juri_id', $juri->id);
+// }])->get();
+
+$lombas = $juri->lombaDijuri()->with([
+    'users' => function ($query) {
+        $query->wherePivot('status', 'proses'); // filter hanya peserta yang diverifikasi
+    },
+    'penilaians' => function ($query) use ($juri) {
+        $query->where('juri_id', $juri->id);
+    }
+])->get();
 
 
         return view('juri.index', compact('lombas'));

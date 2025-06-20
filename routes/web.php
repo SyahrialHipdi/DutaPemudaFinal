@@ -62,12 +62,15 @@ Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
     Route::post('/create/{lomba}/{peserta}', [JuriController::class, 'store'])->name('juri.store');
 });
 
-Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->name('verifikator.')->group(function () {
-    Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('dashboard');
-    Route::get('/peserta', [VerifikatorController::class, 'index'])->name('peserta.index');
-    Route::get('/peserta/{user}/detail', [VerifikatorController::class, 'show'])->name('peserta.show');
-    Route::post('/peserta/{user}/verify', [VerifikatorController::class, 'verify'])->name('peserta.verify');
-    Route::post('/peserta/{user}/reject', [VerifikatorController::class, 'reject'])->name('peserta.reject');
+Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->group(function () {
+    Route::get('/index', [VerifikatorController::class, 'index'])->name('verifikator.index');
+    Route::post('/index/{id}', [VerifikatorController::class, 'store'])->name('verifikator.store');
+    // Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('dashboard');
+    // Route::get('/peserta', [VerifikatorController::class, 'index'])->name('peserta.index');
+    // Route::get('/peserta/{user}/detail', [VerifikatorController::class, 'show'])->name('peserta.show');
+
+    // Route::post('/peserta/{user}/verify', [VerifikatorController::class, 'verify'])->name('peserta.verify');
+    // Route::post('/peserta/{user}/reject', [VerifikatorController::class, 'reject'])->name('peserta.reject');
 });
 
 Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function () {
