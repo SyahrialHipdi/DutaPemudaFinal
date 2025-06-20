@@ -24,4 +24,15 @@ class VerifikatorController extends Controller
 
         return back()->with('success', 'Peserta berhasil diverifikasi.');
     }
+
+    public function tolak(Request $request, $id)
+    {
+        $peserta = LombaPeserta::findOrFail($id);
+        $peserta->update([
+            'status' => 'ditolak',
+            'alasan' => $request->alasan,
+        ]);
+
+        return back()->with('success', 'Peserta berhasil diverifikasi.');
+    }
 }
