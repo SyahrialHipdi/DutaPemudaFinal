@@ -5,7 +5,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Ranking</th>
+            <!-- <th>Ranking</th> -->
             <th>Nama Peserta</th>
             <th>Rata-rata Nilai</th>
         </tr>
@@ -13,7 +13,7 @@
     <tbody>
         @foreach ($ranking as $index => $peserta)
         <tr>
-            <td>{{ $index + 1 }}</td>
+            <!-- <td>{{ $index + 1 }}</td> -->
             <td>{{ $peserta['nama'] }}</td>
             <td>{{ number_format($peserta['rata_rata'], 2) }}</td>
         </tr>

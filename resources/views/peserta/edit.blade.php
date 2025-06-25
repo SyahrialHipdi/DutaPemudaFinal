@@ -8,6 +8,28 @@
                 <div class="col-md-6">
                     <div class="card card-primary card-outline mt-5">
                         <div class="card-body box-profile">
+                            {{-- @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    {{ $errors->first() }}
+                                </div>
+                            @endif
+                            <small class="form-text text-muted">
+                                Syarat password:
+                                <ul class="mb-0">
+                                    <li>Minimal 8 karakter</li>
+                                    <li>Mengandung huruf kecil (a-z)</li>
+                                    <li>Mengandung huruf besar (A-Z)</li>
+                                    <li>Mengandung angka (0-9)</li>
+                                    <li>Mengandung simbol (misal: ! @ # $ % ^ & *)</li>
+                                    <li>Harus sama dengan kolom konfirmasi password</li>
+                                </ul>
+                            </small>
+
                             <form action="{{ route('peserta.update', $user->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')

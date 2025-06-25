@@ -4,6 +4,23 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
+                {{-- Menampilkan semua error --}}
+                {{-- @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif --}}
+
+                {{-- Menampilkan satu error --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        {{ $errors->first() }}
+                    </div>
+                @endif
                 <div class="card-header">User Login</div>
                 <div class="card-body">
                     <form method="POST" action="/login">

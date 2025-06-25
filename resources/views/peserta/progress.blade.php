@@ -26,6 +26,7 @@
                                             <th>Lomba</th>
                                             {{-- <th>Tahap</th> --}}
                                             <th>Status</th>
+                                            <th>Alasan(jika ditolak)</th>
 
                                         </tr>
                                     </thead>
@@ -34,7 +35,10 @@
                                             <tr>
                                                 <td>{{ $lomba->nama_lomba }} </td>
                                                 <td>
-                                                    <button class="btn btn-warning btn-sm">pending</button>
+                                                    <button class="btn btn-warning btn-sm">{{$lomba->pivot->status}}</button>
+                                                </td>
+                                                <td>
+                                                    {{ $lomba->pivot->alasan }}
                                                 </td>
                                                 {{-- <td>
                                                     <a href="{{ route('admin.lomba.edit', $lomba->id) }}"

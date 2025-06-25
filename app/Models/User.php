@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function lombaDiikuti()
     {
-        return $this->belongsToMany(Lomba::class, 'lomba_pesertas');
+        return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('status','alasan');
     }
 
     public function penilaianDiberikan()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\LombaPeserta;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -12,6 +13,9 @@ class PesertaController extends Controller
 
     public function index(User $user)
     {
+        // $user = User::findOrFail($id);
+        // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
+        // $user = User::();
         return view('peserta.index', compact('user'));
     }
 
@@ -33,9 +37,9 @@ class PesertaController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-        // $request->validate([
-        //     'password' =>  'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/',
-        // ]);
+        $request->validate([
+            'password' =>  'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/',
+        ]);
 
         // $peserta = User::findOrFail($id);
         $user->update($request->only('password'));
@@ -46,7 +50,7 @@ class PesertaController extends Controller
     public function progress(Request $request)
     {
         $user = Auth::user(); // user yang sedang login
-        $lombas = $user->lombas; // ambil relasi lomba dari user
+        $lombas = $user->lombaDiikuti; // ambil relasi lomba dari user
 
         return view('peserta.progress', compact('lombas'));
     }
