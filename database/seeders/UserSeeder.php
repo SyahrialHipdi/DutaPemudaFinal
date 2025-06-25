@@ -72,5 +72,16 @@ class UserSeeder extends Seeder
         'role' => 'peserta',
         'password' => '12345',
         ]);
+        User::create([
+        'email' => 'bilqis@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        'email' => 'una@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        
     }
 }

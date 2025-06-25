@@ -72,21 +72,24 @@
                                     @csrf
 
                                     {{-- Field Email & Password (selalu di atas dan berdampingan) --}}
-                                    <div class="row">
-                                        <div class="col-md-6 mb-4">
-                                            <label class="form-label fw-bold">Email <span
-                                                    class="text-danger">*</span></label>
-                                            <input class="form-control" type="email" name="email"
-                                                value="{{ old('email') }}" required>
-                                            <div class="invalid-feedback">Format email tidak valid.</div>
+                                    @guest
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Email <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" type="email" name="email"
+                                                    value="{{ old('email') }}" required>
+                                                <div class="invalid-feedback">Format email tidak valid.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Password <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" type="password" name="password" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6 mb-4">
-                                            <label class="form-label fw-bold">Password <span
-                                                    class="text-danger">*</span></label>
-                                            <input class="form-control" type="password" name="password" required>
-                                            <div class="invalid-feedback">Password wajib diisi.</div>
-                                        </div>
-                                    </div>
+                                    @endguest
                                     {{-- <hr class="my-3"> --}}
 
                                     {{-- Inisialisasi variabel penanda (flag) --}}

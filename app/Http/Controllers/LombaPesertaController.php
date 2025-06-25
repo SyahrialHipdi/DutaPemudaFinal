@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class LombaPesertaController extends Controller
 {
@@ -26,11 +27,28 @@ class LombaPesertaController extends Controller
     public function submit(Request $request, $id)
     {
         $lomba = Lomba::findOrFail($id);
+
+        // Cek
+        $lombaId = $lomba->id;
+        $nikBaru = $request->input('data_isian')['nik']; // ambil isian nik dari input
+        $userId = Auth::id();
+
+        // Cari apakah sudah ada peserta lain yang mendaftar ke lomba ini dengan nik yang sama
+        $duplikat = DB::table('lomba_pesertas')
+            ->where('lomba_id', $lombaId)
+            // ->where('user_id', '!=', $userId) // boleh juga tanpa ini jika tidak boleh daftar 2x
+            ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(data_isian, '$.nik')) = ?", [$nikBaru])
+            ->exists();
+
+        if ($duplikat) {
+            return back()->withErrors(['nik' => 'nik ini sudah digunakan untuk lomba yang sama.']);
+        }
+        // End Cek
         // $user = Auth::user();
 
         $rules = [
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'email' => 'string|unique:users,email',
+            'password' => 'string',
         ];
         $data_isian = [];
 

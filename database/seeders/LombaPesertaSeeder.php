@@ -18,7 +18,7 @@ class LombaPesertaSeeder extends Seeder
         $userB = User::find(7); 
         $userC = User::find(8); 
 
-        $lombaX = Lomba::find(1); 
+        $lombaX = Lomba::find(2); 
         $lombaY = Lomba::find(1); 
 
         if ($userA && $lombaX) {
