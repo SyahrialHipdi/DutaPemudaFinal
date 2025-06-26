@@ -2573,7 +2573,7 @@ fieldset[disabled] a.btn {
 }
 
 .btn-warning:hover {
-    color: #111;
+    color: #fff;
     background-color: #e0a800;
     border-color: #d39e00;
 }

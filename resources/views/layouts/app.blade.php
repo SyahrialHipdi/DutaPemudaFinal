@@ -47,30 +47,71 @@
     <link rel="stylesheet" href="{{ asset('css/form.css') }}" />
 
     @stack('styles')
+
+    {{-- Letakkan ini di bagian paling bawah file Blade Anda --}}
+    @push('styles')
+        <style>
+            /* Memberi gaya pada panel dropdown utama */
+            .profile-dropdown-menu {
+                padding: 0;
+                border: 1px solid #eee;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                border-radius: 8px !important;
+                margin-top: 10px !important;
+            }
+
+            /* Memberi gaya pada header dropdown */
+            .dropdown-header-custom {
+                padding: 1rem;
+                border-bottom: 1px solid #eee;
+            }
+
+            .dropdown-header-custom h6 {
+                margin-bottom: 0.25rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .dropdown-header-custom p {
+                margin-bottom: 0;
+                font-size: 13px;
+            }
+
+            /* Memberi gaya pada setiap item di dropdown */
+            .profile-dropdown-menu .dropdown-item {
+                padding: 0.75rem 1.5rem;
+                font-size: 14px;
+                color: #555;
+                transition: all 0.2s ease-in-out;
+            }
+
+            /* Efek hover yang halus */
+            .profile-dropdown-menu .dropdown-item:hover {
+                background-color: #1a76d1;
+                /* Warna biru dari tema Anda */
+                color: #ffffff;
+            }
+
+            /* Merapikan ikon di dalam item dropdown */
+            .profile-dropdown-menu .dropdown-item .fa {
+                width: 20px;
+                /* Memberi ruang agar teks sejajar */
+            }
+
+            .navbar-avatar {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+                /* Mencegah gambar menjadi gepeng */
+                margin-right: 8px;
+                border: 2px solid #f0f0f0;
+            }
+        </style>
+    @endpush
 </head>
 
 <body>
-    <!-- Preloader -->
-    <!-- End Preloader -->
-
-    <!-- Cp whatsapp -->
-    {{-- <div class="pro-features">
-        <a class="get-pro" href="https://wa.me/6282328059577?text=Mas%20mau%20nanya%20dong!!"><img src="img/wa-icon.png"
-                alt="wa-icon" width="60%"></a>
-        {{-- <li class="big-title">Pro Version Available on Themeforest</li>
-        <li class="title">Pro Version Features</li>
-        <li>2+ premade home pages</li>
-        <li>20+ html pages</li>
-        <li>Color Plate With 12+ Colors</li>
-        <li>Sticky Header / Sticky Filters</li>
-        <li>Working Contact Form With Google Map</li>
-        <div class="button">
-            <a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879"
-                target="_blank" class="btn">Pro Version Demo</a>
-            <a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank"
-                class="btn">Buy Pro Version</a>
-        </div>
-    </div> --}}
 
     <!-- Header Area -->
     <header class="header">
@@ -82,7 +123,8 @@
                         <div class="col-lg-3 col-md-3 col-12">
                             <!-- Start Logo -->
                             <div class="logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#" width="60%" /></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('img/logo.png') }}" alt="#"
+                                        width="60%" /></a>
                             </div>
                             <!-- End Logo -->
                             <!-- Mobile Nav -->
@@ -95,7 +137,8 @@
                                 <nav class="navigation">
                                     <ul class="nav menu">
                                         <li class="{{ request()->is('/') ? 'active' : '' }}">
-                                            <a href="{{ route('home') }}">Beranda</a> </li>
+                                            <a href="{{ route('home') }}">Beranda</a>
+                                        </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
                                             <a href="{{ route('lomba.index') }}">Kategori</a>
                                         </li>
@@ -110,11 +153,63 @@
                             </div>
                             <!--/ End Main Menu -->
                         </div>
-                        <div class="col-lg-2 col-12 ">
+                        <div class="col-lg-2 col-12 mt-2">
                             <div class="get-quote float-right">
                                 @auth
-                                    <a href="{{ route('peserta.index') }}" class="btn">Profile</a>
+                                    <div class="nav-item dropdown">
+
+                                        {{-- TOMBOL TRIGGER DROPDOWN --}}
+                                        <a id="navbarDropdown"
+                                            class="nav-link btn dropdown-toggle d-flex align-items-center" href="#"
+                                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                            v-pre style="padding: 5px 15px; color: white;">
+
+                                            {{-- Menampilkan Avatar Pengguna, atau Ikon Default --}}
+                                            {{-- Ganti 'avatar' dengan nama kolom foto profil di tabel users Anda jika berbeda --}}
+                                            @if (Auth::user()->avatar)
+                                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar"
+                                                    class="navbar-avatar">
+                                            @else
+                                                Profile
+                                            @endif
+
+
+                                        </a>
+
+                                        {{-- PANEL DROPDOWN YANG AKAN MUNCUL --}}
+                                        <div class="dropdown-menu dropdown-menu-right profile-dropdown-menu"
+                                            aria-labelledby="navbarDropdown">
+
+                                            <div class="dropdown-divider"></div>
+
+                                            @php
+                                                $dashboardRoute = match (Auth::user()->role) {
+                                                    'admin' => route('admin.dashboard'),
+                                                    'juri' => route('juri.index'),
+                                                    'peserta' => route('peserta.index'),
+                                                    default => route('home'),
+                                                };
+                                            @endphp
+
+                                            <a class="dropdown-item" href="{{ $dashboardRoute }}">
+                                                <i class="fa fa-th-large mr-2"></i> Dashboard
+                                            </a>
+
+                                            <div class="dropdown-divider"></div>
+
+                                            <a class="dropdown-item" href="{{ route('auth.logout') }}"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-sign-out mr-2"></i> Logout
+                                            </a>
+
+                                            <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </div>
                                 @else
+                                    {{-- Jika belum login, tampilkan tombol Login --}}
                                     <a href="{{ route('auth.login') }}" class="btn">Login</a>
                                 @endauth
                             </div>
@@ -143,7 +238,8 @@
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, nostrum?</p>
                             <ul class="social">
                                 <li>
-                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}" alt=""></a>
+                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
+                                            alt=""></a>
                                 </li>
                                 <li>
                                     <a href="#"><img src="{{ asset('img/logo-digiyok.png') }}"
@@ -176,7 +272,8 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Alur
+                                            <a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Alur
                                                 seleksi</a>
                                         </li>
                                         <li>

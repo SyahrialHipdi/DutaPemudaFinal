@@ -1,3 +1,27 @@
+{{-- <h2>Form Pendaftaran: {{ $lomba->nama_lomba }}</h2>
+
+<form method="POST" action="{{ route('lomba.submit', $lomba->id) }}" enctype="multipart/form-data">
+    @csrf
+
+    @foreach ($lomba->syarat_lomba as $syarat)
+        @php
+            $parts = explode(':', $syarat);
+            $field = $parts[0];
+            $type = $parts[1] ?? 'text';
+        @endphp
+
+        <label>{{ ucfirst(str_replace('_', ' ', $field)) }}</label><br>
+
+        @if ($type === 'file')
+            <input type="file" name="data_isian[{{ $field }}]"><br><br>
+        @else
+            <input type="text" name="data_isian[{{ $field }}]" value="{{ old("data_isian.$field") }}"><br><br>
+        @endif
+    @endforeach
+
+    <button type="submit">Kirim Pendaftaran</button>
+</form> --}}
+
 @extends('layouts.app')
 @section('title', 'form')
 @section('content')
@@ -60,7 +84,7 @@
             <div class="container-fluid px-1 py-5 mx-auto">
                 <div class="row d-flex justify-content-center">
                     <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
-                        <h3 class="text-center">Pendaftaran Pertukaran Pemuda Antar Provinsi Tahun 2025</h3>
+                        <h3 class="text-center">Pendaftaran Pemuda Pelopor Tahun 2025</h3>
                         <p class="text-muted mb-4">Isi formulir ini dengan data yang benar dan lengkap.</p>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -75,26 +99,54 @@
                             <div class="card-body py-3 ">
 
                                 {{-- form start --}}
-                                <form method="POST" action="/user/register" id="myForm"
+                                <form method="POST" action="{{ route('lomba.submit', $lomba->id) }}" id="myForm"
                                     class="form-card mt-4 needs-validation" novalidate enctype="multipart/form-data">
                                     @csrf
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Nama lengkap<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="nama" name="nama"
+                                            <label class="form-control-label h6 px-3">Email</label>
+                                            <input class="form-control" type="text" id="email" name="email"
                                                 placeholder="" required>
-                                            <div class="invalid-feedback">Nama lengkap wajib diisi.</div>
+                                            <div class="invalid-feedback">Emaail wajib isi.</div>
+                                        </div>
+                                        <div class="form-group col-sm-12 flex-column d-flex">
+                                            <label class="form-control-label h6 px-3">Password</label>
+                                            <input class="form-control" type="password" id="password" name="password"
+                                                placeholder="" required>
+                                            <div class="invalid-feedback">isi password.</div>
                                         </div>
                                     </div>
+
+
                                     <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">NIK<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="nik" name="nik"
-                                                placeholder="" required>
-                                            <div class="invalid-feedback">NIK wajib diisi.</div>
+                                            @foreach ($lomba->syarat_lomba as $syarat)
+                                                @php
+                                                    $parts = explode(':', $syarat);
+                                                    $field = $parts[0];
+                                                    $type = $parts[1] ?? 'text';
+                                                @endphp
+
+                                                <label
+                                                    class="form-control-label h6 px-3">{{ ucfirst(str_replace('_', ' ', $field)) }}
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                @if ($type === 'file')
+                                                    <input class="form-control" type="file"
+                                                        name="data_isian[{{ $field }}]" required>
+                                                @else
+                                                    <input class="form-control" type="text"
+                                                        name="data_isian[{{ $field }}]"
+                                                        value="{{ old("data_isian.$field") }}" required>
+                                                    <div class="invalid-feedback">Wajib diisi.</div>
+                                                @endif
+                                            @endforeach
                                         </div>
+                                    </div>
+
+                                    {{-- <div class="row justify-content-between text-left">
+
                                         <div class="form-group col-sm-12 flex-column d-flex">
                                             <label class="form-control-label h6 px-3 mb-1">Tanggal Lahir<span
                                                     class="text-danger"> *</span></label>
@@ -127,15 +179,16 @@
                                                         name="tgl_lahir_yyyy" required>
                                                         <option value="">dd</option>
                                                         @for ($i = 1990; $i <= date('Y'); $i++)
-                                                            <option value="{{ $i }}">{{ $i }}</option>
+                                                            <option value="{{ $i }}">{{ $i }}
+                                                            </option>
                                                         @endfor
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    {{-- <label class="text-left px-3">Alamat<span class="text-danger"> *</span></label> --}}
-                                    <div class="row justify-content-between text-left">
+                                    </div> --}}
+
+                                    {{-- <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-6 flex-column d-flex">
                                             <label class="form-control-label h6 px-3">Provinsi<span class="text-danger">
                                                     *</span></label>
@@ -153,56 +206,36 @@
                                             </select>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Kecamatan<span class="text-danger">
-                                                    *</span></label>
-                                            <select class="form-control w-100" id="kecamatan" name="kecamatan" required>
-                                                <option value="">--Pilih Kecamatan--</option>
-                                            </select>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-6 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Desa/Kelurahan<span
-                                                    class="text-danger">
-                                                    *</span></label>
-                                            <select class="form-control w-100" id="desa" name="desa" required>
-                                                <option value="">--Pilih Desa--</option>
-                                            </select>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">RT/RW<span class="text-danger">
+                                            <label class="form-control-label h6 px-3">Kode Pos<span class="text-danger">
                                                     *</span></label>
-                                            <input class="form-control" type="text" max="999" min="0"
-                                                id="rt_rw" name="rt_rw" placeholder="001/002" required>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Alamat<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="alamat" name="alamat"
-                                                required>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
-                                        </div>
-                                        <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Email<span class="text-danger">
-                                                    *</span></label>
-                                            <input class="form-control" type="text" id="email" name="email"
+                                            <input class="form-control" type="text" id="kodePos" name="kodePos"
                                                 required>
                                             <div class="invalid-feedback">Wajib diisi.</div>
                                         </div>
 
-                                    </div>
-                                    <div class="row justify-content-between text-left">
+                                    </div> --}}
+
+
+                                    {{-- <div class="row justify-content-between text-left">
                                         <div class="form-group col-sm-12 flex-column d-flex">
-                                            <label class="form-control-label h6 px-3">Poto KTP
-                                                <small>(KTP)</small><span class="text-danger"> *</span></label>
-                                            <input class="form-control" type="file" id="ktp" name="ktp"
+                                            <label class="form-control-label h6 px-3">Upload foto KTP <small>(max
+                                                    200kb)</small><span class="text-danger">
+                                                    *</span></label>
+                                            <input class="form-control" type="file" id="foto_ktp" name="foto_ktp"
                                                 placeholder="" required>
-                                            <div class="invalid-feedback">Wajib diisi.</div>
+                                            <div class="invalid-feedback">Wajib upload foto KTP.</div>
                                         </div>
-                                    </div>
+                                    </div> --}}
+
+
+                                    {{-- <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck"
+                                            required>
+                                        <label class="">Saya menyatakan bahwa seluruh data yang saya
+                                            isi
+                                            adalah benar.</label>
+                                    </div> --}}
 
                                     <div class="form-check text-left ml-5 my-4">
                                         <input name="cek" class="form-check-input" type="checkbox" id="invalidCheck"
@@ -276,7 +309,7 @@
             });
         </script>
 
-        <script>
+        {{-- <script>
             document.addEventListener('DOMContentLoaded', async function() {
                 const provinsiSelect = document.getElementById('provinsi');
                 const kotaSelect = document.getElementById('kota');
@@ -524,6 +557,6 @@
 
                 }, 100);
             });
-        </script>
+        </script> --}}
     @endpush
 @endsection

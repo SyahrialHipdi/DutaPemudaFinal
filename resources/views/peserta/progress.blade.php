@@ -1,7 +1,7 @@
 @extends('layouts.pendaftar')
 @section('title', 'Profile')
 @section('content')
-    <div class="content-wrapper">
+    <div class="container">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
@@ -9,9 +9,6 @@
                     <div class="col-sm-6">
                         <h1>Data Lomba</h1>
                     </div>
-                    <a href="{{ route('admin.lomba.create') }}" class="col-sm-6">
-                        <button class="btn btn-primary float-right">Tambah Lomba</button>
-                    </a>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -29,6 +26,7 @@
                                             <th>Lomba</th>
                                             {{-- <th>Tahap</th> --}}
                                             <th>Status</th>
+                                            <th>Alasan(jika ditolak)</th>
 
                                         </tr>
                                     </thead>
@@ -37,7 +35,10 @@
                                             <tr>
                                                 <td>{{ $lomba->nama_lomba }} </td>
                                                 <td>
-                                                    <button class="btn btn-warning btn-sm">pending</button>
+                                                    <button class="btn btn-warning btn-sm">{{$lomba->pivot->status}}</button>
+                                                </td>
+                                                <td>
+                                                    {{ $lomba->pivot->alasan }}
                                                 </td>
                                                 {{-- <td>
                                                     <a href="{{ route('admin.lomba.edit', $lomba->id) }}"

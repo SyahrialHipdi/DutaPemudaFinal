@@ -13,11 +13,6 @@ class UserController extends Controller
         return view('user.show',compact('user'));
     }
 
-    // public function progress(User $user){
-    //     // $user = User::findOrFail($id);
-    //     return view('user.progress',compact('user'));
-    // }
-
     public function edit($id)
     {
         $peserta = User::findOrFail($id);

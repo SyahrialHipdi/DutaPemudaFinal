@@ -45,17 +45,43 @@ class UserSeeder extends Seeder
         'role' => 'juri',
         'password' => '12345',
         ]);
+
+
         User::create([
-        // 'name' => 'Juri',
         'email' => 'syahrial@gmail.com',
         'role' => 'peserta',
         'password' => '12345',
         ]);
         User::create([
-        // 'name' => 'Juri',
         'email' => 'hipdi@gmail.com',
         'role' => 'peserta',
         'password' => '12345',
         ]);
+        User::create([
+        'email' => 'ahmad@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        'email' => 'karel@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        'email' => 'diaz@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        'email' => 'bilqis@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        User::create([
+        'email' => 'una@gmail.com',
+        'role' => 'peserta',
+        'password' => '12345',
+        ]);
+        
     }
 }

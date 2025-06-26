@@ -480,6 +480,7 @@ Preloader Area CSS
 .btn:hover {
     color: #fff;
 }
+
 .btn:before {
     content: "";
     position: absolute;

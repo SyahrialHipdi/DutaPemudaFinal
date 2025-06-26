@@ -1,23 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'Admin Panel')</title>
+    <title>@yield('title')</title>
 
-    <link rel="icon" href="{{ asset('img/favicon.png') }}" />
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" />
 
+    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('css/datatables/dataTables.bootstrap4.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/datatables/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/datatables/buttons.bootstrap4.min.css') }}">
+    {{-- nice select --}}
+    <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />
+
+    {{-- <link rel="stylesheet" href="{{ asset('css/normalize.css') }}" /> --}}
+    <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/pendaftar/adminlte.min.css') }}" />
     @stack('styles')
-
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -26,10 +34,10 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fa fa-bars"></i></a>
+                            class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('home') }}" class="nav-link">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link">Lihat Situs</a>
                 </li>
             </ul>
 
@@ -71,10 +79,10 @@
             </ul>
         </nav>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="#" class="brand-link">
-                <img src="{{ asset('img/favicon.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Admin Duta Pemuda</span>
+            <a href="{{ route('verifikator.dashboard') }}" class="brand-link">
+                <img src="{{ asset('img/favicon.png') }}" alt="Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">Panel Verifikator</span>
             </a>
 
             <div class="sidebar">
@@ -83,61 +91,26 @@
                         <img src="{{ asset('img/user.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        {{-- Menggunakan nama user yang sedang login --}}
-                        <a href="#" class="d-block">{{ Auth::user()->name ?? 'Administrator' }}</a>
-                    </div>
-                </div>
-
-                <div class="form-inline">
-                    <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class=" btn-sidebar">
-                                <i class="fa fa-search fa-fw"></i>
-                            </button>
-                        </div>
+                        <a href="#" class="d-block">{{ Auth::user()->name ?? 'Verifikator' }}</a>
                     </div>
                 </div>
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-
-                        <li class="nav-header">MENU UTAMA</li>
+                        <li class="nav-header">MENU VERIFIKATOR</li>
                         <li class="nav-item">
-                            {{-- Arahkan ke route dashboard admin Anda --}}
-                            <a href="{{ route('admin.user.dashboard') }}" class="nav-link">
-                                <i class="nav-icon fa fa-tachometer-alt"></i>
+                            <a href="{{ route('verifikator.dashboard') }}"
+                                class="nav-link {{ request()->routeIs('verifikator.dashboard') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.user.dashboard') }}"
-                                class="nav-link {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-users-cog"></i>
-                                <p>Manajemen User</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.lomba.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.lomba.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-trophy"></i>
-                                <p>Manajemen Lomba</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.lomba_pendaftar.indexx') }}"
-                                class="nav-link {{ request()->routeIs('admin.lomba_pendaftar.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-address-book"></i>
-                                <p>Data Pendaftar</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.ranking.index') }}"
-                                class="nav-link {{ request()->routeIs('admin.ranking.*') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-address-book"></i>
-                                <p>Ranking Lomba</p>
+                            <a href="{{ route('verifikator.peserta.index') }}"
+                                class="nav-link {{ request()->routeIs('verifikator.peserta.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-tasks"></i>
+                                <p>Verifikasi Peserta</p>
                             </a>
                         </li>
                     </ul>
@@ -145,22 +118,17 @@
             </div>
         </aside>
 
-        {{-- Main content dari setiap halaman --}}
+        {{-- Di sini konten dari setiap halaman akan dimuat --}}
         @yield('content')
-        {{-- ./main content --}}
-
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2025 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; {{ date('Y') }} <a href="#">Nama Proyek Anda</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> 1.0.0
             </div>
         </footer>
 
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
     </div>
-    
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -176,6 +144,7 @@
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.print.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables-buttons/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('js/pendaftar/adminlte.min.js') }}"></script>
+
     {{-- Stack untuk script khusus per halaman --}}
     @stack('scripts')
 </body>

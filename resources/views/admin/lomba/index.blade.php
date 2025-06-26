@@ -33,6 +33,7 @@
     </table> --}}
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
+
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -60,6 +61,7 @@
                                             <th>Tahun</th>
                                             <th>Deskripsi</th>
                                             <th>Syarat</th>
+                                            <th>Komponen Penilaian</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -82,14 +84,28 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
+                                                    @php
+                                                        $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
+                                                    @endphp
+                                                    @foreach ($nilai as $s)
+                                                        <div class="syarat-item">
+                                                            <ull>
+                                                                <li>{{ $s }}</li>
+                                                            </ull>
+                                                        </div>
+                                                    @endforeach
+                                                </td>
+                                                <td>
                                                     <a href="{{ route('admin.lomba.edit', $lomba->id) }}"
-                                                        class="btn btn-sm btn-warning">Edit</a>
+                                                        class="btn btn-sm btn-warning">
+                                                        <i class="fa fa-pencil mr-2"></i>Edit</a>
                                                     <form action="{{ route('admin.lomba.destroy', $lomba->id) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Yakin ingin menghapus?')">Hapus</button>
+                                                            onclick="return confirm('Yakin ingin menghapus?')"><i
+                                                                class="fa fa-trash mr-2"></i>Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>

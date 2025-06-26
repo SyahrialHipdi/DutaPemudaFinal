@@ -17,6 +17,10 @@ class penilaian extends Model
         'nilai',
         'komentar',
     ];
+
+    protected $casts = [
+        'nilai' => 'array',
+    ];
     
     public function juri()
     {

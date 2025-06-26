@@ -21,11 +21,8 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Data Lomba</h1>
+                        <h1>Detail Peserta</h1>
                     </div>
-                    <a href="{{ route('admin.lomba.create') }}" class="col-sm-6">
-                        <button class="btn btn-primary float-right">Tambah Lomba</button>
-                    </a>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -41,7 +38,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama User</th>
                                             <th>Email</th>
                                             <th>Data Isian</th>
 
@@ -51,7 +47,6 @@
                                         @foreach ($lomba->users as $index => $user)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $user->name ?? '-' }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
                                                     @php

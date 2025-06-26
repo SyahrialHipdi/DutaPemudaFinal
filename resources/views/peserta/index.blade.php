@@ -8,9 +8,10 @@
                     <!-- Profile Image -->
                     <div class="card card-primary card-outline mt-5">
                         @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                            <a href="/user/edit">
-                                <div class="alert alert-primary">Klik Disini untuk ganti password</div>
+                            <div class="alert alert-success">{{ session('success') }}
+                                <a href="{{ route('peserta.edit') }}">
+                                    Klik Disini untuk ganti password
+                            </div>
                             </a>
                         @endif
                         @if (session('berhasil'))
@@ -18,7 +19,7 @@
                         @endif
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="img/user.png"
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/user.png') }}"
                                     alt="User profile picture" />
                             </div>
 

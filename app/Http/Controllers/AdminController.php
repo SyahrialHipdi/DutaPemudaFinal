@@ -8,6 +8,7 @@ use App\Models\Lomba;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Komponen;
+use App\Models\penilaian;
 
 class AdminController extends Controller
 {
@@ -23,69 +24,178 @@ class AdminController extends Controller
     }
 
     public function create()
+    {
+        $lombas = Lomba::all();
+        return view('admin.user.create', compact('lombas'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            'role' => 'required|in:admin,juri,verifikator,peserta',
+            'lomba_id' => 'nullable|array',
+            'lomba_id.*' => 'exists:lombas,id',
+        ]);
+
+        // Simpan user
+        $user = User::create([
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'],
+        ]);
+
+        // Tambahkan ke relasi jika juri/peserta
+        if ($user->role === 'juri') {
+            $user->lombaDijuri()->attach($validated['lomba_id'] ?? []);
+        } elseif ($user->role === 'peserta') {
+            $user->lombaDiikuti()->attach($validated['lomba_id'] ?? []);
+        }
+
+        return redirect()->route('admin.user.create')->with('success', 'User berhasil ditambahkan');
+    }
+
+    public function edit($id)
 {
-    $lombas = Lomba::all();
-    return view('admin.user.create', compact('lombas'));
+    $user = User::findOrFail($id);
+    $lombas = Lomba::all(); // ambil semua data lomba
+
+    return view('admin.user.edit', compact('user', 'lombas'));
 }
 
-public function store(Request $request)
+    public function update(Request $request, $id)
 {
+    $user = User::findOrFail($id);
+
     $validated = $request->validate([
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required',
-        'role' => 'required|in:admin,juri,verifikator,peserta',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'password' => 'nullable|min:6',
+        'role' => 'required|in:admin,juri,verifikator',
         'lomba_id' => 'nullable|array',
         'lomba_id.*' => 'exists:lombas,id',
     ]);
 
-    // Simpan user
-    $user = User::create([
-        'email' => $validated['email'],
-        'password' => Hash::make($validated['password']),
-        'role' => $validated['role'],
-    ]);
+    $user->email = $validated['email'];
+    $user->role = $validated['role'];
 
-    // Tambahkan ke relasi jika juri/peserta
-    if ($user->role === 'juri') {
-        $user->lombaDijuri()->attach($validated['lomba_id'] ?? []);
-    } elseif ($user->role === 'peserta') {
-        $user->lombaDiikuti()->attach($validated['lomba_id'] ?? []);
+    // Update password jika diisi
+    if (!empty($validated['password'])) {
+        $user->password = Hash::make($validated['password']);
     }
 
-    return redirect()->route('admin.user.create')->with('success', 'User berhasil ditambahkan');
+    $user->save();
+
+    // Update relasi lomba jika juri
+    if ($user->role === 'juri') {
+        $user->lombaDijuri()->sync($validated['lomba_id'] ?? []);
+    } else {
+        // Jika bukan juri, pastikan tidak ada relasi lombaDijuri tertinggal
+        $user->lombaDijuri()->detach();
+    }
+
+    return redirect()->route('admin.user.edit', $user->id)->with('success', 'User berhasil diperbarui');
 }
 
-    
-    // public function lomba(){
-    //     $lombas = Lomba::all();
-    //     return view('admin.data_lomba', compact('lombas'));
-    // }
+public function destroy($id)
+    {
+        $user = USer::findOrFail($id);
+        $user->delete();
 
-    // public function lombaTambah(){
-    //     return view('admin.tambah_lomba');
-    // }
+        return redirect()->route('admin.user.dashboard')->with('success', 'User dihapus.');
+    }
 
-    // public function lombaShow($id){
-    //     $komponen = Lomba::findOrFail($id);
-    //     return view('admin.show_lomba', compact('komponen'));
-    // }
+public function daftarLomba()
+    {
+        $lombas = Lomba::all();
+        return view('admin.ranking.daftar-lomba', compact('lombas'));
+    }
 
-    // public function lombaCreate(Request $request)
+    // public function rankingLomba(Lomba $lomba)
     // {
-    //     $request->validate([
-    //         // 'nama' => 'required|string|max:255',
-    //         // 'tahun' => 'required|string|max:255|unique:admins',
-    //         // 'deskripsi' => 'required|string|',
-    //     ]);
+    //     $penilaians = $lomba->penilaians()->with('peserta')->get();
 
-    //     $lomba = Lomba::create([
-    //         'nama_lomba' => $request->nama,
-    //         'tahun' => $request->tahun,
-    //         'deskripsi' => $request->deskripsi,
-    //     ]);
+    //     $pesertaNilai = [];
 
-    //     // Auth::guard('admin')->login($admin);
+    //     foreach ($penilaians as $penilaian) {
+    //         $nilaiArray = is_array($penilaian->nilai) ? $penilaian->nilai : json_decode($penilaian->nilai, true);
+    //         if (!$nilaiArray) continue;
 
-    //     return redirect('/admin/data_lomba');
+    //         $total = array_sum($nilaiArray);
+    //         $count = count($nilaiArray);
+    //         $avg = $count > 0 ? $total / $count : 0;
+
+    //         $id = $penilaian->peserta_id;
+
+    //         // Jika peserta sudah ada, gunakan nilai tertinggi (atau update strategi akumulasi lain)
+    //         if (!isset($pesertaNilai[$id])) {
+    //             $pesertaNilai[$id] = [
+    //                 'nama' => $penilaian->peserta->name ?? 'Peserta #' . $id,
+    //                 'total' => $avg,
+    //                 'count' => 1,
+    //             ];
+    //         } else {
+    //             $pesertaNilai[$id]['total'] += $avg;
+    //             $pesertaNilai[$id]['count']++;
+    //         }
+    //     }
+
+    //     $ranking = [];
+    //     foreach ($pesertaNilai as $pesertaId => $data) {
+    //         $rata = $data['count'] > 0 ? $data['total'] / $data['count'] : 0;
+    //         $ranking[] = [
+    //             'peserta_id' => $pesertaId,
+    //             'nama' => $data['nama'],
+    //             'rata_rata' => round($rata, 2),
+    //         ];
+    //     }
+
+    //     // Urutkan berdasarkan rata-rata tertinggi
+    //     usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
+
+    //     return view('admin.ranking.lihat', compact('lomba', 'ranking'));
     // }
+
+
+    public function rankingLomba($lombaId)
+{
+    $penilaians = Penilaian::where('lomba_id', $lombaId)->get();
+
+    $pesertaNilai = [];
+
+    foreach ($penilaians as $penilaian) {
+        $pesertaId = $penilaian->peserta_id;
+        $nilaiArray = $penilaian->nilai;
+
+        if (!isset($pesertaNilai[$pesertaId])) {
+            $pesertaNilai[$pesertaId] = [
+                'total' => 0,
+                'count' => 0,
+                'nama' => $penilaian->peserta->email ?? 'Peserta #' . $pesertaId,
+            ];
+        }
+
+        if (is_array($nilaiArray)) {
+            $pesertaNilai[$pesertaId]['total'] += array_sum($nilaiArray);
+            $pesertaNilai[$pesertaId]['count'] += count($nilaiArray);
+        }
+    }
+
+    // Hitung rata-rata dan simpan
+    $ranking = [];
+    foreach ($pesertaNilai as $pesertaId => $data) {
+        $rata = $data['count'] > 0 ? $data['total'] / $data['count'] : 0;
+        $ranking[] = [
+            'peserta_id' => $pesertaId,
+            'nama' => $data['nama'],
+            'rata_rata' => round($rata, 2),
+        ];
+    }
+
+    // Urutkan dari rata-rata tertinggi
+    usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
+
+    return view('admin.ranking.show', compact('ranking'));
+}
+
 }

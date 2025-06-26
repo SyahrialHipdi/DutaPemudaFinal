@@ -39,7 +39,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Credentials do not match our records.',
+            'email' => 'Email atau password tidak dikenali.',
+            'password' => 'Credentials do not match our records.',
             // 'password' => 'Email/Username atau password salah',
         ]);
     }
