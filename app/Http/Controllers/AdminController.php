@@ -160,6 +160,7 @@ public function daftarLomba()
     public function rankingLomba($lombaId)
 {
     $penilaians = Penilaian::where('lomba_id', $lombaId)->get();
+    $lombaaa = Penilaian::where('lomba_id', $lombaId)->first();
 
     $pesertaNilai = [];
 
@@ -195,7 +196,7 @@ public function daftarLomba()
     // Urutkan dari rata-rata tertinggi
     usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
 
-    return view('admin.ranking.show', compact('ranking'));
+    return view('admin.ranking.show', compact('ranking','lombaaa'));
 }
 
 }
