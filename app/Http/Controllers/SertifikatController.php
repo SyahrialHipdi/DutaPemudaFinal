@@ -132,7 +132,7 @@ class SertifikatController extends Controller
             'user' => $user,
             'lomba' => $lomba,
             'nomor_sertifikat' => $nomor,
-        ]);
+        ])->setPaper('a4', 'landscape');
 
         $filename = 'sertifikat_' . $user->id . '_' . $lomba->id . '.pdf';
         $path = 'sertifikat/' . $filename;
@@ -142,7 +142,7 @@ class SertifikatController extends Controller
         if (Sertifikat::where('user_id', $user->id)->where('lomba_id', $lomba->id)->exists()) {
             return back()->with('warning', 'Sertifikat sudah pernah dibuat untuk peserta ini.');
         }
-        
+
         Sertifikat::create([
             'user_id' => $user->id,
             'lomba_id' => $lomba->id,
