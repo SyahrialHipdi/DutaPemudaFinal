@@ -22,6 +22,9 @@
                             <div class="alert alert-success">{{ session('success') }}
                             </div>
                         @endif
+                        @if (session('warning'))
+                            <div class="alert alert-warning">{{ session('warning') }}</div>
+                        @endif
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -41,16 +44,28 @@
                                                 <td>{{ $peserta['nama'] }}</td>
                                                 <td>{{ number_format($peserta['rata_rata'], 2) }}</td> {{-- demi keamanan, jangan tampilkan password asli --}}
                                                 <td>
-                                                    <form action="{{ route('sertifikat.generate') }}" method="POST"
+                                                    {{-- <form action="{{ route('sertifikat.generate') }}" method="POST"
                                                         style="display:inline;">
                                                         @csrf
                                                         <input type="hidden" name="user_id"
                                                             value="{{ $peserta['peserta_id'] }}">
                                                         <input type="hidden" name="lomba_id"
-                                                            value="{{ $lombaaa->lomba_id }}">
-                                                        {{-- ini dari controller --}}
+                                                            value="{{ $lombaaa->lomba_id }}">\
                                                         <button class="btn btn-sm btn-success">Beri Sertifikat</button>
-                                                    </form>
+                                                    </form> --}}
+                                                    @if ($peserta['has_sertifikat'])
+                                                        <span class="badge bg-info">Sudah diberi Sertif</span>
+                                                    @else
+                                                        <form action="{{ route('sertifikat.generate') }}" method="POST"
+                                                            style="display:inline;">
+                                                            @csrf
+                                                            <input type="hidden" name="user_id"
+                                                                value="{{ $peserta['peserta_id'] }}">
+                                                            <input type="hidden" name="lomba_id"
+                                                                value="{{ $lombaaa->lomba_id }}">
+                                                            <button class="btn btn-sm btn-success">Beri Sertifikat</button>
+                                                        </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

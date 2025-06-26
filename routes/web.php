@@ -66,6 +66,8 @@ Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function (
     Route::get('/edit', [PesertaController::class, 'edit'])->name('peserta.edit');
     Route::put('/edit', [PesertaController::class, 'update'])->name('peserta.update');
     Route::get('/progress', [PesertaController::class, 'progress'])->name('peserta.progress');
+    Route::get('/downloadsertif', [SertifikatController::class, 'userIndex'])->name('peserta.downloadsertif');
+    Route::get('/download/{id}', [SertifikatController::class, 'download'])->name('peserta.download');
 });
 
 Route::get('/provinsi', [LocationController::class, 'getProvinsi']);
@@ -86,5 +88,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/sertifikat', [SertifikatController::class, 'index'])->name('sertifikat.index');
     Route::post('/admin/sertifikat/generate', [SertifikatController::class, 'generate'])->name('sertifikat.generate');
 });
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/user/sertifikat', [SertifikatController::class, 'userIndex'])->name('user.sertifikat.index');
+//     Route::get('/user/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('user.sertifikat.download');
+// });
+
 
 

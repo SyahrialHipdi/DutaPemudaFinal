@@ -112,7 +112,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('peserta.dashboard') }}" class="nav-link">
+                            <a href="{{ route('peserta.downloadsertif') }}" class="nav-link">
                                 <i class="nav-icon fa fa-tachometer"></i>
                                 <p>Unduh Sertifikat</p>
                             </a>

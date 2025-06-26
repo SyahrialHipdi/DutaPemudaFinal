@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Lomba;
 use App\Models\User;
+use App\Models\Sertifikat;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Komponen;
 use App\Models\penilaian;
@@ -173,6 +174,7 @@ public function daftarLomba()
                 'total' => 0,
                 'count' => 0,
                 'nama' => $penilaian->peserta->email ?? 'Peserta #' . $pesertaId,
+                'user_id' => $penilaian->peserta_id??null ,
             ];
         }
 
@@ -185,17 +187,21 @@ public function daftarLomba()
     // Hitung rata-rata dan simpan
     $ranking = [];
     foreach ($pesertaNilai as $pesertaId => $data) {
+        $hasSertifikat = Sertifikat::where('user_id', $data['user_id'] ?? null)
+        ->where('lomba_id', $lombaId)
+        ->exists();
         $rata = $data['count'] > 0 ? $data['total'] / $data['count'] : 0;
         $ranking[] = [
             'peserta_id' => $pesertaId,
             'nama' => $data['nama'],
             'rata_rata' => round($rata, 2),
+            'has_sertifikat' =>$hasSertifikat,
         ];
     }
 
     // Urutkan dari rata-rata tertinggi
     usort($ranking, fn($a, $b) => $b['rata_rata'] <=> $a['rata_rata']);
-
+    // @dd($ranking);
     return view('admin.ranking.show', compact('ranking','lombaaa'));
 }
 
