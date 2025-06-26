@@ -47,9 +47,6 @@ class LombaController extends Controller
 
         $validated = $request->validate($rules);
 
-        // Simpan data pendaftaran, misalnya di tabel pendaftaran (belum dibuat)
-        // Untuk demo, kita hanya return data yg diterima
-
         return redirect()->route('lomba.index')->with('success', 'Pendaftaran berhasil!');
     }
 

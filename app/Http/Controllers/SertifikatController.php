@@ -1,0 +1,95 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Sertifikat;
+use App\Models\User;
+use App\Models\Lomba;
+// use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
+class SertifikatController extends Controller
+{
+
+    public function index()
+    {
+        $users = User::all();
+        $lombas = Lomba::all();
+
+        return view('admin.sertifikat.index', compact('users', 'lombas'));
+    }
+
+    // public function generate(Request $request)
+    // {
+    //     $user = User::findOrFail($request->user_id);
+    //     $lomba = Lomba::findOrFail($request->lomba_id);
+    //     $nomor = 'SERT-' . strtoupper(Str::random(10));
+
+    //     $pdf = PDF::loadView('sertifikat', [
+    //         'user' => $user,
+    //         'lomba' => $lomba,
+    //         'nomor_sertifikat' => $nomor,
+    //     ]);
+
+    //     $filename = 'sertifikat_' . $user->id . '_' . $lomba->id . '.pdf';
+    //     $path = 'sertifikat/' . $filename;
+    //     Storage::put('public/' . $path, $pdf->output());
+
+    //     Sertifikat::create([
+    //         'user_id' => $user->id,
+    //         'lomba_id' => $lomba->id,
+    //         'nomor_sertifikat' => $nomor,
+    //         'file_path' => $path,
+    //     ]);
+
+    //     return back()->with('success', 'Sertifikat berhasil dibuat!');
+    // }
+
+    public function generate(Request $request)
+{
+    $user = User::findOrFail($request->user_id);
+    $lomba = Lomba::findOrFail($request->lomba_id);
+    $nomor = 'SERT-' . strtoupper(Str::random(10));
+
+    $pdf = PDF::loadView('sertifikat', [
+        'user' => $user,
+        'lomba' => $lomba,
+        'nomor_sertifikat' => $nomor,
+    ]);
+
+    $filename = 'sertifikat_' . $user->id . '_' . $lomba->id . '.pdf';
+    $path = 'sertifikat/' . $filename;
+
+    // ✅ Simpan ke storage/app/public/sertifikat/
+    Storage::disk('public')->put($path, $pdf->output());
+
+    Sertifikat::create([
+        'user_id' => $user->id,
+        'lomba_id' => $lomba->id,
+        'nomor_sertifikat' => $nomor,
+        'file_path' => $path, // Simpan hanya "sertifikat/namafile.pdf"
+    ]);
+
+    return back()->with('success', 'Sertifikat berhasil dibuat!');
+}
+
+    //
+    public function download($id)
+    {
+        // $sertifikat = Sertifikat::where('id', $id)
+        //     ->where('user_id', Auth::user()->id) // agar user hanya bisa unduh sertifikat miliknya
+        //     ->firstOrFail();
+
+        // $sertifikat = Sertifikat::where('user_id', $id)->get();
+        $sertifikat = Sertifikat::where('user_id', 1)->first();
+        if (!$sertifikat) {
+            return abort(404, 'Sertifikat tidak ditemukan atau bukan milikmu.');
+        }
+
+        return response()->download(storage_path('app/public/' . $sertifikat->file_path));
+    }
+}

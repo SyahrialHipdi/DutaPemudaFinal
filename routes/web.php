@@ -8,6 +8,7 @@ use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\LombaController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LombaPesertaController;
+use App\Http\Controllers\SertifikatController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
     Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
     Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
-    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
+Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
 
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
@@ -75,3 +76,15 @@ Route::get('/desa/{kodeKecamatan}', [LocationController::class, 'getDesa']);
 // Route::get('admin/create', function () {
 //     return view('admin.lomba.create');
 // })->name('admin/create');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('sertifikat.download');
+    Route::post('/sertifikat/generate', [SertifikatController::class, 'generate'])->middleware('can:admin')->name('sertifikat.generate');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/sertifikat', [SertifikatController::class, 'index'])->name('sertifikat.index');
+    Route::post('/admin/sertifikat/generate', [SertifikatController::class, 'generate'])->name('sertifikat.generate');
+});
+
+
