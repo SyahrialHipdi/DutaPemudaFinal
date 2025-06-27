@@ -85,7 +85,10 @@
                                                 </td>
                                                 <td>
                                                     @php
-                                                        $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
+                                                        $nilai = old(
+                                                            'komponen_penilaian',
+                                                            $lomba->komponen_penilaian ?? [],
+                                                        );
                                                     @endphp
                                                     @foreach ($nilai as $s)
                                                         <div class="syarat-item">
@@ -98,14 +101,14 @@
                                                 <td>
                                                     <a href="{{ route('admin.lomba.edit', $lomba->id) }}"
                                                         class="btn btn-sm btn-warning">
-                                                        <i class="fa fa-pencil mr-2"></i>Edit</a>
+                                                        <i class="fas fa-edit mr-2"></i>Edit</a>
                                                     <form action="{{ route('admin.lomba.destroy', $lomba->id) }}"
                                                         method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-sm btn-danger"
                                                             onclick="return confirm('Yakin ingin menghapus?')"><i
-                                                                class="fa fa-trash mr-2"></i>Hapus</button>
+                                                                class="fas fa-trash mr-2"></i>Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>

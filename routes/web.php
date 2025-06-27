@@ -56,8 +56,8 @@ Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
 
 Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->group(function () {
     Route::get('/index', [VerifikatorController::class, 'index'])->name('verifikator.index');
-    Route::post('/index/{id}', [VerifikatorController::class, 'store'])->name('verifikator.store');
-    Route::post('/tolak/{id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
+    Route::put('/index/{id}', [VerifikatorController::class, 'store'])->name('verifikator.store');
+    Route::put('/tolak/{id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
 });
 
 Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function () {

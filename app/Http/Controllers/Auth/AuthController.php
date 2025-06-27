@@ -31,7 +31,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             return match ($user->role) {
                 'admin' => redirect()->intended('/admin/dashboard'),
-                'verifikator' => redirect()->intended('/verifikator/dashboard'),
+                'verifikator' => redirect()->intended('/verifikator/index'),
                 'juri' => redirect()->intended('/juri/index'),
                 'peserta' => redirect()->intended('/peserta/index'),
                 default => redirect('/peserta/index')

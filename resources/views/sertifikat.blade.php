@@ -194,14 +194,14 @@
         <!-- Name Section -->
         <div class="name-section">
             <div class="name-display">
-                <div class="participant-name">a</div>
+                <div class="participant-name">{{ $user->email }}</div>
             </div>
         </div>
 
         <!-- Achievement Description -->
         <div class="achievement">
             Atas <span class="achievement-title">partisipasinya sebagai peserta dalam kegiatan </span><br>
-            <span class="achievement-title">a</span>
+            <span class="achievement-title">{{ $lomba->nama_lomba }}</span>
         </div>
 
         <!-- Signature Section -->
