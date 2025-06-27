@@ -94,6 +94,6 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/user/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('user.sertifikat.download');
 // });
 
-Route::get('/sertifikat', function () {
-    return view('sertifikat');
-})->name('sertifikat');
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
