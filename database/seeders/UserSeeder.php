@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,74 +15,74 @@ class UserSeeder extends Seeder
     {
         //
         User::create([
-        // 'name' => 'Super dmin',
-        'email' => 'admin@example.com',
-        'role' => 'admin',
-        'password' => '12345',
+            // 'name' => 'Super dmin',
+            'email' => 'admin@example.com',
+            'role' => 'admin',
+            'password' => '12345',
         ]);
 
         User::create([
-        // 'name' => 'Verifikator',
-        'email' => 'verifikator@example.com',
-        'role' => 'verifikator',
-        'password' => '12345',
+            // 'name' => 'Verifikator',
+            'email' => 'verifikator@example.com',
+            'role' => 'verifikator',
+            'password' => '12345',
         ]);
 
         User::create([
-        'email' => 'juripp1@example.com',
-        'role' => 'juri',
-        'password' => '12345',
+            'email' => 'juripp1@example.com',
+            'role' => 'juri',
+            'password' => '12345',
         ]);
 
         User::create([
-        'email' => 'juripp2@example.com',
-        'role' => 'juri',
-        'password' => '12345',
+            'email' => 'juripp2@example.com',
+            'role' => 'juri',
+            'password' => '12345',
         ]);
 
         User::create([
-        // 'name' => 'Juri',
-        'email' => 'jurippan@example.com',
-        'role' => 'juri',
-        'password' => '12345',
+            // 'name' => 'Juri',
+            'email' => 'jurippan@example.com',
+            'role' => 'juri',
+            'password' => '12345',
         ]);
 
 
         User::create([
-        'email' => 'syahrial@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'syahrial@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
+        ]);
+
+        User::create([
+            'email' => 'hipdi@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
         User::create([
-        'email' => 'hipdi@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'ahmad@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
         User::create([
-        'email' => 'ahmad@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'karel@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
         User::create([
-        'email' => 'karel@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'diaz@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
         User::create([
-        'email' => 'diaz@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'bilqis@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
         User::create([
-        'email' => 'bilqis@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
+            'email' => 'una@gmail.com',
+            'role' => 'peserta',
+            'password' => '12345',
         ]);
-        User::create([
-        'email' => 'una@gmail.com',
-        'role' => 'peserta',
-        'password' => '12345',
-        ]);
-        
     }
 }

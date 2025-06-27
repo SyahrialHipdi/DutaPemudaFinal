@@ -32,7 +32,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::post('/lomba/create', [LombaController::class, 'store'])->name('admin.lomba.store');
     Route::get('/lomba/{id}/edit', [LombaController::class, 'edit'])->name('admin.lomba.edit');
     Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
-Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
+    Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
 
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
@@ -43,7 +43,7 @@ Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.l
     Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
     Route::delete('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
-    
+
     Route::get('/ranking', [AdminController::class, 'daftarLomba'])->name('admin.ranking.index');
     Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
 });
@@ -94,5 +94,6 @@ Route::middleware(['auth'])->group(function () {
 //     Route::get('/user/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('user.sertifikat.download');
 // });
 
-
-
+Route::get('/sertifikat', function () {
+    return view('sertifikat');
+})->name('sertifikat');

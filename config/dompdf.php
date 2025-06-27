@@ -296,6 +296,16 @@ return [
          * @var bool
          */
         'enable_html5_parser' => true,
+
+        'font_data' => [
+            'greatvibes' => [
+                'R'  => 'GreatVibes-Regular.ttf',
+                'useOTL' => 0,
+                'useKashida' => 75,
+            ],
+        ],
     ],
+
+
 
 ];
