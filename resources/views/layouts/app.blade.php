@@ -143,7 +143,7 @@
                                             <a href="{{ route('lomba.index') }}">Kategori</a>
                                         </li>
                                         <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            <a href="#">FAQ</a>
+                                            <a href="/faq">FAQ</a>
                                         </li>
                                         <li class="{{ request()->is('pages*') ? 'active' : '' }}">
                                             <a href="/berita">Berita</a>
@@ -165,7 +165,8 @@
                                             v-pre style="padding: 5px 15px; color: white;">
 
                                             {{-- Menampilkan Avatar Pengguna, atau Ikon Default --}}
-                                            {{-- Ganti 'avatar' dengan nama kolom foto profil di tabel users Anda jika berbeda --}}
+                                            {{-- Ganti 'avatar' dengan nama kolom foto profil di tabel users Anda jika
+                                            berbeda --}}
                                             @if (Auth::user()->avatar)
                                                 <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar"
                                                     class="navbar-avatar">
@@ -238,16 +239,13 @@
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, nostrum?</p>
                             <ul class="social">
                                 <li>
-                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
-                                            alt=""></a>
+                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}" alt=""></a>
                                 </li>
                                 <li>
-                                    <a href="#"><img src="{{ asset('img/logo-digiyok.png') }}"
-                                            alt=""></i></a>
+                                    <a href="#"><img src="{{ asset('img/logo-digiyok.png') }}" alt=""></i></a>
                                 </li>
                                 <li>
-                                    <a href="#"><img src="{{ asset('img/logo-dispora.png') }}"
-                                            alt=""></i></a>
+                                    <a href="#"><img src="{{ asset('img/logo-dispora.png') }}" alt=""></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -260,25 +258,21 @@
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Home</a>
+                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Home</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Kategori</a>
+                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Kategori</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Alur
+                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Alur
                                                 seleksi</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Berita</a>
+                                            <a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i>Berita</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -352,7 +346,8 @@
     {{-- Problem disini --}}
     <script src="{{ asset('js/main.js') }}"></script>
 
-    {{-- <script>
+    {{--
+    <script>
         $(document).ready(function () {
             $('#btn-lanjut').click(function () {
                 if (!$('#agreeTerms').is(':checked')) {

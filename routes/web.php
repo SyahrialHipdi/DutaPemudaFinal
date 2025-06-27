@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JuriController;
 use App\Http\Controllers\VerifikatorController;
@@ -15,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [AuthController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 
 Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomba.index');
 Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
@@ -42,7 +46,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/user/{id}', [AdminController::class, 'edit'])->name('admin.user.edit');
     Route::put('/user/{id}/edit', [AdminController::class, 'update'])->name('admin.user.update');
     Route::delete('/user/{id}', [AdminController::class, 'destroy'])->name('admin.user.destroy');
-    
+
     Route::get('/ranking', [AdminController::class, 'daftarLomba'])->name('admin.ranking.index');
     Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
 });

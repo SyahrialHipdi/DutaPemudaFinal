@@ -10,14 +10,14 @@
 {{-- Tahun --}}
 <div class="form-group">
     <label for="tahun">Tahun</label>
-    <input type="number" id="tahun" name="tahun" class="form-control"
-        value="{{ old('tahun', $lomba->tahun ?? '') }}">
+    <input type="number" id="tahun" name="tahun" class="form-control" value="{{ old('tahun', $lomba->tahun ?? '') }}">
 </div>
 
 {{-- Deskripsi --}}
 <div class="form-group">
     <label for="deskripsi">Deskripsi</label>
-    <textarea id="deskripsi" name="deskripsi" class="form-control" rows="4">{{ old('deskripsi', $lomba->deskripsi ?? '') }}</textarea>
+    <textarea id="deskripsi" name="deskripsi" class="form-control"
+        rows="4">{{ old('deskripsi', $lomba->deskripsi ?? '') }}</textarea>
 </div>
 
 {{-- Syarat Lomba (Dynamic Section) --}}
@@ -36,8 +36,8 @@
             @endphp
             <div class="row syarat-item" style="margin-bottom: 10px;">
                 <div class="col-md-5">
-                    <input type="text" name="syarat_lomba[{{ $index }}][field]"
-                        placeholder="Contoh: Nama Lengkap" class="form-control" value="{{ $field }}">
+                    <input type="text" name="syarat_lomba[{{ $index }}][field]" placeholder="Contoh: Nama Lengkap"
+                        class="form-control" value="{{ $field }}">
                 </div>
                 <div class="col-md-4">
                     <select name="syarat_lomba[{{ $index }}][type]" class="form-control">
@@ -60,31 +60,31 @@
 
 
     <div class="form-group">
-    <label class="form-label">Komponen Penilaian</label>
-    <div id="komponen-container">
-        @php
-            $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
-        @endphp
+        <label class="form-label">Komponen Penilaian</label>
+        <div id="komponen-container">
+            @php
+                $nilai = old('komponen_penilaian', $lomba->komponen_penilaian ?? []);
+            @endphp
 
-        @forelse ($nilai as $item)
-            <div class="input-group mb-2">
-                <input type="text" name="komponen_penilaian[]" class="form-control"
-                    placeholder="Contoh: Public Speaking" value="{{ $item }}">
-                <button type="button" class="btn btn-outline-danger btn-remove-komponen">-</button>
-            </div>
-        @empty
-            <div class="input-group mb-2">
-                <input type="text" name="komponen_penilaian[]" class="form-control"
-                    placeholder="Contoh: Public Speaking">
-                <button type="button" class="btn btn-outline-danger btn-remove-komponen">-</button>
-            </div>
-        @endforelse
+            @forelse ($nilai as $item)
+                <div class="input-group mb-2">
+                    <input type="text" name="komponen_penilaian[]" class="form-control"
+                        placeholder="Contoh: Public Speaking" value="{{ $item }}">
+                    <button type="button" class="btn btn-danger btn-remove-komponen">- Hapus</button>
+                </div>
+            @empty
+                <div class="input-group mb-2">
+                    <input type="text" name="komponen_penilaian[]" class="form-control"
+                        placeholder="Contoh: Public Speaking">
+                    <button type="button" class="btn btn-danger btn-remove-komponen">- Hapus</button>
+                </div>
+            @endforelse
+        </div>
+
+        <button type="button" class="btn btn-add-komponen btn-primary">
+            + Tambah Komponen
+        </button>
     </div>
-
-    <button type="button" class="btn btn-outline-primary btn-add-komponen mt-2">
-        + Tambah Komponen
-    </button>
-</div>
 
 
 </div>
@@ -133,19 +133,19 @@
         button.parentElement.parentElement.remove();
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Tambah komponen penilaian
-        $(document).on('click', '.btn-add-komponen', function() {
+        $(document).on('click', '.btn-add-komponen', function () {
             $('#komponen-container').append(`
                 <div class="input-group mb-2">
                     <input type="text" name="komponen_penilaian[]" class="form-control" placeholder="Contoh: Public Speaking" required>
-                    <button type="button" class="btn btn-outline-danger btn-remove-komponen">-hapus</button>
+                    <button type="button" class="btn btn-danger btn-remove-komponen">- hapus</button>
                 </div>
             `);
         });
 
         // Hapus komponen penilaian
-        $(document).on('click', '.btn-remove-komponen', function() {
+        $(document).on('click', '.btn-remove-komponen', function () {
             $(this).closest('.input-group').remove();
         });
     });
