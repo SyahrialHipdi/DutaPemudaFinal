@@ -23,6 +23,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <!-- jQuery (wajib sebelum Bootstrap JS) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- Popper.js (untuk fitur collapse/tooltips) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     <!-- Nice Select CSS -->
     <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" />
     <!-- Font Awesome CSS -->
