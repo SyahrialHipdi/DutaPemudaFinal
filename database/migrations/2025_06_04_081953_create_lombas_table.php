@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nama_lomba');
             $table->integer('tahun');
             $table->text('deskripsi');
-            $table->json('syarat_lomba');
+        
+            // $table->json('syarat_lomba');
             $table->json('komponen_penilaian');
             $table->timestamps();
         });

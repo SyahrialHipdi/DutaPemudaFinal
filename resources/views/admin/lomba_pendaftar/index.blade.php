@@ -50,7 +50,7 @@
                                             <tr>
                                                 <td>{{ $lomba->nama_lomba }}</td>
                                                 <td>{{ $lomba->tahun }}</td>
-                                                <td>{{ $lomba->users_count }}</td> {{-- demi keamanan, jangan tampilkan password asli --}}
+                                                <td>{{ $lomba->users_count }}</td>
                                                 <td>
                                                     <a href="{{ route('admin.lomba_pendaftar.show', $lomba->id) }}">
                                                         <button class="btn btn-sm btn-info">Lihat Detail</button>

@@ -42,8 +42,6 @@
                                                 <th>No</th>
                                                 <th>Nilai</th>
                                                 <th>Email</th>
-                                                {{-- <th>lomba</th> --}}
-                                                <th>Data Isian</th>
                                                 <th>aksi</th>
 
                                             </tr>
@@ -75,8 +73,7 @@
                                                         @endif
                                                     </td>
                                                     <td>{{ $user->email }}</td>
-                                                    <td>
-                                                        @php
+                                                        {{-- @php
                                                             $dataIsian = json_decode($user->pivot->data_isian, true);
                                                         @endphp
                                                         <ul>
@@ -91,8 +88,8 @@
                                                                     @endif
                                                                 </li>
                                                             @endforeach
-                                                        </ul>
-                                                    </td>
+                                                        </ul> --}}
+                                                
                                                     <td>
                                                         <a href="{{ route('juri.create', [$lomba->id, $user->id]) }}"
                                                             class="btn btn-sm btn-warning">Nilai</a>

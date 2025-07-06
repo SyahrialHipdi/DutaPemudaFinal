@@ -27,8 +27,9 @@
 
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form method="POST" action="{{ route('admin.lomba.store') }}">
+                    <form method="POST" action="{{ route('admin.lomba.update', $lomba->id) }}">
                         @csrf
+                        @method('PUT')
                         <div class="card-body">
                             {{-- Meng-include file form terpisah --}}
                             @include('admin.lomba.form')

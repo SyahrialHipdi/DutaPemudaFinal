@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lomba;
 use App\Models\User;
+use App\Models\Peserta;
+use App\Models\LombaPeserta;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,73 +32,67 @@ class LombaPesertaController extends Controller
 
         // Cek
         $lombaId = $lomba->id;
-        $nikBaru = $request->input('data_isian')['nik']; // ambil isian nik dari input
-        $userId = Auth::id();
+        $user = Auth::id();
+        // $data_isian = [];
 
-        // Cari apakah sudah ada peserta lain yang mendaftar ke lomba ini dengan nik yang sama
-        $duplikat = DB::table('lomba_pesertas')
-            ->where('lomba_id', $lombaId)
-            // ->where('user_id', '!=', $userId) // boleh juga tanpa ini jika tidak boleh daftar 2x
-            ->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(data_isian, '$.nik')) = ?", [$nikBaru])
-            ->exists();
-
-        if ($duplikat) {
-            return back()->withErrors(['nik' => 'nik ini sudah digunakan untuk lomba yang sama.']);
-        }
-        // End Cek
-        // $user = Auth::user();
-
-        $rules = [
-            'email' => 'string|unique:users,email',
-            'password' => 'string',
-        ];
-        $data_isian = [];
-
-        foreach ($lomba->syarat_lomba as $syarat) {
-            $parts = explode(':', $syarat);
-            $field = $parts[0];
-            $type = $parts[1] ?? 'text';
-
-            if ($type === 'file') {
-                $rules["data_isian.$field"] = 'required|file|mimes:jpg,jpeg,png|max:2048';
-            } else {
-                $rules["data_isian.$field"] = 'required|string';
-            }
-        }
-
-        $validated = $request->validate($rules);
 
         if (!Auth::check()) {
+            // User belum login, validasi semua field
+            $validated = $request->validate([
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:5',
+                'nama' => 'required|string|max:255',
+                'nik' => 'required|string|max:20|unique:pesertas,nik',
+                'provinsi' => 'required',
+                'kota' => 'required',
+                'kecamatan' => 'required',
+                'desa' => 'required',
+                'rt_rw' => 'required',
+                'alamat' => 'required|string|max:255',
+                'kodepos' => 'required',
+                'ktp' => 'required',
+                'bidang_pilihan_id' => 'nullable',
+                'lahir' => 'required',
+            ]);
+
+            // Buat user
             $user = User::create([
                 'email' => $validated['email'],
                 'password' => Hash::make($validated['password']),
-                'role' => 'peserta', // default role
+                'role' => 'peserta',
             ]);
 
-            Auth::login($user); // login otomatis
+            // Simpan data peserta
+            Peserta::create([
+                'Id_user' => $user->id,
+                'nama' => $validated['nama'],
+                'nik' => $validated['nik'],
+                'provinsi' => $validated['provinsi'],
+                'kota' => $validated['kota'],
+                'kecamatan' => $validated['kecamatan'],
+                'desa' => $validated['desa'],
+                'rt_rw' => $validated['rt_rw'],
+                'alamat' => $validated['alamat'],
+                'kodepos' => $validated['kodepos'],
+                'ktp' => $validated['ktp'],
+                'lahir' => $validated['lahir'],
+            ]);
+
+            Auth::login($user);
         } else {
+            $validated = $request->validate([
+                'bidang_pilihan_id' => 'nullable',
+            ]);
+
             $user = Auth::user();
         }
-
-        foreach ($lomba->syarat_lomba as $syarat) {
-            $parts = explode(':', $syarat);
-            $field = $parts[0];
-            $type = $parts[1] ?? 'text';
-
-            if ($type === 'file') {
-                if ($request->hasFile("data_isian.$field")) {
-                    $path = $request->file("data_isian.$field")->store("pendaftaran/{$lomba->id}/{$user->id}", 'public');
-                    $data_isian[$field] = $path;
-                }
-            } else {
-                $data_isian[$field] = $validated['data_isian'][$field];
-            }
-        }
-
-        $user->lombas()->attach($lomba->id, [
-            'data_isian' => json_encode($data_isian),
+        $bidangId = null;
+        $bidangId = $validated['bidang_pilihan_id'] ?? null;
+        LombaPeserta::create([
+            'user_id' => $user->id,
+            'lomba_id' => $lombaId,
+            'bidang' => $bidangId,
         ]);
-
         return redirect()->route('peserta.index')->with('success', 'Berhasil daftar lomba.');
     }
 
@@ -110,5 +106,12 @@ class LombaPesertaController extends Controller
     {
         $lomba = Lomba::with('users')->findOrFail($id);
         return view('admin.lomba_pendaftar.show', compact('lomba'));
+    }
+
+    public function detail($id)
+    {
+        $peserta = Peserta::where('Id_user', $id)->firstOrFail();;
+        return view('admin.lomba_pendaftar.showdetail', compact('peserta'));
+        // dd($peserta);
     }
 }

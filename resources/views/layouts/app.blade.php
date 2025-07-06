@@ -235,7 +235,7 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-footer">
                             <h2>About Us</h2>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Possimus, nostrum?</p>
+                            <p>Sistem ini merupakan platform resmi Dinas Pemuda dan Olahraga Kota Tangerang Selatan untuk memfasilitasi program Duta Pemuda secara lebih mudah, efisien, dan terintegrasi.</p>
                             <ul class="social">
                                 <li>
                                     <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
@@ -288,8 +288,11 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-footer">
                             <h2>Contact</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, alias ducimus vitae
-                                voluptatum dicta suscipit.</p>
+                            <p>Dinas Pemuda dan Olahraga Kota Tangerang Selatan<br>
+                                Jl. Raya Maruga No.1, Serua, Ciputat, Kota Tangerang Selatan<br>
+                                Telepon: (021) 7471-1234<br>
+                                Email: dispora@tangerangselatankota.go.id<br>
+                                Jam Layanan: Senin–Jumat, 07.30–16.00 WIB</p>
                             <!-- Social -->
                             <ul class="social">
                                 <li>

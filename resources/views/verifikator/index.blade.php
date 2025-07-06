@@ -25,6 +25,9 @@
                     <div class="card-header">
                         <h3 class="card-title">Data Pendaftar Lomba</h3>
                     </div>
+                    @if (session('success'))
+                                    <div class="alert alert-success">{{ session('success') }}</div>
+                                @endif
                     <div class="card-body">
                         <table id="pesertaTable" class="table table-bordered table-striped table-hover">
                             <thead>
@@ -65,21 +68,22 @@
                                                     </a> --}}
 
                                                     {{-- Tombol Verifikasi (Diterima) --}}
-                                                    <form action="{{ route('verifikator.store', $p->id) }}" method="POST"
-                                                        class="d-inline">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <input type="hidden" name="status" value="diterima">
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-primary mr-2">Verifikasi</button>
-                                                    </form>
+                                                    {{-- <button type="button" class="btn btn-s
+                                                    m btn-success mr-2" data-toggle="modal"
+                                                        data-target="#modalTerima" data-id="{{ $p->id }}"
+                                                        data-nama="{{ $p->user->data_isian['nama_lengkap'] ?? $p->user->name }}">
+                                                        Verifikasi
+                                                    </button> --}}
 
                                                     {{-- Tombol Tolak (Membuka Modal) --}}
-                                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                                    {{-- <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                                         data-target="#modalTolak" data-id="{{ $p->id }}"
                                                         data-nama="{{ $p->user->data_isian['nama_lengkap'] ?? $p->user->name }}">
                                                         Tolak
-                                                    </button>
+                                                    </button> --}}
+                                                    <a href="{{ route('verifikator.showdetail', $p->id) }}">
+                                                        <button class="btn btn-sm btn-info">Lihat Detail</button>
+                                                    </a>
                                                 </div>
                                             @else
                                                 <span class="text-muted">Tindakan Selesai</span>
@@ -100,34 +104,7 @@
         </section>
     </div>
 
-    <!-- Modal Penolakan -->
-    <div class="modal fade" id="modalTolak" tabindex="-1" role="dialog" aria-labelledby="modalTolakLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTolakLabel">Alasan Penolakan Peserta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="formTolak" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-body">
-                        <input type="hidden" name="status" value="ditolak">
-
-                        <textarea name="alasan" id="alasan" class="form-control" rows="3" required
-                            placeholder="Tulis alasan penolakan..."></textarea>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger">Kirim Penolakan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
 
 @endsection
 
@@ -144,23 +121,6 @@
         });
     </script>
 
-    {{-- Script untuk Modal Penolakan --}}
-    <script>
-        $('#modalTolak').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var pesertaId = button.data('id');
-            var namaPeserta = button.data('nama');
-
-            // Ini ambil base route dari Blade (tanpa ID)
-            var baseUrl = @json(route('verifikator.tolak', ['id' => 'PESERTA_ID']));
-
-            // Ganti 'PESERTA_ID' dengan ID peserta sesungguhnya
-            var actionUrl = baseUrl.replace('PESERTA_ID', pesertaId);
-
-            var modal = $(this);
-            modal.find('#formTolak').attr('action', actionUrl);
-            modal.find('#modalTolakLabel').text('Alasan Penolakan untuk ' + namaPeserta);
-            modal.find('#alasan').val('');
-        });
-    </script>
+    
 @endpush
+

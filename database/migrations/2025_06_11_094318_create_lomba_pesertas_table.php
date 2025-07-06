@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('lomba_id');
-            $table->json('data_isian');
+            // $table->json('data_isian');
             $table->enum('status',['pending','proses','juara','selesai','ditolak'])->default('pending');
             $table->string('alasan')->nullable();
             $table->timestamps();

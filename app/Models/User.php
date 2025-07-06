@@ -97,7 +97,7 @@ class User extends Authenticatable
 //     return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
 // }
 
-// public function kabupatenWilayah()
+// public function kotaWilayah()
 // {
 //     return $this->belongsTo(TrefRegion::class, 'kota', 'code');
 // }

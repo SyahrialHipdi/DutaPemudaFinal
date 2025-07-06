@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Peserta;
 use App\Models\LombaPeserta;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,22 @@ class VerifikatorController extends Controller
             'alasan' => $request->alasan,
         ]);
 
-        return back()->with('success', 'Peserta berhasil diverifikasi.');
+        return back()->with('success', 'Peserta berhasil ditolak.');
+    }
+
+    public function terima(Request $request, $id)
+    {
+        $pendaftaran = LombaPeserta::findOrFail($id);
+        $pendaftaran->status = 'proses';
+        $pendaftaran->save();
+
+        return redirect('verifikator/index')->with('success', 'Peserta berhasil diverifikasi.');
+    }
+
+    public function detail($id)
+    {
+        $peserta = Peserta::where('Id_user', $id)->firstOrFail();;
+        return view('verifikator.show', compact('peserta'));
+        // dd($peserta);
     }
 }

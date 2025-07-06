@@ -36,6 +36,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
+    Route::get('/lomba_pendaftar/{id}/detail', [LombaPesertaController::class, 'detail'])->name('admin.lomba_pendaftar.showdetail');
 
     Route::get('/user', [AdminController::class, 'dashboard'])->name('admin.user.dashboard');
     Route::get('/user/create', [AdminController::class, 'create'])->name('admin.user.create');
@@ -57,7 +58,9 @@ Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
 Route::middleware(['auth', 'role:verifikator'])->prefix('verifikator')->group(function () {
     Route::get('/index', [VerifikatorController::class, 'index'])->name('verifikator.index');
     Route::put('/index/{id}', [VerifikatorController::class, 'store'])->name('verifikator.store');
+    Route::put('/terima/{id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
     Route::put('/tolak/{id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
+    Route::get('/detail/{id}', [VerifikatorController::class, 'detail'])->name('verifikator.showdetail');
 });
 
 Route::middleware(['auth', 'role:peserta'])->prefix('peserta')->group(function () {
@@ -75,9 +78,9 @@ Route::get('/kota/{kodeProvinsi}', [LocationController::class, 'getKota']);
 Route::get('/kecamatan/{kodeKota}', [LocationController::class, 'getKecamatan']);
 Route::get('/desa/{kodeKecamatan}', [LocationController::class, 'getDesa']);
 
-// Route::get('admin/create', function () {
-//     return view('admin.lomba.create');
-// })->name('admin/create');
+Route::get('/sertifikat', function () {
+    return view('sertifikat');
+})->name('sertifikat');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/sertifikat/download/{id}', [SertifikatController::class, 'download'])->name('sertifikat.download');

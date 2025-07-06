@@ -14,18 +14,18 @@ class Lomba extends Model
         'nama_lomba',
         'tahun',
         'deskripsi',
-        'syarat_lomba',
+        // 'syarat_lomba',
         'komponen_penilaian',
     ];
 
     protected $casts = [
-        'syarat_lomba' => 'array',
+        // 'syarat_lomba' => 'array',
         'komponen_penilaian' => 'array',
     ];
     
     public function users()
     {
-        return $this->belongsToMany(User::class,'lomba_pesertas')->withPivot('data_isian')->withTimestamps();
+        return $this->belongsToMany(User::class,'lomba_pesertas');
     }
 
     // Jurinya

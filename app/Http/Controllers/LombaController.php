@@ -33,19 +33,19 @@ class LombaController extends Controller
         $lomba = Lomba::findOrFail($id);
 
         // Buat rules validasi dinamis berdasarkan syarat_lomba
-        $rules = [];
-        foreach ($lomba->syarat_lomba as $field) {
-            $rules[$field] = 'required';
-            // bisa ditambah validasi spesifik sesuai field, misal 'email' => 'required|email'
-            if ($field === 'email') {
-                $rules[$field] = 'required|email';
-            }
-            if ($field === 'usia') {
-                $rules[$field] = 'required|integer|min:1';
-            }
-        }
+        // $rules = [];
+        // foreach ($lomba->syarat_lomba as $field) {
+        //     $rules[$field] = 'required';
+        //     // bisa ditambah validasi spesifik sesuai field, misal 'email' => 'required|email'
+        //     if ($field === 'email') {
+        //         $rules[$field] = 'required|email';
+        //     }
+        //     if ($field === 'usia') {
+        //         $rules[$field] = 'required|integer|min:1';
+        //     }
+        // }
 
-        $validated = $request->validate($rules);
+        // $validated = $request->validate($rules);
 
         return redirect()->route('lomba.index')->with('success', 'Pendaftaran berhasil!');
     }
@@ -61,32 +61,32 @@ class LombaController extends Controller
             'nama_lomba' => 'required|string|max:255',
             'tahun' => 'required|integer',
             'deskripsi' => 'nullable|string',
-            'syarat_lomba' => 'array',
-            'syarat_lomba.*.field' => 'nullable|string',
-            'syarat_lomba.*.type' => 'nullable|string',
+            // 'syarat_lomba' => 'array',
+            // 'syarat_lomba.*.field' => 'nullable|string',
+            // 'syarat_lomba.*.type' => 'nullable|string',
             'komponen_penilaian' => 'array',
             'komponen_penilaian.*' => 'nullable',
 
         ]);
 
-        $syarat = $request->input('syarat_lomba', []);
-        $syarat_lomba = [];
+        // $syarat = $request->input('syarat_lomba', []);
+        // $syarat_lomba = [];
 
-        foreach ($syarat as $item) {
-            $field = trim($item['field'] ?? '');
-            $type = trim($item['type'] ?? 'text');
+        // foreach ($syarat as $item) {
+        //     $field = trim($item['field'] ?? '');
+        //     $type = trim($item['type'] ?? 'text');
 
-            if ($field !== '') {
-                $syarat_lomba[] = "$field:$type";
-            }
-        }
+        //     if ($field !== '') {
+        //         $syarat_lomba[] = "$field:$type";
+        //     }
+        // }
 
          $komponen_penilaian = array_filter(array_map('trim', $request->input('komponen_penilaian', [])));
         Lomba::create([
             'nama_lomba' => $request->nama_lomba,
             'tahun' => $request->tahun,
             'deskripsi' => $request->deskripsi,
-            'syarat_lomba' => $syarat_lomba,
+            // 'syarat_lomba' => $syarat_lomba,
             'komponen_penilaian' => $komponen_penilaian,
         ]);
 
@@ -105,33 +105,33 @@ class LombaController extends Controller
             'nama_lomba' => 'required|string|max:255',
             'tahun' => 'required|integer',
             'deskripsi' => 'nullable|string',
-            'syarat_lomba' => 'array',
-            'syarat_lomba.*.field' => 'nullable|string',
-            'syarat_lomba.*.type' => 'nullable|string',
+            // 'syarat_lomba' => 'array',
+            // 'syarat_lomba.*.field' => 'nullable|string',
+            // 'syarat_lomba.*.type' => 'nullable|string',
             'komponen_penilaian' => 'nullable',
             'komponen_penilaian.*' => 'nullable',
         ]);
 
         $lomba = Lomba::findOrFail($id);
 
-        $syarat = $request->input('syarat_lomba', []);
-        $syarat_lomba = [];
+        // $syarat = $request->input('syarat_lomba', []);
+        // $syarat_lomba = [];
 
-        foreach ($syarat as $item) {
-            $field = trim($item['field'] ?? '');
-            $type = trim($item['type'] ?? 'text');
+        // foreach ($syarat as $item) {
+        //     $field = trim($item['field'] ?? '');
+        //     $type = trim($item['type'] ?? 'text');
 
-            if ($field !== '') {
-                $syarat_lomba[] = "$field:$type";
-            }
-        }
+        //     if ($field !== '') {
+        //         $syarat_lomba[] = "$field:$type";
+        //     }
+        // }
         $komponen = $request->input('komponen_penilaian', []);
 
         $lomba->update([
             'nama_lomba' => $request->nama_lomba,
             'tahun' => $request->tahun,
             'deskripsi' => $request->deskripsi,
-            'syarat_lomba' => $syarat_lomba,
+            // 'syarat_lomba' => $syarat_lomba,
             'komponen_penilaian' => $komponen, 
         ]);
 

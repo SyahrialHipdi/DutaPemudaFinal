@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Peserta;
 use App\Models\LombaPeserta;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,8 @@ class PesertaController extends Controller
         // $user = User::findOrFail($id);
         // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
         // $user = User::();
-        return view('peserta.index', compact('user'));
+        $peserta = Peserta::with('user')->where('Id_user',Auth::user()->id)->first();
+        return view('peserta.index', compact('peserta'));
     }
 
     public function show(User $user)

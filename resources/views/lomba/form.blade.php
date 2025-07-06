@@ -1,6 +1,18 @@
 @extends('layouts.app')
 @section('title', 'Formulir Pendaftaran')
 @section('content')
+    @if (request()->session()->has('step1_done'))
+        {{-- versi server-side --}}
+        <style>
+            #wizard-step-1 {
+                display: none !important;
+            }
+
+            #wizard-step-2 {
+                display: block !important;
+            }
+        </style>
+    @endif
 
     <section>
         {{-- Wizard Step 1: Syarat --}}
@@ -74,6 +86,126 @@
                                     {{-- Field Email & Password (selalu di atas dan berdampingan) --}}
                                     @guest
 
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label fw-bold">NIK</label>
+                                                <input class="form-control" type="nik" name="nik" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label class="form-label fw-bold">Nama Lengkap</label>
+                                                <input class="form-control" type="nama" name="nama" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Provinsi</label>
+                                                <select id="provinsi" name="provinsi" class="form-control nice-select wide"
+                                                    required>
+                                                    <option value="" disabled selected>-- Pilih Provinsi --
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Pilihan ini wajib diisi.</div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">kota</label>
+                                                <select id="kota" name="kota" class="form-control nice-select wide"
+                                                    required>
+                                                    <option value="" disabled selected>-- Pilih kota --
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Pilihan ini wajib diisi.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">kecamatan</label>
+                                                <select id="kecamatan" name="kecamatan" class="form-control nice-select wide"
+                                                    required>
+                                                    <option value="" disabled selected>-- Pilih kecamatan --
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Pilihan ini wajib diisi.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">desa</label>
+                                                <select id="desa" name="desa" class="form-control nice-select wide"
+                                                    required>
+                                                    <option value="" disabled selected>-- Pilih desa --
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Pilihan ini wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">rt_rw</label>
+                                                <input class="form-control" type="text" name="rt_rw"
+                                                    value="{{ old('rt_rw') }}" required>
+                                                <div class="invalid-feedback">Format email tidak valid.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">kode pos <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" name="kodepos" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
+                                            <div class="col-sm-12 mb-4">
+                                                <label class="form-label fw-bold">Alamat</label>
+                                                <input class="form-control" type="text" name="alamat"
+                                                    value="{{ old('alamat') }}" required>
+                                                <div class="invalid-feedback">Format email tidak valid.</div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">ktp <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" type="file" name="ktp" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Tanggal Lahir</label>
+                                                <input class="form-control" type="date" name="lahir" required>
+                                                <div class="invalid-feedback">Password wajib diisi.</div>
+                                            </div>
+                                        </div>
+                                        @if ($lomba->role == 'pemuda pelopor')
+                                            <div class="row">
+                                                <div class="col-12 mb-4">
+                                                    <label class="form-label fw-bold">Bidang Kepeloporan<span
+                                                            class="text-danger">*</span></label>
+                                                    <select id="bidang" name="bidang_pilihan_id"
+                                                        class="form-control nice-select wide">
+                                                        <option value="">-- Pilih Bidang --
+                                                        </option>
+                                                        <option value="">pendidikan
+                                                        </option>
+                                                        <option value="">Pengelolaan sumber daya alam
+                                                        </option>
+                                                        <option value="">lingkungan dan pariwisata
+                                                        </option>
+                                                        <option value="">pangan
+                                                        </option>
+                                                        <option value="">inovasi teknolgi
+                                                        </option>
+                                                        <option value="">sosial
+                                                        </option>
+                                                        <option value="">agama
+                                                        </option>
+                                                        <option value="">budaya
+                                                        </option>
+                                                    </select>
+                                                    <div class="invalid-feedback">BIdang wajib diisi.</div>
+
+                                                </div>
+                                            </div>
+                                        @endif
+
+
                                         <div class="row">
                                             <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Email <span
@@ -90,90 +222,24 @@
                                             </div>
                                         </div>
                                     @endguest
-                                    {{-- <hr class="my-3"> --}}
 
-                                    {{-- Inisialisasi variabel penanda (flag) --}}
-                                    @php
-                                        $in_address_block = false;
-                                        $alamatFields = ['Provinsi', 'Kota', 'Kecamatan', 'Desa'];
-                                    @endphp
+                                    {{-- Bagian persetujuan dan tombol submit --}}
+                                    <div class="form-check mb-4 text-center">
+                                        <input class="form-check-input" type="checkbox" id="invalidCheck" required>
+                                        <label class="form-check-label" for="invalidCheck">Saya menyatakan semua data yang
+                                            diisi
+                                            adalah
+                                            benar.</label>
+                                        <div class="invalid-feedback">Anda harus menyetujui pernyataan ini.</div>
+                                    </div>
 
-                                    @foreach ($lomba->syarat_lomba as $syarat)
-                                        @php
-                                            $parts = explode(':', $syarat);
-                                            $field = $parts[0];
-                                            $type = $parts[1] ?? 'text';
-                                            $label = ucfirst(str_replace('_', ' ', $field));
-                                            $is_address_field = in_array($label, $alamatFields);
-                                        @endphp
-
-                                        {{-- KONDISI 1: Jika bertemu field alamat PERTAMA kali --}}
-                                        {{-- Buka tag <div class="row"> --}}
-                                        @if ($is_address_field && !$in_address_block)
-                                            @php $in_address_block = true; @endphp
-                                            <div class="row">
-                                        @endif
-
-                                        {{-- KONDISI 2: Jika bertemu field BUKAN alamat, SETELAH sebelumnya berada di blok alamat --}}
-                                        {{-- Tutup tag <div class="row"> --}}
-                                        @if (!$is_address_field && $in_address_block)
-                                            @php $in_address_block = false; @endphp
+                                    <button type="submit" class="btn w-100">Kirim Pendaftaran</button>
+                                </form>
                             </div>
-                            @endif
-
-
-                            {{-- Render semua field sesuai kondisinya --}}
-                            @if ($is_address_field)
-                                {{-- Render field alamat di dalam col-md-6 --}}
-                                <div class="col-md-6 mb-4">
-                                    <label class="form-label fw-bold">{{ $label }} <span
-                                            class="text-danger">*</span></label>
-                                    <select id="{{ strtolower($label) }}" name="data_isian[{{ $field }}]"
-                                        class="form-control nice-select wide" required>
-                                        <option value="" disabled selected>-- Pilih {{ $label }} --</option>
-                                    </select>
-                                    <div class="invalid-feedback">Pilihan ini wajib diisi.</div>
-                                </div>
-                            @else
-                                {{-- Render field lain dalam satu baris penuh --}}
-                                <div class="mb-4">
-                                    <label class="form-label fw-bold">{{ $label }} <span
-                                            class="text-danger">*</span></label>
-                                    @if ($type === 'file')
-                                        <input type="file" class="form-control" name="data_isian[{{ $field }}]"
-                                            required>
-                                        <div class="invalid-feedback">File ini wajib diunggah.</div>
-                                    @else
-                                        <input type="{{ $type }}" class="form-control"
-                                            name="data_isian[{{ $field }}]"
-                                            value="{{ old('data_isian.' . $field) }}" required>
-                                        <div class="invalid-feedback">Field ini wajib diisi.</div>
-                                    @endif
-                                </div>
-                            @endif
-
-                            {{-- KONDISI 3: Jika ini adalah item terakhir DAN kita masih di dalam blok alamat --}}
-                            {{-- Tutup tag <div class="row"> --}}
-                            @if ($loop->last && $in_address_block)
                         </div>
-                        @endif
-                        @endforeach
-
-                        {{-- Bagian persetujuan dan tombol submit --}}
-                        <div class="form-check mb-4 text-center">
-                            <input class="form-check-input" type="checkbox" id="invalidCheck" required>
-                            <label class="form-check-label" for="invalidCheck">Saya menyatakan semua data yang diisi adalah
-                                benar.</label>
-                            <div class="invalid-feedback">Anda harus menyetujui pernyataan ini.</div>
-                        </div>
-
-                        <button type="submit" class="btn w-100">Kirim Pendaftaran</button>
-                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
 
     </section>
@@ -184,12 +250,25 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script> --}}
     <script>
         $(document).ready(function() {
-            // Wizard
+            // MIne
+
+
+            if (sessionStorage.getItem('step1_done')) {
+                $('#wizard-step-1').hide();
+                $('#wizard-step-2').show();
+            }
+
             $('#btn-lanjut').click(function() {
                 if (!$('#agreeTerms').is(':checked')) {
                     $('#alert-warning').removeClass('d-none');
                 } else {
                     $('#alert-warning').addClass('d-none');
+
+                    // Simpan status bahwa step 1 sudah dilalui
+                    sessionStorage.setItem('step1_done', true);
+                    $('#wizard-step-1').addClass('d-none');
+
+                    // Tampilkan step 2
                     $('#wizard-step-1').hide();
                     $('#wizard-step-2').show();
                     $("html, body").animate({

@@ -1,4 +1,5 @@
 {{-- Menampilkan error validasi jika ada --}}
+@csrf
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul class="mb-0">
@@ -12,9 +13,12 @@
 <div class="row">
     <div class="col-md-8">
         <div class="form-group">
-            <label for="nama_lomba">Nama Lomba</label>
-            <input type="text" id="nama_lomba" name="nama_lomba" class="form-control"
-                placeholder="Contoh: Pemuda Pelopor" value="{{ old('nama_lomba', $lomba->nama_lomba ?? '') }}" required>
+            <label for="nama_lomba">Kategori Lomba</label>
+                <select class="form-control w-100" id="nnama_lomba" name="nama_lomba" required>
+                                        <option value="">Pilih Lomba</option>
+                                        <option value="Pemuda pelopor">Pemuda Pelopor</option>
+                                        <option value="PPAP">PPAP/PPAN</option>
+                                    </select>
         </div>
     </div>
     <div class="col-md-4">
@@ -35,7 +39,7 @@
 <hr>
 
 {{-- Bagian Dinamis Syarat Pendaftaran --}}
-<div class="card card-outline card-info">
+{{-- <div class="card card-outline card-info">
     <div class="card-header">
         <h3 class="card-title">Syarat Pendaftaran Peserta</h3>
     </div>
@@ -74,14 +78,13 @@
                     </div>
                 </div>
             @empty
-                {{-- Kosongkan agar bisa ditambah dari awal --}}
             @endforelse
         </div>
         <button type="button" class="btn btn-success mt-2" onclick="addSyarat()">
             <i class="fas fa-plus-circle"></i> Tambah Syarat Pendaftaran
         </button>
     </div>
-</div>
+</div> --}}
 
 {{-- Bagian Dinamis Komponen Penilaian --}}
 <div class="card card-outline card-warning mt-4">
@@ -130,41 +133,6 @@
 
 @push('scripts')
     <script>
-        // Inisialisasi index untuk item baru, berdasarkan jumlah item yang sudah ada
-        let syaratIndex = {{ count($syarat_lomba) }};
-
-        function addSyarat() {
-            const container = document.getElementById('syarat-container');
-            const div = document.createElement('div');
-            div.className = 'row syarat-item mb-2';
-
-            div.innerHTML = `
-            <div class="col-md-5">
-                <input type="text" name="syarat_lomba[${syaratIndex}][field]" placeholder="Nama Field Baru" class="form-control" required>
-            </div>
-            <div class="col-md-5">
-                <select name="syarat_lomba[${syaratIndex}][type]" class="form-control">
-                    <option value="text">Teks Singkat</option>
-                    <option value="number">Angka</option>
-                    <option value="file">Upload File</option>
-                    <option value="textarea">Teks Panjang (Textarea)</option>
-                    <option value="email">Email</option>
-                    <option value="date">Tanggal</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-md btn-danger btn-block" onclick="removeElement(this)"><i class="fas fa-trash"></i> Hapus</button>
-            </div>
-        `;
-
-            container.appendChild(div);
-            syaratIndex++;
-        }
-
-        // Fungsi umum untuk menghapus parent dari tombol
-        function removeElement(button) {
-            button.closest('.syarat-item').remove();
-        }
 
         // Menggunakan JQuery untuk komponen penilaian agar lebih ringkas
         $(document).ready(function() {

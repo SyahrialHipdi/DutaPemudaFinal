@@ -35,7 +35,15 @@
                                             <tr>
                                                 <td>{{ $lomba->nama_lomba }} </td>
                                                 <td>
-                                                    <button class="btn btn-warning btn-sm">{{$lomba->pivot->status}}</button>
+                                                    @if ($lomba->pivot->status=="ditolak")
+
+                                                        <button class="btn btn-danger btn-sm">{{$lomba->pivot->status}}</button>
+                                                        
+                                                        @elseif($lomba->pivot->status=="juara")
+                                                        <button class="btn btn-success btn-sm">{{$lomba->pivot->status}} <i class="fa fa-trophy ml-1"></i></button>
+                                                        @else
+                                                        <button class="btn btn-warning btn-sm">{{$lomba->pivot->status}}</button>
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     {{ $lomba->pivot->alasan }}

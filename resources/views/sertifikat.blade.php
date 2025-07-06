@@ -15,6 +15,11 @@
             font-style: normal;
         }
 
+        @page {
+            margin: 0px;
+        }
+
+
         * {
             margin: 0;
             padding: 0;
@@ -29,6 +34,8 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            margin: 0px;
+            padding: 0px;
         }
 
         .certificate-container {
@@ -56,7 +63,7 @@
         /* Header Section */
         .header {
             position: absolute;
-            top: 80px;
+            top: 70px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -64,6 +71,7 @@
         }
 
         .header h1 {
+            font-family: serif;
             font-size: 72px;
             font-weight: 700;
             color: #1a365d;
@@ -73,10 +81,11 @@
 
         .header h2 {
             font-size: 28px;
+            margin-top: -10px;
             font-weight: 400;
             color: #1a365d;
             letter-spacing: 4px;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
         }
 
         .given-to {
@@ -89,7 +98,7 @@
         /* Name Section */
         .name-section {
             position: absolute;
-            top: 320px;
+            top: 300px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -118,7 +127,7 @@
         /* Achievement Description */
         .achievement {
             position: absolute;
-            top: 410px;
+            top: 400px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -188,20 +197,21 @@
         <div class="header">
             <h1>SERTIFIKAT</h1>
             <h2>PENGHARGAAN</h2>
+            <h3>Nomor: XXX.X.X/Kep.XXX-Dispora/2025</h3>
             <div class="given-to">Diberikan Kepada :</div>
         </div>
 
         <!-- Name Section -->
         <div class="name-section">
             <div class="name-display">
-                <div class="participant-name">{{ $user->email }}</div>
+                <div class="participant-name">suaib</div>
             </div>
         </div>
 
         <!-- Achievement Description -->
         <div class="achievement">
             Atas <span class="achievement-title">partisipasinya sebagai peserta dalam kegiatan </span><br>
-            <span class="achievement-title">{{ $lomba->nama_lomba }}</span>
+            <span class="achievement-title">ppan 2025</span>
         </div>
 
         <!-- Signature Section -->

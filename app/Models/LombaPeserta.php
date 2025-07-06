@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class LombaPeserta extends Model
 {
-    protected $fillable = ['user_id', 'lomba_id', 'data_isian','status','alasan'];
+    protected $fillable = ['user_id', 'lomba_id','bidang' ,'status','alasan'];
 
-    protected $casts = [
-    'data_isian' => 'array',
-    ];
+    // protected $casts = [
+    // 'data_isian' => 'array',
+    // ];
 
     public function user()
 {

@@ -39,7 +39,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Email</th>
-                                            <th>Data Isian</th>
+                                            <th>Detail Peserta</th>
 
                                         </tr>
                                     </thead>
@@ -49,7 +49,12 @@
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
-                                                    @php
+                                                    <a href="{{ route('admin.lomba_pendaftar.showdetail', $user->id) }}">
+                                                        <button class="btn btn-sm btn-info">Lihat Detail</button>
+                                                    </a>
+                                                </td>
+                                                {{-- <td> --}}
+                                                    {{-- @php
                                                         $dataIsian = json_decode($user->pivot->data_isian, true);
                                                     @endphp
                                                     <ul>
@@ -64,8 +69,8 @@
                                                                 @endif
                                                             </li>
                                                         @endforeach
-                                                    </ul>
-                                                </td>
+                                                    </ul> --}}
+                                                {{-- </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>
