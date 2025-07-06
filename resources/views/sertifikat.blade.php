@@ -63,7 +63,7 @@
         /* Header Section */
         .header {
             position: absolute;
-            top: 70px;
+            top: 237px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -79,12 +79,12 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .header h2 {
-            font-size: 28px;
+        .header h3 {
+            font-size: 15px;
             margin-top: -10px;
-            font-weight: 400;
+            font-weight: 700;
             color: #1a365d;
-            letter-spacing: 4px;
+            letter-spacing: 1px;
             /* margin-bottom: 20px; */
         }
 
@@ -98,7 +98,7 @@
         /* Name Section */
         .name-section {
             position: absolute;
-            top: 300px;
+            top: 365px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -113,7 +113,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-bottom: 2px solid #2d3748;
+            /* border-bottom: 2px solid #2d3748; */
         }
 
         .participant-name {
@@ -127,7 +127,25 @@
         /* Achievement Description */
         .achievement {
             position: absolute;
-            top: 400px;
+            top: 440px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-align: center;
+            width: 70%;
+            font-size: 18px;
+            color: #2d3748;
+            line-height: 1.3;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: #1a365d;
+        }
+
+        .tgl-sertif {
+            position: absolute;
+            top: 500px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -136,11 +154,6 @@
             font-size: 18px;
             color: #2d3748;
             line-height: 1.8;
-        }
-
-        .achievement-title {
-            font-weight: 600;
-            color: #1a365d;
         }
 
         /* Signature Section */
@@ -195,38 +208,27 @@
 
         <!-- Header -->
         <div class="header">
-            <h1>SERTIFIKAT</h1>
-            <h2>PENGHARGAAN</h2>
             <h3>Nomor: XXX.X.X/Kep.XXX-Dispora/2025</h3>
-            <div class="given-to">Diberikan Kepada :</div>
         </div>
 
         <!-- Name Section -->
         <div class="name-section">
             <div class="name-display">
-                <div class="participant-name">suaib</div>
+                <div class="participant-name">Christiano Ronaldo</div>
             </div>
         </div>
 
         <!-- Achievement Description -->
         <div class="achievement">
-            Atas <span class="achievement-title">partisipasinya sebagai peserta dalam kegiatan </span><br>
-            <span class="achievement-title">ppan 2025</span>
+            <span class="achievement-title">Pemenang Pertama Pemuda Pelopor ( Bidang INOVASI TEKNOLOGI )</span><br>
+            Tingkat Provinsi Banten Tahun 2025
         </div>
 
-        <!-- Signature Section -->
-        {{-- <div class="signatures">
-            <div class="signature-box">
-                <div class="signature-text">Gubernur</div>
-                <div class="signature-line"></div>
-                <div class="signature-title">Nama</div>
-            </div>
-            <div class="signature-box">
-                <div class="signature-text">Ketua Panitia</div>
-                <div class="signature-line"></div>
-                <div class="signature-title">Nama</div>
-            </div>
-        </div> --}}
+        {{-- tgl sertif --}}
+        <div class="tgl-sertif">
+            Serang, 23 Agustus 2025
+        </div>
+
     </div>
 </body>
 
