@@ -56,7 +56,7 @@ class LombaPesertaController extends Controller
                 'proposal' => 'nullable',
                 'ktp' => 'required',
                 'bidang_pilihan_id' => 'nullable',
-                'lahir' => 'required',
+                // 'lahir' => 'required',
             ]);
             $tanggal_lengkap = $request->tgl_lahir_yyyy . '-' . $request->tgl_lahir_mm . '-' . $request->tgl_lahir_dd;
             if (!checkdate((int)$request->tgl_lahir_mm, (int)$request->tgl_lahir_dd, (int)$request->tgl_lahir_yyyy)) {
@@ -76,7 +76,7 @@ class LombaPesertaController extends Controller
             }
 
 
-            $password = str_replace('-', '', $validated['lahir']); // 19990519
+            $password = str_replace('-', '', $tanggal_lengkap); // 19990519
             $hashedPassword = Hash::make($password);
 
             // Buat user
@@ -99,7 +99,7 @@ class LombaPesertaController extends Controller
                 'alamat' => $validated['alamat'],
                 'kodepos' => $validated['kodepos'],
                 'ktp' => $validated['ktp'],
-                'lahir' => $validated['lahir'],
+                'lahir' => $tanggal_lengkap,
             ]);
 
             Auth::login($user);
@@ -113,15 +113,6 @@ class LombaPesertaController extends Controller
         }
         $bidangId = null;
         $bidangId = $validated['bidang_pilihan_id'] ?? null;
-
-        // $sudahTerdaftar = LombaPeserta::where('user_id', $user->id)
-        //     ->where('lomba_id', $lombaId)
-        //     ->exists();
-
-        // if ($sudahTerdaftar) {
-        //     return back()->withErrors(['error' => 'Kamu sudah mendaftar ke lomba ini.'])->withInput();
-        // }
-
         $alreadyExists = LombaPeserta::where('user_id', $user->id)
             ->where('lomba_id', $lombaId)
             ->exists();
