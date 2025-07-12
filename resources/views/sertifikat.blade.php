@@ -208,27 +208,29 @@
 
         <!-- Header -->
         <div class="header">
-            <h3>Nomor: XXX.X.X/Kep.XXX-Dispora/2025</h3>
+            <h3>Nomor: {{ $nomor_sertifikat }}</h3>
         </div>
 
         <!-- Name Section -->
         <div class="name-section">
             <div class="name-display">
-                <div class="participant-name">Christiano Ronaldo</div>
+                <div class="participant-name">{{ $user->peserta->nama }}</div>
             </div>
         </div>
 
         <!-- Achievement Description -->
         <div class="achievement">
-            <span class="achievement-title">Pemenang Pertama Pemuda Pelopor ( Bidang INOVASI TEKNOLOGI )</span><br>
-            Tingkat Provinsi Banten Tahun 2025
+            <span class="achievement-title">
+                Pemenang Pertama Pemuda Pelopor
+                ( Bidang {{ strtoupper($lomba->bidang ?? 'Umum') }} )
+            </span><br>
+            Tingkat Provinsi {{ $provinsi ?? 'Banten' }} Tahun {{ now()->year }}
         </div>
 
-        {{-- tgl sertif --}}
+        <!-- Tanggal Sertifikat -->
         <div class="tgl-sertif">
-            Serang, 23 Agustus 2025
+            Serang, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
         </div>
-
     </div>
 </body>
 
