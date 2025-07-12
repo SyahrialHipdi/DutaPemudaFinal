@@ -35,14 +35,15 @@
                                             <tr>
                                                 <td>{{ $lomba->nama_lomba }} </td>
                                                 <td>
-                                                    @if ($lomba->pivot->status=="ditolak")
-
-                                                        <button class="btn btn-danger btn-sm">{{$lomba->pivot->status}}</button>
-                                                        
-                                                        @elseif($lomba->pivot->status=="juara")
-                                                        <button class="btn btn-success btn-sm">{{$lomba->pivot->status}} <i class="fa fa-trophy ml-1"></i></button>
-                                                        @else
-                                                        <button class="btn btn-warning btn-sm">{{$lomba->pivot->status}}</button>
+                                                    @if ($lomba->pivot->status == 'ditolak')
+                                                        <button
+                                                            class="btn btn-danger btn-sm">{{ $lomba->pivot->status }}</button>
+                                                    @elseif($lomba->pivot->status == 'juara')
+                                                        <button class="btn btn-success btn-sm">{{ $lomba->pivot->status }}
+                                                            <i class="fa fa-trophy ml-1"></i></button>
+                                                    @else
+                                                        <button
+                                                            class="btn btn-warning btn-sm">{{ $lomba->pivot->status }}</button>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -65,6 +66,35 @@
 
 
                                 </table>
+                            </div>
+
+                            <div class="card-body">
+                                @if ($sertifikats)
+                                    <table id="example" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Lomba</th>
+                                                <th>Nomor Sertifikat</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $sertifikats->lomba->nama_lomba ?? 'Lomba Tidak Ditemukan' }}</td>
+                                                <td>{{ $sertifikats->nomor_sertifikat ?? '-' }}</td>
+                                                <td>
+                                                    <a href="{{ route('peserta.download', $sertifikats->id) }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        Download
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <p class="text-muted">Belum ada sertifikat yang tersedia.</p>
+                                @endif
+
                             </div>
                             <!-- /.card-body -->
                         </div>
