@@ -9,10 +9,13 @@
                     <div class="card card-primary card-outline mt-5">
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}
+                            </div>
+                            <div class="alert alert-warning">
+
                                 <a href="{{ route('peserta.edit') }}">
                                     Klik Disini untuk ganti password
+                                </a>
                             </div>
-                            </a>
                         @endif
                         @if (session('berhasil'))
                             <div class="alert alert-success">{{ session('berhasil') }}</div>
@@ -30,43 +33,43 @@
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                     <b>NIK</b>
-                                    <a class="float-right">{{ $peserta->nik}}</a>
+                                    <a class="float-right">{{ $peserta->nik }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Nama</b>
-                                    <a class="float-right">{{ $peserta->nama}}</a>
+                                    <a class="float-right">{{ $peserta->nama }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Tanggal lahir</b>
-                                    <a class="float-right">{{ $peserta->lahir}}</a>
+                                    <a class="float-right">{{ $peserta->lahir }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Provinsi</b>
-                                    <a class="float-right">{{ $peserta->provinsi}}</a>
+                                    <a class="float-right">{{ $peserta->provinsi }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Kota</b>
-                                    <a class="float-right">{{ $peserta->kota}}</a>
+                                    <a class="float-right">{{ $peserta->kota }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Kecamatan</b>
-                                    <a class="float-right">{{ $peserta->kecamatan}}</a>
+                                    <a class="float-right">{{ $peserta->kecamatan }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Desa</b>
-                                    <a class="float-right">{{ $peserta->desa}}</a>
+                                    <a class="float-right">{{ $peserta->desa }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>RT/RW</b>
-                                    <a class="float-right">{{ $peserta->rt_rw}}</a>
+                                    <a class="float-right">{{ $peserta->rt_rw }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Alamat</b>
-                                    <a class="float-right">{{ $peserta->alamat}}</a>
+                                    <a class="float-right">{{ $peserta->alamat }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Kode pos</b>
-                                    <a class="float-right">{{ $peserta->kodepos}}</a>
+                                    <a class="float-right">{{ $peserta->kodepos }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Email</b>
@@ -90,7 +93,8 @@
                                 @endif --}}
                             </ul>
 
-                            <a href="{{ route('peserta.edit') }}" class="btn btn-primary btn-block"><b>Ubah Password</b></a>
+                            <a href="{{ route('peserta.edit') }}" class="btn btn-primary btn-block"><b>Ubah
+                                    Password</b></a>
                         </div>
                         <!-- /.card-body -->
                     </div>

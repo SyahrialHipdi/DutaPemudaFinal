@@ -10,6 +10,7 @@ use App\Models\LombaPeserta;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class LombaPesertaController extends Controller
@@ -28,6 +29,8 @@ class LombaPesertaController extends Controller
 
     public function submit(Request $request, $id)
     {
+
+
         $lomba = Lomba::findOrFail($id);
 
         // Cek
@@ -40,7 +43,7 @@ class LombaPesertaController extends Controller
             // User belum login, validasi semua field
             $validated = $request->validate([
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required|min:5',
+                // 'password' => 'required|min:5',
                 'nama' => 'required|string|max:255',
                 'nik' => 'required|string|max:20|unique:pesertas,nik',
                 'provinsi' => 'required',
@@ -55,11 +58,31 @@ class LombaPesertaController extends Controller
                 'bidang_pilihan_id' => 'nullable',
                 'lahir' => 'required',
             ]);
+            $tanggal_lengkap = $request->tgl_lahir_yyyy . '-' . $request->tgl_lahir_mm . '-' . $request->tgl_lahir_dd;
+            if (!checkdate((int)$request->tgl_lahir_mm, (int)$request->tgl_lahir_dd, (int)$request->tgl_lahir_yyyy)) {
+                return back()->withErrors(['tanggal' => 'Tanggal tidak valid.']);
+            }
+            $tglLahircek = Carbon::createFromFormat('Y-m-d', $tanggal_lengkap);
+
+            $batasUsiaMax = Carbon::now()->subYears(30);
+            $batasUsiaMin = Carbon::now()->subYears(17);
+
+            if ($tglLahircek < $batasUsiaMax) {
+                return back()->withErrors(['tanggal' => 'Usia maksimal adalah 30 tahun.']);
+            }
+
+            if ($tglLahircek > $batasUsiaMin) {
+                return back()->withErrors(['tanggal' => 'Usia minimal adalah 17 tahun.']);
+            }
+
+
+            $password = str_replace('-', '', $validated['lahir']); // 19990519
+            $hashedPassword = Hash::make($password);
 
             // Buat user
             $user = User::create([
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
+                'password' => $hashedPassword,
                 'role' => 'peserta',
             ]);
 
@@ -114,7 +137,7 @@ class LombaPesertaController extends Controller
             'bidang' => $bidangId,
             'proposal' => $validated['proposal'],
         ]);
-        return redirect()->route('peserta.index')->with('success', 'Berhasil daftar lomba.');
+        return redirect()->route('peserta.index')->with('success', "Berhasil Daftar, password Anda adalah {$password} (tanggal lahir) sialakn ganti password untuk keamanan");
     }
 
     public function data()

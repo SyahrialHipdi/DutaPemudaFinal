@@ -181,12 +181,12 @@
                                                     value="{{ old('email') }}" required>
                                                 <div class="invalid-feedback">Format email tidak valid.</div>
                                             </div>
-                                            <div class="col-md-6 mb-4">
+                                            {{-- <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Password <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="password" name="password" required>
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     @endguest
 
