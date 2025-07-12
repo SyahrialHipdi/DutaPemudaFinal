@@ -53,25 +53,9 @@ class PesertaController extends Controller
     public function progress(Request $request)
     {
         $user = Auth::user(); // user yang sedang login
-        $sertifikats = Sertifikat::where('user_id', Auth::user()->id)->first();
+        $sertifikats = Sertifikat::where('user_id', Auth::user()->id)->get();
         $lombas = $user->lombaDiikuti; // ambil relasi lomba dari user
 
         return view('peserta.progress', compact('lombas', 'sertifikats'));
     }
-
-    // public function download($id)
-    // {
-    //     // $sertifikat = Sertifikat::where('id', $id)
-    //     //     ->where('user_id', Auth::user()->id) // agar user hanya bisa unduh sertifikat miliknya
-    //     //     ->firstOrFail();
-
-    //     // $sertifikat = Sertifikat::where('user_id', $id)->get();
-    //     $sertifikat = Sertifikat::where('user_id', Auth::user()->id)->first();
-    //     // dd($sertifikat->file_path);
-    //     if (!$sertifikat) {
-    //         return abort(404, 'Sertifikat tidak ditemukan atau bukan milikmu.');
-    //     }
-
-    //     return response()->download(storage_path('app/public/' . $sertifikat->file_path));
-    // }
 }

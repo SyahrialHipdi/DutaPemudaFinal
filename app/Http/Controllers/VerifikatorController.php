@@ -48,8 +48,8 @@ class VerifikatorController extends Controller
 
     public function detail($id)
     {
-        $peserta = Peserta::where('Id_user', $id)->firstOrFail();;
-        return view('verifikator.show', compact('peserta'));
+        $detail = LombaPeserta::with('peserta')->find($id);;
+        return view('verifikator.show', compact('detail'));
         // dd($peserta);
     }
 }

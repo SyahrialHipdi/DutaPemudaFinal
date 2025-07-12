@@ -79,16 +79,19 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>{{ $sertifikats->lomba->nama_lomba ?? 'Lomba Tidak Ditemukan' }}</td>
-                                                <td>{{ $sertifikats->nomor_sertifikat ?? '-' }}</td>
-                                                <td>
-                                                    <a href="{{ route('peserta.download', $sertifikats->id) }}"
-                                                        class="btn btn-sm btn-primary">
-                                                        Download
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            @foreach ($sertifikats as $s)
+                                                <tr>
+                                                    <td>{{ $s->lomba->nama_lomba ?? 'Lomba Tidak Ditemukan' }}
+                                                    </td>
+                                                    <td>{{ $s->nomor_sertifikat ?? '-' }}</td>
+                                                    <td>
+                                                        <a href="{{ route('peserta.download', $s->id) }}"
+                                                            class="btn btn-sm btn-primary">
+                                                            Download
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 @else

@@ -40,12 +40,12 @@ class UserSeeder extends Seeder
             'password' => '12345',
         ]);
 
-        User::create([
-            // 'name' => 'Juri',
-            'email' => 'jurippan@example.com',
-            'role' => 'juri',
-            'password' => '12345',
-        ]);
+        // User::create([
+        //     // 'name' => 'Juri',
+        //     'email' => 'jurippan@example.com',
+        //     'role' => 'juri',
+        //     'password' => '12345',
+        // ]);
 
 
         // User::create([

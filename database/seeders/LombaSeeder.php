@@ -25,7 +25,7 @@ class LombaSeeder extends Seeder
             'nama_lomba' => 'PPAP 2025',
             'tahun' => 2025,
             'deskripsi' => 'Pertukaran Pelajar Antar Provinsi 2025',
-            'role' => 'ppan',
+            'role' => 'ppap',
             // 'syarat_lomba' => ['Nama:text', 'lahir:date','ktp:file'],
             'komponen_penilaian' => ['proposal', 'presentasi', 'jawaban'],
         ]);

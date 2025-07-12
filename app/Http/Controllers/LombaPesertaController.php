@@ -29,21 +29,14 @@ class LombaPesertaController extends Controller
 
     public function submit(Request $request, $id)
     {
-
-
         $lomba = Lomba::findOrFail($id);
-
-        // Cek
         $lombaId = $lomba->id;
-        $user = Auth::id();
-        // $data_isian = [];
-
+        $isNewUser = false; // Tambahkan flag ini
 
         if (!Auth::check()) {
-            // User belum login, validasi semua field
+            // Validasi pendaftaran user baru
             $validated = $request->validate([
                 'email' => 'required|email|unique:users,email',
-                // 'password' => 'required|min:5',
                 'nama' => 'required|string|max:255',
                 'nik' => 'required|string|max:20|unique:pesertas,nik',
                 'provinsi' => 'required',
@@ -53,17 +46,18 @@ class LombaPesertaController extends Controller
                 'rt_rw' => 'required',
                 'alamat' => 'required|string|max:255',
                 'kodepos' => 'required',
-                'proposal' => 'nullable',
                 'ktp' => 'required',
+                'proposal' => 'nullable',
                 'bidang_pilihan_id' => 'nullable',
-                // 'lahir' => 'required',
             ]);
+
             $tanggal_lengkap = $request->tgl_lahir_yyyy . '-' . $request->tgl_lahir_mm . '-' . $request->tgl_lahir_dd;
+
             if (!checkdate((int)$request->tgl_lahir_mm, (int)$request->tgl_lahir_dd, (int)$request->tgl_lahir_yyyy)) {
                 return back()->withErrors(['tanggal' => 'Tanggal tidak valid.']);
             }
-            $tglLahircek = Carbon::createFromFormat('Y-m-d', $tanggal_lengkap);
 
+            $tglLahircek = Carbon::createFromFormat('Y-m-d', $tanggal_lengkap);
             $batasUsiaMax = Carbon::now()->subYears(30);
             $batasUsiaMin = Carbon::now()->subYears(17);
 
@@ -75,18 +69,19 @@ class LombaPesertaController extends Controller
                 return back()->withErrors(['tanggal' => 'Usia minimal adalah 17 tahun.']);
             }
 
-
-            $password = str_replace('-', '', $tanggal_lengkap); // 19990519
+            $password = str_replace('-', '', $tanggal_lengkap);
             $hashedPassword = Hash::make($password);
 
-            // Buat user
+            // Tandai bahwa user baru
+            $isNewUser = true;
+
+            // Buat user & peserta
             $user = User::create([
                 'email' => $validated['email'],
                 'password' => $hashedPassword,
                 'role' => 'peserta',
             ]);
 
-            // Simpan data peserta
             Peserta::create([
                 'Id_user' => $user->id,
                 'nama' => $validated['nama'],
@@ -111,8 +106,9 @@ class LombaPesertaController extends Controller
 
             $user = Auth::user();
         }
-        $bidangId = null;
+
         $bidangId = $validated['bidang_pilihan_id'] ?? null;
+
         $alreadyExists = LombaPeserta::where('user_id', $user->id)
             ->where('lomba_id', $lombaId)
             ->exists();
@@ -122,14 +118,24 @@ class LombaPesertaController extends Controller
                 'error' => 'Kamu sudah mendaftar ke lomba ini sebelumnya.'
             ])->withInput();
         }
+
         LombaPeserta::create([
             'user_id' => $user->id,
             'lomba_id' => $lombaId,
             'bidang' => $bidangId,
-            'proposal' => $validated['proposal'],
+            'proposal' => $validated['proposal'] ?? null,
         ]);
-        return redirect()->route('peserta.index')->with('success', "Berhasil Daftar, password Anda adalah {$password} (tanggal lahir) sialakn ganti password untuk keamanan");
+
+        if ($isNewUser) {
+            return redirect()->route('peserta.index')->with(
+                'success',
+                "Berhasil Daftar, password Anda adalah {$password} (tanggal lahir). Silakan ganti password untuk keamanan."
+            );
+        } else {
+            return redirect()->route('peserta.index');
+        }
     }
+
 
     public function data()
     {

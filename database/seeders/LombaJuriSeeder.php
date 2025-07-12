@@ -28,10 +28,5 @@ class LombaJuriSeeder extends Seeder
         if ($juriB && $lombaY) {
             $juriB->lombaDijuri()->attach($lombaY->id);
         }
-
-        // Tambahan: juri B juga menilai lomba X
-        // if ($juriB && $lombaX) {
-        //     $juriB->lombas()->attach($lombaX->id);
-        // }
     }
 }
