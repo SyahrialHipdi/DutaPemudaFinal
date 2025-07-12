@@ -45,7 +45,7 @@ class User extends Authenticatable
 
     public function lombaDiikuti()
     {
-        return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('status','alasan');
+        return $this->belongsToMany(Lomba::class, 'lomba_pesertas')->withPivot('status', 'alasan', 'bidang');
     }
 
     public function penilaianDiberikan()
@@ -57,63 +57,66 @@ class User extends Authenticatable
 
 
 
-
+    public function peserta()
+    {
+        return $this->hasOne(Peserta::class, 'Id_user');
+    }
 
 
     public function pendaftaranLomba()
-{
-    return $this->hasMany(PendaftaranLomba::class);
-}
+    {
+        return $this->hasMany(PendaftaranLomba::class);
+    }
 
-    public function isAdmin():bool
+    public function isAdmin(): bool
     {
         return $this->role === 'admin';
     }
-    public function isJuri():bool
+    public function isJuri(): bool
     {
         return $this->role === 'juri';
     }
-    public function isVerifikator():bool
+    public function isVerifikator(): bool
     {
         return $this->role === 'verifikator';
     }
-    public function isPeserta():bool
+    public function isPeserta(): bool
     {
         return $this->role === 'peserta';
     }
 
-//         public function verifier()
-// {
-//     return $this->belongsTo(Admin::class, 'verified_by');
-// }
+    //         public function verifier()
+    // {
+    //     return $this->belongsTo(Admin::class, 'verified_by');
+    // }
 
-// public function getProvinsiNamaAttribute()
-// {
-//     return TrefRegion::where('code', $this->provinsi)->value('name');
-// }
+    // public function getProvinsiNamaAttribute()
+    // {
+    //     return TrefRegion::where('code', $this->provinsi)->value('name');
+    // }
 
-//     public function provinsiWilayah()
-// {
-//     return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
-// }
+    //     public function provinsiWilayah()
+    // {
+    //     return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
+    // }
 
-// public function kotaWilayah()
-// {
-//     return $this->belongsTo(TrefRegion::class, 'kota', 'code');
-// }
+    // public function kotaWilayah()
+    // {
+    //     return $this->belongsTo(TrefRegion::class, 'kota', 'code');
+    // }
 
-// public function kecamatanWilayah()
-// {
-//     return $this->belongsTo(TrefRegion::class, 'kecamatan', 'code');
-// }
-// public function desaWilayah()
-// {
-//     return $this->belongsTo(TrefRegion::class, 'desa', 'code');
-// }
+    // public function kecamatanWilayah()
+    // {
+    //     return $this->belongsTo(TrefRegion::class, 'kecamatan', 'code');
+    // }
+    // public function desaWilayah()
+    // {
+    //     return $this->belongsTo(TrefRegion::class, 'desa', 'code');
+    // }
 
-// public function pendaftaranLomba(): HasMany
-//     {
-//         return $this->hasMany(PendaftaranLomba::class);
-//     }
+    // public function pendaftaranLomba(): HasMany
+    //     {
+    //         return $this->hasMany(PendaftaranLomba::class);
+    //     }
 
 }

@@ -14,11 +14,16 @@
     <div class="col-md-8">
         <div class="form-group">
             <label for="nama_lomba">Kategori Lomba</label>
-                <select class="form-control w-100" id="nnama_lomba" name="nama_lomba" required>
-                                        <option value="">Pilih Lomba</option>
-                                        <option value="Pemuda pelopor">Pemuda Pelopor</option>
-                                        <option value="PPAP">PPAP/PPAN</option>
-                                    </select>
+            <select class="form-control w-100" id="nama_lomba" name="nama_lomba" required>
+                <option value="">Pilih Lomba</option>
+                <option value="Pemuda pelopor"
+                    {{ old('nama_lomba', $lomba->nama_lomba ?? '') == 'Pemuda pelopor' ? 'selected' : '' }}>
+                    Pemuda Pelopor
+                </option>
+                <option value="PPAP" {{ old('nama_lomba', $lomba->nama_lomba ?? '') == 'PPAP' ? 'selected' : '' }}>
+                    PPAP/PPAN
+                </option>
+            </select>
         </div>
     </div>
     <div class="col-md-4">
@@ -133,7 +138,6 @@
 
 @push('scripts')
     <script>
-
         // Menggunakan JQuery untuk komponen penilaian agar lebih ringkas
         $(document).ready(function() {
             $('.btn-add-komponen').on('click', function() {
