@@ -25,28 +25,30 @@
                                 <table id="example" class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>User ID</th>
-                                            <th>Lomba ID</th>
-                                            <th>Status</th>
-                                            <th>Alasan</th>
+                                            <th>NIK</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>Email</th>
+                                            <th>Lomba</th>
                                             <th>Bidang</th>
+                                            <th>Status</th>
+                                            <th>Alasan (Jika ditolak)</th>
                                             <th>Aksi</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($peserta as $lomba)
+                                        @foreach ($data as $d)
                                             <tr>
-                                                <td>{{ $lomba->id }}</td>
-                                                <td>{{ $lomba->user_id }}</td>
-                                                <td>{{ $lomba->lomba_id }}</td>
-                                                <td>{{ $lomba->status }}</td>
-                                                <td>{{ $lomba->alasan }}</td>
-                                                <td>{{ $lomba->bidang }}</td>
+                                                <td>{{ $d->peserta->nik }}</td>
+                                                <td>{{ $d->peserta->nama }}</td>
+                                                <td>{{ $d->user->email }}</td>
+                                                <td>{{ $d->lomba->nama_lomba }}</td>
+                                                <td>{{ $d->bidang }}</td>
+                                                <td>{{ $d->status }}</td>
+                                                <td>{{ $d->alasan }}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.lomba_pendaftar.data_detail', $lomba->id) }}">
-                                                        <button class="btn btn-sm btn-info">Lihat Detail</button>
+                                                    <a href="{{ route('admin.lomba_pendaftar.edit', $d->id) }}">
+                                                        <button class="btn btn-sm btn-info">Lihat Detail/Edit</button>
                                                     </a>
                                                 </td>
                                             </tr>

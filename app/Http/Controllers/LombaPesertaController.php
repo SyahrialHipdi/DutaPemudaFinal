@@ -50,6 +50,7 @@ class LombaPesertaController extends Controller
                 'rt_rw' => 'required',
                 'alamat' => 'required|string|max:255',
                 'kodepos' => 'required',
+                'proposal' => 'nullable',
                 'ktp' => 'required',
                 'bidang_pilihan_id' => 'nullable',
                 'lahir' => 'required',
@@ -81,6 +82,7 @@ class LombaPesertaController extends Controller
             Auth::login($user);
         } else {
             $validated = $request->validate([
+                'proposal' => 'nullable',
                 'bidang_pilihan_id' => 'nullable',
             ]);
 
@@ -88,78 +90,53 @@ class LombaPesertaController extends Controller
         }
         $bidangId = null;
         $bidangId = $validated['bidang_pilihan_id'] ?? null;
+
+        // $sudahTerdaftar = LombaPeserta::where('user_id', $user->id)
+        //     ->where('lomba_id', $lombaId)
+        //     ->exists();
+
+        // if ($sudahTerdaftar) {
+        //     return back()->withErrors(['error' => 'Kamu sudah mendaftar ke lomba ini.'])->withInput();
+        // }
+
+        $alreadyExists = LombaPeserta::where('user_id', $user->id)
+            ->where('lomba_id', $lombaId)
+            ->exists();
+
+        if ($alreadyExists) {
+            return back()->withErrors([
+                'error' => 'Kamu sudah mendaftar ke lomba ini sebelumnya.'
+            ])->withInput();
+        }
         LombaPeserta::create([
             'user_id' => $user->id,
             'lomba_id' => $lombaId,
             'bidang' => $bidangId,
+            'proposal' => $validated['proposal'],
         ]);
         return redirect()->route('peserta.index')->with('success', 'Berhasil daftar lomba.');
-    }
-
-    public function indexx()
-    {
-        $lombas = Lomba::withCount('users')->get();
-        return view('admin.lomba_pendaftar.index', compact('lombas'));
-    }
-
-    public function show($id)
-    {
-        $lomba = Lomba::with('users')->findOrFail($id);
-        return view('admin.lomba_pendaftar.show', compact('lomba'));
-    }
-
-    public function detail($id)
-    {
-
-        $user = User::with(['peserta', 'lombaDiikuti'])->findOrFail($id);
-
-        $peserta = $user->peserta;
-
-        if (!$peserta) {
-            return back()->with('error', 'Data peserta tidak ditemukan.');
-        }
-        return view('admin.lomba_pendaftar.showdetail', compact('user', 'peserta'));
-
-        // Ambil semua data lomba + data tambahan dari json
-        // $pendaftarans = $peserta->lombaPeserta->map(function ($item) {
-        //     $item->data_json_parsed = json_decode($item->data_json, true);
-        //     $item->syarat_fields = json_decode($item->lomba->syarat_json, true);
-        //     return $item;
-        // });
-
-        // @dd($user);
-        // $peserta = LombaPeserta::with(['peserta.user', 'lomba'])->findOrFail($id);
-
-        // $dataTambahan = json_decode($lombaPeserta->data_json, true);
-        // $fields = json_decode($lombaPeserta->lomba->syarat_json, true);
-
-        // return view('admin.lomba_peserta.show', compact('lombaPeserta', 'dataTambahan', 'fields'));
-        // $pendaftaran = Pendaftaran::with(['lomba', 'peserta'])->findOrFail($id);
-        // $peserta = Peserta::where('Id_user', $id)->firstOrFail();
-        // return view('admin.lomba_pendaftar.showdetail', compact('peserta'));
-        // dd($peserta);
     }
 
     public function data()
     {
         // Menampilkan semua peserta yang sudah mendaftar
-        $peserta = LombaPeserta::with(['user', 'lomba'])->get();
-        return view('admin.lomba_pendaftar.data', compact('peserta'));
+        $data = LombaPeserta::with(['user', 'lomba', 'peserta'])->get();
+        return view('admin.lomba_pendaftar.data', compact('data'));
     }
 
-    public function datadetail($id)
+    public function detail($id)
     {
         $details = LombaPeserta::with(['user', 'lomba', 'peserta'])->find($id);
-        return view('admin.lomba_pendaftar.data_detail', compact('details'));
+        return view('admin.lomba_pendaftar.detail', compact('details'));
     }
 
-    public function editdatadetail($id)
+    public function edit($id)
     {
         $details = LombaPeserta::with(['user', 'lomba', 'peserta'])->find($id);
-        return view('admin.lomba_pendaftar.edit_data_detail', compact('details'));
+        return view('admin.lomba_pendaftar.edit', compact('details'));
     }
 
-    public function updatedatadetail(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'status' => 'nullable|string',

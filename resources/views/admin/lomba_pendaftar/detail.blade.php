@@ -45,8 +45,7 @@
                                             <td>{{ $details->bidang }}</td>
                                             {{-- <td>{{ $details->user->email }}</td> --}}
                                             <td>
-                                                <a
-                                                    href="{{ route('admin.lomba_pendaftar.edit_data_detail', $details->id) }}">
+                                                <a href="{{ route('admin.lomba_pendaftar.edit', $details->id) }}">
                                                     <button class="btn btn-sm btn-info">Lihat Detail</button>
                                                 </a>
                                             </td>

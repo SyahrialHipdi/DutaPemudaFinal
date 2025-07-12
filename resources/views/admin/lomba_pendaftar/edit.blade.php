@@ -11,7 +11,7 @@
 
         <section class="content">
             <div class="container-fluid">
-                <form method="POST" action="{{ route('admin.lomba_pendaftar.update_data_detail', $details->id) }}">
+                <form method="POST" action="{{ route('admin.lomba_pendaftar.update', $details->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="card">
@@ -86,12 +86,33 @@
 
                             <div class="form-group">
                                 <label>Bidang</label>
-                                <input type="text" class="form-control" name="bidang" value="{{ $details->bidang }}">
+                                <select name="bidang" class="form-control">
+                                    @php
+                                        $bidangOptions = [
+                                            'pendidikan',
+                                            'Pengelolaan sumber daya alam',
+                                            'lingkungan dan pariwisata',
+                                            'pangan',
+                                            'inovasi teknolgi',
+                                            'sosial',
+                                            'agama',
+                                            'budaya',
+                                        ];
+                                    @endphp
+
+                                    @foreach ($bidangOptions as $option)
+                                        <option value="{{ $option }}"
+                                            {{ $details->bidang === $option ? 'selected' : '' }}>
+                                            {{ ucwords($option) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
                             </div>
 
                             <div class="form-group mt-4">
                                 <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                <a href="{{ route('admin.lomba_pendaftar.data_detail', $details->id) }}"
+                                <a href="{{ route('admin.lomba_pendaftar.data', $details->id) }}"
                                     class="btn btn-secondary">Kembali</a>
                             </div>
 

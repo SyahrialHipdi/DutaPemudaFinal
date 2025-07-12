@@ -85,8 +85,6 @@
 
                                     {{-- Field Email & Password (selalu di atas dan berdampingan) --}}
                                     @guest
-
-
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label fw-bold">NIK</label>
@@ -173,37 +171,6 @@
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
                                             </div>
                                         </div>
-                                        @if ($lomba->role == 'pemuda pelopor')
-                                            <div class="row">
-                                                <div class="col-12 mb-4">
-                                                    <label class="form-label fw-bold">Bidang Kepeloporan<span
-                                                            class="text-danger">*</span></label>
-                                                    <select id="bidang" name="bidang_pilihan_id"
-                                                        class="form-control nice-select wide">
-                                                        <option value="">-- Pilih Bidang --
-                                                        </option>
-                                                        <option value="">pendidikan
-                                                        </option>
-                                                        <option value="">Pengelolaan sumber daya alam
-                                                        </option>
-                                                        <option value="">lingkungan dan pariwisata
-                                                        </option>
-                                                        <option value="">pangan
-                                                        </option>
-                                                        <option value="">inovasi teknolgi
-                                                        </option>
-                                                        <option value="">sosial
-                                                        </option>
-                                                        <option value="">agama
-                                                        </option>
-                                                        <option value="">budaya
-                                                        </option>
-                                                    </select>
-                                                    <div class="invalid-feedback">BIdang wajib diisi.</div>
-
-                                                </div>
-                                            </div>
-                                        @endif
 
 
                                         <div class="row">
@@ -224,6 +191,49 @@
                                     @endguest
 
                                     {{-- Bagian persetujuan dan tombol submit --}}
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label fw-bold">Proposal <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" name="proposal"
+                                                value="{{ old('proposal') }}" required>
+                                            <div class="invalid-feedback">Proposal tidak valid.</div>
+                                        </div>
+                                    </div>
+                                    @if ($lomba->role == 'pemuda pelopor')
+                                        <div class="row">
+                                            <div class="col-12 mb-4">
+                                                <label class="form-label fw-bold">Bidang Kepeloporan<span
+                                                        class="text-danger">*</span></label>
+                                                <select id="bidang" name="bidang_pilihan_id"
+                                                    class="form-control nice-select wide">
+                                                    <option value="">-- Pilih Bidang --
+                                                    </option>
+                                                    <option value="pendidikan">pendidikan
+                                                    </option>
+                                                    <option value="Pengelolaan sumber daya alam">Pengelolaan sumber daya
+                                                        alam
+                                                    </option>
+                                                    <option value="lingkungan dan pariwisata">lingkungan dan pariwisata
+                                                    </option>
+                                                    <option value="pangan">pangan
+                                                    </option>
+                                                    <option value="inovasi teknolgi">inovasi teknolgi
+                                                    </option>
+                                                    <option value="sosial">sosial
+                                                    </option>
+                                                    <option value="agama">agama
+                                                    </option>
+                                                    <option value="budaya">budaya
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Bidang wajib diisi.</div>
+
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="form-check mb-4 text-center">
                                         <input class="form-check-input" type="checkbox" id="invalidCheck" required>
                                         <label class="form-check-label" for="invalidCheck">Saya menyatakan semua data yang

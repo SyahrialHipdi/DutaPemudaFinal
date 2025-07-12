@@ -21,31 +21,31 @@ class UserSeeder extends Seeder
             'password' => '12345',
         ]);
 
-        // User::create([
-        //     // 'name' => 'Verifikator',
-        //     'email' => 'verifikator@example.com',
-        //     'role' => 'verifikator',
-        //     'password' => '12345',
-        // ]);
+        User::create([
+            // 'name' => 'Verifikator',
+            'email' => 'verifikator@example.com',
+            'role' => 'verifikator',
+            'password' => '12345',
+        ]);
 
-        // User::create([
-        //     'email' => 'juripp1@example.com',
-        //     'role' => 'juri',
-        //     'password' => '12345',
-        // ]);
+        User::create([
+            'email' => 'juripp1@example.com',
+            'role' => 'juri',
+            'password' => '12345',
+        ]);
 
-        // User::create([
-        //     'email' => 'juripp2@example.com',
-        //     'role' => 'juri',
-        //     'password' => '12345',
-        // ]);
+        User::create([
+            'email' => 'juripp2@example.com',
+            'role' => 'juri',
+            'password' => '12345',
+        ]);
 
-        // User::create([
-        //     // 'name' => 'Juri',
-        //     'email' => 'jurippan@example.com',
-        //     'role' => 'juri',
-        //     'password' => '12345',
-        // ]);
+        User::create([
+            // 'name' => 'Juri',
+            'email' => 'jurippan@example.com',
+            'role' => 'juri',
+            'password' => '12345',
+        ]);
 
 
         // User::create([

@@ -127,7 +127,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.lomba_pendaftar.indexx') }}"
+                            <a href="{{ route('admin.lomba_pendaftar.data') }}"
                                 class="nav-link {{ request()->routeIs('admin.lomba_pendaftar.*') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-address-book"></i>
                                 <p>Data Pendaftar</p>
@@ -160,7 +160,7 @@
         <aside class="control-sidebar control-sidebar-dark">
         </aside>
     </div>
-    
+
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
