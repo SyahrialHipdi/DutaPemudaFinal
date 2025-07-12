@@ -21,6 +21,14 @@ Route::get('/daftarlomba', [LombaPesertaController::class, 'index'])->name('lomb
 Route::get('/daftarlomba/{id}', [LombaPesertaController::class, 'form'])->name('lomba.form');
 Route::post('/daftarlomba/{id}', [LombaPesertaController::class, 'submit'])->name('lomba.submit');
 
+Route::get('/faq', function () {
+    return view('faq');
+});
+
+Route::get('/berita', function () {
+    return view('berita');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
