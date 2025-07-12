@@ -42,6 +42,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::put('/lomba/{id}', [LombaController::class, 'update'])->name('admin.lomba.update');
     Route::delete('/lomba/{id}', [LombaController::class, 'destroy'])->name('admin.lomba.destroy');
 
+    Route::get('/lomba_pendaftar/data', [LombaPesertaController::class, 'data'])->name('admin.lomba_pendaftar.data');
+    Route::get('/lomba_pendaftar/data/{id}/detail', [LombaPesertaController::class, 'datadetail'])->name('admin.lomba_pendaftar.data_detail');
+    Route::get('/lomba_pendaftar/data/{id}/edit', [LombaPesertaController::class, 'editdatadetail'])->name('admin.lomba_pendaftar.edit_data_detail');
+    Route::put('/lomba_pendaftar/data/{id}', [LombaPesertaController::class, 'updatedatadetail'])->name('admin.lomba_pendaftar.update_data_detail');
+
     Route::get('/lomba_pendaftar', [LombaPesertaController::class, 'indexx'])->name('admin.lomba_pendaftar.indexx');
     Route::get('/lomba_pendaftar/{id}', [LombaPesertaController::class, 'show'])->name('admin.lomba_pendaftar.show');
     Route::get('/lomba_pendaftar/{id}/detail', [LombaPesertaController::class, 'detail'])->name('admin.lomba_pendaftar.showdetail');
