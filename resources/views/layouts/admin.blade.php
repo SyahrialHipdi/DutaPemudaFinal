@@ -140,6 +140,13 @@
                                 <p>Ranking Lomba</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.berita.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-address-book"></i>
+                                <p>Kelola Berita</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

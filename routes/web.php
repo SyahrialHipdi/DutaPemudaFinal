@@ -9,8 +9,10 @@ use App\Http\Controllers\LombaController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LombaPesertaController;
 use App\Http\Controllers\SertifikatController;
+use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 
 
 Route::get('/', [AuthController::class, 'index'])->name('home');
@@ -60,6 +62,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     Route::get('/ranking', [AdminController::class, 'daftarLomba'])->name('admin.ranking.index');
     Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
+
+    Route::resource('/berita', BeritaController::class);
 });
 
 Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {

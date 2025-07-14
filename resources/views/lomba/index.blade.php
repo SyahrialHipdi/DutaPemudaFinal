@@ -18,7 +18,7 @@
                         <div class="mx-lg-5 mx-md-3 mx-1">
 
                             {{-- <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                    <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                    <img src="img/favicon.png" alt="" width="52px" class="mr-3">
                                     <h6>Pemuda Pelopor (PP)</h6>
                                 </div> --}}
                             @foreach ($lombas as $lomba)
@@ -28,7 +28,7 @@
                 {{ $lomba->deskripsi }}<br>
             </li> --}}
                                     <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                        <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                        <img src="img/favicon.png" alt="" width="52px" class="mr-3">
                                         <h6>{{ $lomba->nama_lomba }} ({{ $lomba->tahun }})</h6>
                                     </div>
                                 </a>
@@ -45,14 +45,14 @@
 
                             <a href="{{ route('auth.user.registerPPAP') }}">
                                 <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                    <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                    <img src="img/favicon.png" alt="" width="52px" class="mr-3">
                                     <h6>Pertukaran Pemuda Antar Provinsi (PPAP)</h6>
                                 </div>
                             </a>
 
                             <a href="{{ route('auth.user.registerPPAP') }}">
                                 <div class="program-item mb-5 d-flex flex-row align-items-center">
-                                    <img src="img/logo_ppan.png" alt="" width="52px" class="mr-3">
+                                    <img src="img/favicon.png" alt="" width="52px" class="mr-3">
                                     <h6>Pertukaran Pemuda Antar Negara (PPAN)</h6>
                                 </div>
                             </a> --}}

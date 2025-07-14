@@ -45,4 +45,6 @@ public function isJuri(): bool
 {
     return $this->role === 'juri';
 }
+
+
 }

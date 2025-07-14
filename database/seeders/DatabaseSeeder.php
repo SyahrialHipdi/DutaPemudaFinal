@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
         $this->call([
-            // LombaSeeder::class,
+            LombaSeeder::class,
             UserSeeder::class,
-            // LombaJuriSeeder::class,
-            // LombaPesertaSeeder::class,
+            LombaJuriSeeder::class,
+            LombaPesertaSeeder::class,
         ]);
     }
 }

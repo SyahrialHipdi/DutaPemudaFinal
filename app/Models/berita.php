@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class berita extends Model
 {
-    protected $table = 'berita';
+    use HasFactory;
+    protected $table = 'beritas';
 
     protected $fillable = [
         'judul',
         'isi',
         'gambar',
-        'tanggal',
-        'id_kategori'
+        'user_id',
         ];
+    public function user() // Nama metode biasanya tunggal (singular)
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
 }
