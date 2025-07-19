@@ -86,19 +86,18 @@
                                     {{-- Field Email & Password (selalu di atas dan berdampingan) --}}
                                     @guest
                                         <div class="row">
-                                            <div class="col-md-6 mb-6">
+                                            <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">NIK</label>
                                                 <input class="form-control" type="nik" name="nik" required>
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
                                             </div>
-                                            <div class="col-md-6 mb-6">
+                                            <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Nama Lengkap</label>
                                                 <input class="form-control" type="nama" name="nama" required>
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
                                             </div>
                                         </div>
                                         <div class="row">
-
                                             <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Provinsi</label>
                                                 <select id="provinsi" name="provinsi" class="form-control nice-select wide"
@@ -172,7 +171,7 @@
                                                     <div class="flex-fill mr-3">
                                                         <select class="form-control w-100" id="tgl_lahir_dd"
                                                             name="tgl_lahir_dd" required>
-                                                            <option value="">Pilih Tanggal</option>
+                                                            <option value="">dd</option>
                                                             @for ($i = 1; $i <= 31; $i++)
                                                                 <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">
                                                                     {{ $i }}</option>
@@ -201,7 +200,7 @@
                                                     <div class="flex-fill mr-3">
                                                         <select class="form-control w-100" id="tgl_lahir_mm"
                                                             name="tgl_lahir_mm" required>
-                                                            <option value="">Pilih Bulan</option>
+                                                            <option value="">mm</option>
                                                             @foreach ($bulanIndonesia as $angka => $nama)
                                                                 <option value="{{ $angka }}">{{ $nama }}
                                                                 </option>
@@ -213,7 +212,7 @@
                                                     <div class="flex-fill mr-3">
                                                         <select class="form-control w-100" id="tgl_lahir_dd"
                                                             name="tgl_lahir_yyyy" required>
-                                                            <option value="">Pilih Tahun</option>
+                                                            <option value="">yyyy</option>
                                                             @for ($i = 1990; $i <= date('Y'); $i++)
                                                                 <option value="{{ $i }}">{{ $i }}
                                                                 </option>
@@ -240,6 +239,13 @@
                                                     value="{{ old('email') }}" required>
                                                 <div class="invalid-feedback">Format email tidak valid.</div>
                                             </div>
+                                            <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Proposal <span
+                                                        class="text-danger">*</span></label>
+                                                <input class="form-control" type="text" name="proposal"
+                                                    value="{{ old('proposal') }}" required>
+                                                <div class="invalid-feedback">Proposal tidak valid.</div>
+                                            </div>
                                             {{-- <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Password <span
                                                         class="text-danger">*</span></label>
@@ -251,7 +257,7 @@
 
                                     {{-- Bagian persetujuan dan tombol submit --}}
 
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-md-6 mb-4">
                                             <label class="form-label fw-bold">Proposal <span
                                                     class="text-danger">*</span></label>
@@ -259,7 +265,7 @@
                                                 value="{{ old('proposal') }}" required>
                                             <div class="invalid-feedback">Proposal tidak valid.</div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     @if ($lomba->role == 'pemuda pelopor')
                                         <div class="row">
                                             <div class="col-12 mb-4">

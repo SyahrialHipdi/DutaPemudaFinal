@@ -33,7 +33,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
             margin: 0px;
             padding: 0px;
         }
@@ -70,15 +69,6 @@
             text-align: center;
         }
 
-        .header h1 {
-            font-family: serif;
-            font-size: 72px;
-            font-weight: 700;
-            color: #1a365d;
-            letter-spacing: 8px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
         .header h3 {
             font-size: 15px;
             margin-top: -10px;
@@ -86,13 +76,6 @@
             color: #1a365d;
             letter-spacing: 1px;
             /* margin-bottom: 20px; */
-        }
-
-        .given-to {
-            font-size: 20px;
-            color: #2d3748;
-            font-weight: 400;
-            margin-bottom: 40px;
         }
 
         /* Name Section */
@@ -154,50 +137,6 @@
             font-size: 18px;
             color: #2d3748;
             line-height: 1.8;
-        }
-
-        /* Signature Section */
-        .signatures {
-            position: absolute;
-            bottom: 100px;
-            left: 0;
-            right: 0;
-            z-index: 3;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 200px;
-        }
-
-        .signature-box {
-            text-align: center;
-            width: 200px;
-            height: 150px;
-        }
-
-        .signature-line {
-            width: 100%;
-            height: 70px;
-            border-bottom: 2px solid #2d3748;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 5px;
-        }
-
-        .signature-text {
-            font-style: italic;
-            margin-top: 30px;
-            font-size: 16px;
-            color: #1a1a1a;
-        }
-
-        .signature-title {
-            font-size: 14px;
-            color: #4a5568;
-            font-weight: 500;
-            margin-top: 5px;
-            font-weight: bold;
         }
     </style>
 </head>
