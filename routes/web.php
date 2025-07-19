@@ -10,6 +10,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LombaPesertaController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\KategoriController; // Tambahkan di atas
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,9 +28,8 @@ Route::get('/faq', function () {
     return view('faq');
 });
 
-Route::get('/berita', function () {
-    return view('berita');
-});
+Route::get('/berita', [BeritaController::class, 'showPublic'])->name('berita.public.index');
+Route::get('/berita/{id}', [BeritaController::class, 'showDetail'])->name('berita.detail');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -60,6 +60,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
 
     Route::resource('/berita', BeritaController::class)->names('admin.berita');
+    Route::resource('/kategori', KategoriController::class)->names('admin.kategori');
+
+
+
+
 });
 
 Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {

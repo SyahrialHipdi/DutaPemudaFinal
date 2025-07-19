@@ -4,56 +4,92 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/berita.css') }}">
+    <style>
+        /* CSS untuk Hero Section Dinamis */
+        .hero-section {
+            position: relative;
+            padding: 8rem 0;
+            background-size: cover;
+            background-position: center center;
+            color: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
 
-    <!-- Hero -->
-    <section class="py-5 text-center text-black bg-light mb-4">
-        <div class="container">
-            <h1 class="display-5 fw-bold mb-3">Informasi Seputar Duta Pemuda Tangsel</h1>
-            <p class="lead mb-0">Duta Pelajar Hadirkan Kisah Inspiratif dari Program Pertukaran Pelajar Terkini!</p>
-        </div>
-    </section>
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            /* Gradient overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    <!-- Highlight Berita -->
-    <section class="container mb-5">
-        <div class="row g-4 align-items-center">
-            <div class="col-md-6">
-                <img src="{{ asset('img/57pem.webp') }}" alt="Jumbo" class="img-fluid rounded shadow">
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+
+    <!-- Hero Dinamis -->
+    @if($highlightBerita)
+        <section class="container my-4">
+            <div class="hero-section text-center"
+                style="background-image: url('{{ asset('img/berita/' . $highlightBerita->gambar) }}');">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1 class="display-5 fw-bold mb-3">{{ $highlightBerita->judul }}</h1>
+                        <p class="lead mb-4 col-md-8 mx-auto">{{ Str::limit(strip_tags($highlightBerita->isi), 120, '...') }}
+                        </p>
+                        {{-- Link diperbarui --}}
+                        <a href="{{ route('berita.detail', $highlightBerita->id) }}" class="btn btn-primary btn-lg">Baca
+                            Selengkapnya</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6">
-                <h2 class="mb-3">57 pemuda Tangerang ikuti seleksi pertukaran pemuda ke tiga negara</h2>
-                <p class="mb-3">Tangerang (ANTARA) - Sebanyak 57 pemuda dari berbagai perguruan tinggi mengikuti Seleksi
-                    Duta Pemuda Kota Tangerang Kategori Pertukaran Pemuda Antar Negara (PPAN) memperebutkan kuota pertukaran
-                    pemuda ke Singapura, Jepang, dan Korea.</p>
-                <small class="text-muted">12 Mei 2025 - Raditya Yusuf Ramadhan</small>
+        </section>
+    @else
+        {{-- Fallback jika tidak ada berita sama sekali --}}
+        <section class="py-5 text-center text-black bg-light mb-4">
+            <div class="container">
+                <h1 class="display-5 fw-bold mb-3">Informasi Seputar Duta Pemuda Tangsel</h1>
+                <p class="lead mb-0">Belum ada berita terbaru yang dipublikasikan.</p>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- Kumpulan Berita -->
     <section class="container mb-5">
+        <h2 class="mb-4 text-center">Berita Lainnya</h2>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            @php
-                $berita = [
-                    ['img' => 'young.webp', 'judul' => 'Duta Kampus Unej wakili Indonesia "Youth Exchange" Malaysia-Singapura', 'isi' => 'Jember, Jawa Timur (ANTARA) - Duta Kampus Universitas Jember (Unej)...'],
-                    ['img' => 'antar.webp', 'judul' => 'Kepri kirim dua perwakilan pertukaran pemuda antarnegara 2024', 'isi' => 'Tanjungpinang (ANTARA) - Dinas Pemuda dan Olahraga (Dispora)...'],
-                    ['img' => '38prov.webp', 'judul' => 'Utusan 38 provinsi ikuti program Pertukaran Pemuda Nasional di Kaltara', 'isi' => 'Tanjung Selor (ANTARA) - Puluhan pemuda dari 38 provinsi...'],
-                    ['img' => 'gubsul.webp', 'judul' => 'Gubernur Sulbar minta peserta PPAN jaga nama baik Indonesia', 'isi' => 'Mamuju (ANTARA) - Penjabat Gubernur Sulawesi Barat (Sulbar)...'],
-                    ['img' => '348maha.webp', 'judul' => '348 mahasiswa Unja ikuti program Pertukaran Mahasiswa Merdeka 2024', 'isi' => 'Jambi (ANTARA) - Sebanyak 348 mahasiswa Universitas Jambi...'],
-                    ['img' => 'jambi.webp', 'judul' => 'Jambi kirim dua mahasiswa ikut Pertukaran Pemuda Antar-Negara 2023', 'isi' => 'Jambi (ANTARA) - Dinas Pemuda dan Olahraga Provinsi Jambi...'],
-                ];
-            @endphp
 
-            @foreach($berita as $b)
+            @forelse($beritas as $item)
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0">
-                        <img src="{{ asset('img/' . $b['img']) }}" class="card-img-top" alt="">
+                        <a href="{{ route('berita.detail', $item->id) }}">
+                            <img src="{{ asset('img/berita/' . $item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}">
+                        </a>
                         <div class="card-body d-flex flex-column p-4">
-                            <h5 class="card-title mb-2">{{ $b['judul'] }}</h5>
-                            <p class="card-text mb-3">{{ $b['isi'] }}</p>
-                            <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+                            <h5 class="card-title mb-2">
+                                <a href="{{ route('berita.detail', $item->id) }}"
+                                    class="text-decoration-none text-dark stretched-link">{{ $item->judul }}</a>
+                            </h5>
+                            <p class="card-text mb-3">{{ Str::limit(strip_tags($item->isi), 100, '...') }}</p>
+                            {{-- Tombol ini bisa dihapus karena seluruh card sudah bisa diklik --}}
+                            <a href="{{ route('berita.detail', $item->id) }}" class="btn btn-outline-primary mt-auto">Read
+                                More</a>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                {{-- Jika tidak ada berita selain highlight, bagian ini tidak akan menampilkan apa-apa, yang sudah sesuai --}}
+            @endforelse
+
         </div>
     </section>
+
+@endsection

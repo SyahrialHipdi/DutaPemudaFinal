@@ -1,79 +1,83 @@
 @extends('layouts.admin')
 @section('title', 'Tambah Berita Baru')
 
+@push('styles')
+{{-- Tambahkan CSS Select2 --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap4-theme@1.0.0/dist/select2-bootstrap4.min.css">
+@endpush
+
 @section('content')
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Tambah Berita</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('admin.berita.index') }}">Manajemen Berita</a></li>
-                            <li class="breadcrumb-item active">Tambah Berita</li>
-                        </ol>
-                    </div>
-                </div>
-            </div></section>
-
-        <section class="content">
-            <div class="container-fluid">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Formulir Tambah Berita</h3>
-                    </div>
-                    <form method="POST" action="{{ route('admin.berita.store') }}" enctype="multipart/form-data">
-                        <div class="card-body">
-
-                            {{-- ========================================================== --}}
-                            {{-- Kode dari form.blade.php yang disatukan dimulai di sini --}}
-                            {{-- ========================================================== --}}
-
-                            @csrf
-
-                            {{-- Menampilkan error validasi jika ada --}}
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <h5 class="font-weight-bold">Terjadi Kesalahan:</h5>
-                                    <ul class="mb-0">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
-                            <div class="form-group">
-                                <label for="judul">Judul Berita</label>
-                                <input type="text" class="form-control" id="judul" name="judul" value="{{ old('judul') }}" placeholder="Masukkan judul berita" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="isi">Isi Berita</label>
-                                <textarea id="isi" name="isi" class="form-control" rows="8" placeholder="Tulis isi berita di sini..." required>{{ old('isi') }}</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="gambar">Gambar Sampul</label>
-                                <input type="file" class="form-control-file" id="gambar" name="gambar" required>
-                                <small class="form-text text-muted">Format: JPG, JPEG, PNG, WEBP. Maks 2MB.</small>
-                            </div>
-                            
-                            {{-- ========================================================== --}}
-                            {{-- Kode dari form.blade.php berakhir di sini --}}
-                            {{-- ========================================================== --}}
-
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save mr-2"></i>Simpan Berita</button>
-                            <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">Batal</a>
-                        </div>
-                    </form>
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Tambah Berita Baru</h1>
                 </div>
             </div>
-        </section>
         </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Form Tambah Berita</h3>
+                </div>
+                <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="judul">Judul Berita</label>
+                            <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul" name="judul" value="{{ old('judul') }}" required>
+                            @error('judul') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kategori_id">Kategori</label>
+                            <select class="form-control select2-tags @error('kategori_id') is-invalid @enderror" id="kategori_id" name="kategori_id" required>
+                                @foreach($kategoris as $kategori)
+                                    <option value="{{ $kategori->id }}" {{ old('kategori_id') == $kategori->id ? 'selected' : '' }}>{{ $kategori->nama }}</option>
+                                @endforeach
+                            </select>
+                            <small class="form-text text-muted">Pilih kategori yang sudah ada atau ketik nama kategori baru.</small>
+                            @error('kategori_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="isi">Isi Berita</label>
+                            <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi" rows="10" required>{{ old('isi') }}</textarea>
+                            @error('isi') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gambar">Gambar Berita</label>
+                            <input type="file" class="form-control-file @error('gambar') is-invalid @enderror" id="gambar" name="gambar" required>
+                            @error('gambar') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Simpan Berita</button>
+                        <a href="{{ route('admin.berita.index') }}" class="btn btn-secondary">Batal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 @endsection
+
+@push('scripts')
+{{-- Tambahkan JS Select2 --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.select2-tags').select2({
+            theme: 'bootstrap4',
+            tags: true, // Izinkan pembuatan tag baru
+            tokenSeparators: [',']
+        });
+    });
+</script>
+@endpush

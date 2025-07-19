@@ -4,61 +4,46 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Berita;
-use Illuminate\Support\Facades\Auth; // <-- 1. Import Class Auth
+use App\Models\Kategori;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
-    public function index()
+    // ... (method index, create, store, edit, update, destroy yang sudah ada) ...
+
+    /**
+     * Menampilkan semua berita untuk halaman publik.
+     */
+    public function showPublic()
     {
-        // Menggunakan latest() untuk mengurutkan dari yang terbaru & paginate untuk halaman
-        $beritas = Berita::latest()->paginate(10);
-        return view('admin.berita.index', compact('beritas'));
-    }
+        $kategoris = Kategori::all();
+        $highlightBerita = Berita::with('kategori', 'user')->latest()->first();
 
-    public function create()
-    {
-        return view('admin.berita.create');
-    }
-
-    public function store(Request $request)
-    {
-        // 2. Validasi yang lebih baik
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'isi' => 'required|string',
-            // 'image' memastikan file adalah gambar, 'nullable' membuatnya opsional
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
-        ]);
-
-        // Siapkan data yang akan disimpan
-        $data = [
-            'judul' => $request->judul,
-            'isi' => $request->isi,
-            'user_id' => auth()->id(), // <-- 3. Ambil ID user yang login
-        ];
-
-        // 4. Logika untuk memproses gambar JIKA ada yang di-upload
-        if ($request->hasFile('gambar')) {
-            // Buat nama file yang unik
-            $namaGambar = time() . '.' . $request->gambar->extension();
-            // Pindahkan file ke folder public/img/berita
-            $request->gambar->move(public_path('img/berita'), $namaGambar);
-            // Tambahkan nama file gambar ke array data
-            $data['gambar'] = $namaGambar;
+        $beritasQuery = Berita::with('kategori', 'user')->latest();
+        if ($highlightBerita) {
+            $beritasQuery->where('id', '!=', $highlightBerita->id);
         }
+        $beritas = $beritasQuery->paginate(6);
 
-        // Simpan data ke database
-        Berita::create($data);
-
-        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil ditambahkan.');
+        return view('berita', compact('highlightBerita', 'beritas', 'kategoris'));
     }
 
-    public function edit($id)
+    /**
+     * METHOD BARU: Menampilkan halaman detail untuk satu berita.
+     */
+    public function showDetail($id)
     {
-        // Gunakan findOrFail untuk mendapatkan SATU OBJEK berita.
-        // JANGAN GUNAKAN ->get() di sini.
-        $berita = Berita::findOrFail($id);
+        // Ambil data berita yang spesifik berdasarkan ID, beserta relasinya
+        $berita = Berita::with('kategori', 'user')->findOrFail($id);
 
-        return view('admin.berita.edit', compact('berita'));
+        // Ambil 4 berita terbaru lainnya untuk ditampilkan sebagai "Berita Terkait"
+        $beritaTerkait = Berita::where('id', '!=', $id)
+            ->latest()
+            ->take(4)
+            ->get();
+
+        return view('berita_detail', compact('berita', 'beritaTerkait'));
     }
 }

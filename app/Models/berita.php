@@ -15,11 +15,18 @@ class berita extends Model
         'isi',
         'gambar',
         'user_id',
-        ];
+        'kategori_id',
+    ];
     public function user() // Nama metode biasanya tunggal (singular)
     {
         return $this->belongsTo(User::class);
     }
 
-    
+    // app/Models/Berita.php
+
+    // ... (di dalam class Berita)
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }

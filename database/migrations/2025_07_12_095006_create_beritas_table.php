@@ -19,6 +19,7 @@ return new class extends Migration {
 
             $table->foreignId('user_id')
                 ->constrained('users');
+            $table->foreignId('kategori_id')->nullable()->constrained('kategoris')->onDelete('set null')->after('user_id');
         });
     }
 
