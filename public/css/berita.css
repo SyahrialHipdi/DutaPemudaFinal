@@ -222,3 +222,78 @@
     background: #f8f9fa;
     margin-top: 60px;
 }
+
+/*--------------------------------------------------------------
+# Responsive Styles
+--------------------------------------------------------------*/
+
+@media (max-width: 992px) {
+    .hero-modern-title {
+        font-size: 2.8rem;
+    }
+
+    .berita-detail-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-modern-section {
+        height: 70vh;
+    }
+
+    .hero-modern-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-modern-excerpt {
+        font-size: 1.1rem;
+    }
+
+    .modern-section-title {
+        font-size: 2rem;
+    }
+
+    .berita-detail-title {
+        font-size: 2rem;
+    }
+
+    .berita-detail-meta {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-modern-section {
+        height: 60vh;
+    }
+
+    .hero-modern-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-modern-excerpt {
+        font-size: 1rem;
+    }
+
+    .berita-detail-header {
+        padding: 40px 0;
+    }
+
+    .berita-detail-title {
+        font-size: 1.8rem;
+    }
+
+    .berita-detail-meta {
+        font-size: 0.8rem;
+        flex-direction: column;
+    }
+
+    .berita-detail-meta span {
+        margin-bottom: 5px;
+    }
+
+    .berita-detail-meta .mx-3 {
+        display: none;
+    }
+}
