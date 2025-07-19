@@ -59,7 +59,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/ranking', [AdminController::class, 'daftarLomba'])->name('admin.ranking.index');
     Route::get('/ranking/{id}', [AdminController::class, 'rankingLomba'])->name('admin.ranking.lihat');
 
-    Route::resource('/berita', BeritaController::class);
+    Route::resource('/berita', BeritaController::class)->names('admin.berita');
 });
 
 Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {
