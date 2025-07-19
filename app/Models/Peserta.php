@@ -40,22 +40,22 @@ class Peserta extends Model
     //     'syarat_lomba' => 'array',
     //     'komponen_penilaian' => 'array',
     // ];
-    //     public function provinsiWilayah()
-    // {
-    //     return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
-    // }
+    public function provinsiWilayah()
+    {
+        return $this->belongsTo(TrefRegion::class, 'provinsi', 'code');
+    }
 
-    // public function kotaWilayah()
-    // {
-    //     return $this->belongsTo(TrefRegion::class, 'kota', 'code');
-    // }
+    public function kotaWilayah()
+    {
+        return $this->belongsTo(TrefRegion::class, 'kota', 'code');
+    }
 
-    // public function kecamatanWilayah()
-    // {
-    //     return $this->belongsTo(TrefRegion::class, 'kecamatan', 'code');
-    // }
-    // public function desaWilayah()
-    // {
-    //     return $this->belongsTo(TrefRegion::class, 'desa', 'code');
-    // }
+    public function kecamatanWilayah()
+    {
+        return $this->belongsTo(TrefRegion::class, 'kecamatan', 'code');
+    }
+    public function desaWilayah()
+    {
+        return $this->belongsTo(TrefRegion::class, 'desa', 'code');
+    }
 }

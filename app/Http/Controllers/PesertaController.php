@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Peserta;
 use App\Models\Sertifikat;
 use App\Models\LombaPeserta;
+use App\Models\TrefRegion;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -18,7 +19,7 @@ class PesertaController extends Controller
         // $user = User::findOrFail($id);
         // $user = User::with(['provinsiWilayah', 'kabupatenWilayah', 'kecamatanWilayah','desaWilayah'])->get();
         // $user = User::();
-        $peserta = Peserta::with('user')->where('Id_user', Auth::user()->id)->first();
+        $peserta = Peserta::with(['user', 'provinsiWilayah', 'provinsiWilayah', 'kotaWilayah', 'kecamatanWilayah', 'desaWilayah'])->where('Id_user', Auth::user()->id)->first();
         return view('peserta.index', compact('peserta'));
     }
 

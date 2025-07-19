@@ -45,19 +45,19 @@
                                 </li>
                                 <li class="list-group-item">
                                     <b>Provinsi</b>
-                                    <a class="float-right">{{ $peserta->provinsi }}</a>
+                                    <a class="float-right">{{ $peserta->provinsiWilayah->name }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Kota</b>
-                                    <a class="float-right">{{ $peserta->kota }}</a>
+                                    <a class="float-right">{{ $peserta->kotaWilayah->name }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Kecamatan</b>
-                                    <a class="float-right">{{ $peserta->kecamatan }}</a>
+                                    <a class="float-right">{{ $peserta->kecamatanWilayah->name }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>Desa</b>
-                                    <a class="float-right">{{ $peserta->desa }}</a>
+                                    <a class="float-right">{{ $peserta->desaWilayah->name }}</a>
                                 </li>
                                 <li class="list-group-item">
                                     <b>RT/RW</b>
