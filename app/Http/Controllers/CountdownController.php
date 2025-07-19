@@ -42,12 +42,12 @@ class CountdownController extends Controller
         $request->validate([
             'title' => 'required|string',
             'target_datetime' => 'required|date',
-            'status' => 'required|boolean',
+            'status' => 'required',
         ]);
 
         $countdown = Countdown::findOrFail($id);
         $countdown->update($request->only('title', 'target_datetime', 'status'));
 
-        return redirect('/countdown')->with('success', 'Countdown berhasil diperbarui.');
+        return redirect('admin/countdown/index')->with('success', 'Countdown berhasil diperbarui.');
     }
 }
