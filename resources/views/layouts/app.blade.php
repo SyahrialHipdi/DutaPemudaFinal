@@ -51,67 +51,92 @@
 
     @stack('styles')
 
-    {{-- Letakkan ini di bagian paling bawah file Blade Anda --}}
-    @push('styles')
-        <style>
-            /* Memberi gaya pada panel dropdown utama */
-            .profile-dropdown-menu {
-                padding: 0;
-                border: 1px solid #eee;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-                border-radius: 8px !important;
-                margin-top: 10px !important;
-            }
+    {{-- CSS Kustom untuk Dropdown Profil dan Tombol Responsif --}}
+    <style>
+        /* Gaya untuk panel dropdown */
+        .profile-dropdown-menu {
+            padding: 0;
+            border: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 8px !important;
+            margin-top: 10px !important;
+        }
 
-            /* Memberi gaya pada header dropdown */
-            .dropdown-header-custom {
-                padding: 1rem;
-                border-bottom: 1px solid #eee;
-            }
+        .profile-dropdown-menu .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            font-size: 14px;
+            color: #555;
+            transition: all 0.2s ease-in-out;
+        }
 
-            .dropdown-header-custom h6 {
-                margin-bottom: 0.25rem;
-                font-weight: 600;
-                color: #333;
-            }
+        .profile-dropdown-menu .dropdown-item:hover {
+            background-color: #1a76d1;
+            color: #ffffff;
+        }
 
-            .dropdown-header-custom p {
-                margin-bottom: 0;
-                font-size: 13px;
-            }
+        .profile-dropdown-menu .dropdown-item .fa {
+            width: 20px;
+        }
 
-            /* Memberi gaya pada setiap item di dropdown */
-            .profile-dropdown-menu .dropdown-item {
-                padding: 0.75rem 1.5rem;
-                font-size: 14px;
-                color: #555;
-                transition: all 0.2s ease-in-out;
-            }
+        /* Gaya untuk avatar di dalam tombol */
+        .navbar-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
 
-            /* Efek hover yang halus */
-            .profile-dropdown-menu .dropdown-item:hover {
-                background-color: #1a76d1;
-                /* Warna biru dari tema Anda */
-                color: #ffffff;
-            }
+        /* Gaya baru untuk tombol Login dan Profil di Desktop */
+        .get-quote .btn-login,
+        .get-quote .btn-profile {
+            background: #1A76D1;
+            color: #fff !important;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 42px;
+        }
 
-            /* Merapikan ikon di dalam item dropdown */
-            .profile-dropdown-menu .dropdown-item .fa {
-                width: 20px;
-                /* Memberi ruang agar teks sejajar */
-            }
+        .get-quote .btn-login {
+            padding: 0 25px;
+        }
 
-            .navbar-avatar {
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                object-fit: cover;
-                /* Mencegah gambar menjadi gepeng */
-                margin-right: 8px;
-                border: 2px solid #f0f0f0;
-            }
-        </style>
-    @endpush
+        .get-quote .btn-profile {
+            padding: 0 20px 0 10px;
+        }
+
+        .get-quote .btn-login:hover,
+        .get-quote .btn-profile:hover {
+            background: #1565b8;
+            color: #fff;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* login mobile */
+        .slicknav_nav .mobile-login-btn {
+            background: #1A76D1 !important;
+            color: #fff !important;
+            margin: 10px 15px !important;
+            padding: 10px !important;
+            border-radius: 5px !important;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .slicknav_nav .mobile-login-btn:hover {
+            background: #1565b8 !important;
+            color: #fff !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,87 +159,87 @@
                             <div class="mobile-nav"></div>
                             <!-- End Mobile Nav -->
                         </div>
-                        <div class="d-flex col-lg-7 col-md-9 col-12 justify-content-center">
+                        <div class="col-lg-7 col-md-6 col-12">
                             <!-- Main Menu -->
                             <div class="main-menu">
                                 <nav class="navigation">
-                                    <ul class="nav menu">
-                                        <li class="{{ request()->is('/') ? 'active' : '' }}">
-                                            <a href="{{ route('home') }}">Beranda</a>
-                                        </li>
-                                        <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            <a href="{{ route('lomba.index') }}">Kategori</a>
-                                        </li>
-                                        <li class="{{ request()->is('doctors*') ? 'active' : '' }}">
-                                            <a href="/faq">FAQ</a>
-                                        </li>
-                                        <li class="{{ request()->is('pages*') ? 'active' : '' }}">
-                                            <a href="/berita">Berita</a>
+                                    <ul class="nav menu d-flex justify-content-center">
+                                        <li class="{{ request()->is('/') ? 'active' : '' }}"><a
+                                                href="{{ route('home') }}">Beranda</a></li>
+                                        <li class="{{ request()->is('lomba*') ? 'active' : '' }}"><a
+                                                href="{{ route('lomba.index') }}">Kategori</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">Berita</a></li>
+
+                                        {{-- tampilan login mobile --}}
+                                        <li class="d-lg-none">
+                                            @auth
+                                                <a href="#" style="text-primary font-weight-bold">Akun Saya</a>
+                                                <ul class="dropdown">
+                                                    @php
+                                                        $dashboardRoute = match (Auth::user()->role) {
+                                                            'admin' => route('admin.dashboard'),
+                                                            'juri' => route('juri.index'),
+                                                            'verifikator' => route('verifikator.dashboard'),
+                                                            default => route('peserta.index'),
+                                                        };
+                                                    @endphp
+                                                    <li><a href="{{ $dashboardRoute }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('auth.logout') }}"
+                                                            onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();">Logout</a>
+                                                    </li>
+                                                    <form id="logout-form-mobile" action="{{ route('auth.logout') }}"
+                                                        method="POST" style="display: none;">@csrf</form>
+                                                </ul>
+                                            @else
+                                                <a href="{{ route('auth.login') }}" class="mobile-login-btn">Login</a>
+                                            @endauth
                                         </li>
                                     </ul>
                                 </nav>
                             </div>
                             <!--/ End Main Menu -->
                         </div>
-                        <div class="col-lg-2 col-12 mt-2">
-                            <div class="get-quote float-right">
+                        <div class="col-lg-2 col-md-3 col-12">
+                            {{-- tampilam login desktop --}}
+                            <div class="get-quote d-none d-lg-block">
                                 @auth
                                     <div class="nav-item dropdown">
-
-                                        {{-- TOMBOL TRIGGER DROPDOWN --}}
-                                        <a id="navbarDropdown"
-                                            class="nav-link btn dropdown-toggle d-flex align-items-center" href="#"
-                                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                            v-pre style="padding: 5px 15px; color: white;">
-
-                                            {{-- Menampilkan Avatar Pengguna, atau Ikon Default --}}
-                                            {{-- Ganti 'avatar' dengan nama kolom foto profil di tabel users Anda jika
-                                            berbeda --}}
+                                        <a id="navbarDropdown" class="btn-profile dropdown-toggle" href="#"
+                                            role="button" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
                                             @if (Auth::user()->avatar)
                                                 <img src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="Avatar"
                                                     class="navbar-avatar">
                                             @else
-                                                Profile
+                                                <i class="fa fa-user-circle"
+                                                    style="font-size: 1.4rem; margin-right: 8px;"></i>
                                             @endif
-
-
+                                            <span>{{ Auth::user()->name ?? 'Profil' }}</span>
                                         </a>
-
-                                        {{-- PANEL DROPDOWN YANG AKAN MUNCUL --}}
                                         <div class="dropdown-menu dropdown-menu-right profile-dropdown-menu"
                                             aria-labelledby="navbarDropdown">
-
-                                            <div class="dropdown-divider"></div>
-
                                             @php
                                                 $dashboardRoute = match (Auth::user()->role) {
                                                     'admin' => route('admin.dashboard'),
                                                     'juri' => route('juri.index'),
-                                                    'peserta' => route('peserta.index'),
-                                                    default => route('home'),
+                                                    'verifikator' => route('verifikator.dashboard'),
+                                                    default => route('peserta.index'),
                                                 };
                                             @endphp
-
-                                            <a class="dropdown-item" href="{{ $dashboardRoute }}">
-                                                <i class="fa fa-th-large mr-2"></i> Dashboard
-                                            </a>
-
+                                            <a class="dropdown-item" href="{{ $dashboardRoute }}"><i
+                                                    class="fa fa-th-large mr-2"></i> Dashboard</a>
                                             <div class="dropdown-divider"></div>
-
                                             <a class="dropdown-item" href="{{ route('auth.logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                 <i class="fa fa-sign-out mr-2"></i> Logout
                                             </a>
-
                                             <form id="logout-form" action="{{ route('auth.logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                            </form>
+                                                class="d-none">@csrf</form>
                                         </div>
                                     </div>
                                 @else
-                                    {{-- Jika belum login, tampilkan tombol Login --}}
-                                    <a href="{{ route('auth.login') }}" class="btn">Login</a>
+                                    <a href="{{ route('auth.login') }}" class="btn-login">Login</a>
                                 @endauth
                             </div>
                         </div>
@@ -243,49 +268,33 @@
                                 untuk memfasilitasi program Duta Pemuda secara lebih mudah, efisien, dan terintegrasi.
                             </p>
                             <ul class="social">
-                                <li>
-                                    <a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
-                                            alt=""></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="{{ asset('img/logo-digiyok.png') }}"
-                                            alt=""></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="{{ asset('img/logo-dispora.png') }}"
-                                            alt=""></i></a>
-                                </li>
+                                <li><a href="#"><img src="{{ asset('img/logo-unsoed.png') }}"
+                                            alt="Logo Unsoed"></a></li>
+                                <li><a href="#"><img src="{{ asset('img/logo-digiyok.png') }}"
+                                            alt="Logo Digiyok"></a></li>
+                                <li><a href="#"><img src="{{ asset('img/logo-dispora.png') }}"
+                                            alt="Logo Dispora"></a></li>
                             </ul>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-footer f-link">
                             <h2>Quick Links</h2>
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
-                                        <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Home</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Kategori</a>
-                                        </li>
+                                        <li><a href="{{ route('home') }}"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Home</a></li>
+                                        <li><a href="{{ route('lomba.index') }}"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Kategori</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <ul>
-                                        <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Alur
-                                                seleksi</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><i class="fa fa-caret-right"
-                                                    aria-hidden="true"></i>Berita</a>
-                                        </li>
+                                        <li><a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Alur Seleksi</a></li>
+                                        <li><a href="#"><i class="fa fa-caret-right"
+                                                    aria-hidden="true"></i>Berita</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -293,25 +302,16 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-footer">
-                            <h2>Contact</h2>
+                            <h2>Kontak</h2>
                             <p>Dinas Pemuda dan Olahraga Kota Tangerang Selatan<br>
                                 Jl. Raya Maruga No.1, Serua, Ciputat, Kota Tangerang Selatan<br>
                                 Telepon: (021) 7471-1234<br>
-                                Email: dispora@tangerangselatankota.go.id<br>
-                                Jam Layanan: Senin–Jumat, 07.30–16.00 WIB</p>
-                            <!-- Social -->
+                                Email: dispora@tangerangselatankota.go.id</p>
                             <ul class="social">
-                                <li>
-                                    <a href="#"><i class="icofont-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icofont-whatsapp"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icofont-google-plus"></i></a>
-                                </li>
+                                <li><a href="#"><i class="icofont-instagram"></i></a></li>
+                                <li><a href="#"><i class="icofont-whatsapp"></i></a></li>
+                                <li><a href="#"><i class="icofont-google-plus"></i></a></li>
                             </ul>
-                            <!-- End Social -->
                         </div>
                     </div>
                 </div>
@@ -326,7 +326,7 @@
                         <div class="copyright-content">
                             <p>
                                 © Copyright 2025 | All Rights Reserved by
-                                <a href="https://www.wpthemesgrid.com" target="_blank">Digiyok</a>
+                                <a href="https://www.wpthemesgrid.com" target="_blank">cihuy</a>
                             </p>
                         </div>
                     </div>
@@ -338,7 +338,6 @@
     <!--/ End Footer Area -->
 
     <!-- jQuery Min JS -->
-
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-migrate-3.0.0.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
@@ -358,11 +357,9 @@
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    {{-- Problem disini --}}
     <script src="{{ asset('js/main.js') }}"></script>
 
-    {{--
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $('#btn-lanjut').click(function () {
                 if (!$('#agreeTerms').is(':checked')) {

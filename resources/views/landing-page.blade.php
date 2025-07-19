@@ -29,6 +29,24 @@
             letter-spacing: .05rem;
             text-transform: uppercase;
         }
+
+        /* Responsive adjustments for the countdown */
+        @media (max-width: 767px) {
+            .countdown-unit .value {
+                font-size: 2rem;
+                /* Smaller font for mobile */
+            }
+
+            .countdown-unit .label {
+                font-size: 0.8rem;
+                /* Smaller label for mobile */
+            }
+
+            .countdown-card {
+                padding: 1.5rem !important;
+                /* Reduce padding on mobile */
+            }
+        }
     </style>
 
     <!-- Preloader -->

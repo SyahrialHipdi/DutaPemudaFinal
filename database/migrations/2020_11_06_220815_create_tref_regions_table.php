@@ -15,8 +15,8 @@ class CreateTrefRegionsTable extends Migration
     {
         Schema::create('tref_regions', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('code',13);
-			$table->string('name',100);
+            $table->string('code', 13);
+            $table->string('name', 100);
         });
     }
 
