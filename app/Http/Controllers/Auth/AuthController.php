@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Str;
 use App\Models\Admin;
+use App\Models\Countdown;
 
 class AuthController extends Controller
 {
@@ -47,7 +48,10 @@ class AuthController extends Controller
 
     public function index()
     {
-        return view('landing-page');
+        $activeCountdowns = Countdown::where('status', 'aktif')->get();
+        // Ambil countdown aktif pertama
+        // dd($activeCountdown);
+        return view('landing-page', compact('activeCountdowns'));
     }
 
     public function logout(Request $request)

@@ -147,6 +147,13 @@
                                 <p>Kelola Berita</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.countdown.index') }}"
+                                class="nav-link {{ request()->routeIs('admin.countdown.*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-address-book"></i>
+                                <p>Countdown</p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

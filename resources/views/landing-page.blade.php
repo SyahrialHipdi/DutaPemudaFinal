@@ -166,61 +166,79 @@
                         <img src="img/section-img.png" alt="#" class="img-fluid" />
                     </div>
                     {{-- countdown 1 --}}
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10 col-md-12">
-                            <h5>Pemuda Pelopor</h5>
-                            <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
-                                style="background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff">
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="days" class="value">0</span>
-                                    <span class="label">Hari</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="hours" class="value">00</span>
-                                    <span class="label">Jam</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="minutes" class="value">00</span>
-                                    <span class="label">Menit</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3">
-                                    <span id="seconds" class="value">00</span>
-                                    <span class="label">Detik</span>
+                    @if ($activeCountdowns->count() > 0)
+                        @foreach ($activeCountdowns as $countdown)
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 col-md-12">
+                                    <h5>{{ $countdown->title }}</h5>
+                                    <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
+                                        style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff"
+                                        id="countdown-{{ $countdown->id }}">
+                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                            <span id="days-{{ $countdown->id }}" class="value">0</span>
+                                            <span class="label">Hari</span>
+                                        </div>
+                                        <div class="display-4 mx-2">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                            <span id="hours-{{ $countdown->id }}" class="value">00</span>
+                                            <span class="label">Jam</span>
+                                        </div>
+                                        <div class="display-4 mx-2">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                            <span id="minutes-{{ $countdown->id }}" class="value">00</span>
+                                            <span class="label">Menit</span>
+                                        </div>
+                                        <div class="display-4 mx-2">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-3">
+                                            <span id="seconds-{{ $countdown->id }}" class="value">00</span>
+                                            <span class="label">Detik</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+
+                            {{-- <div class="mb-4 p-3 border rounded">
+                                <h4>{{ $countdown->title }}</h4>
+                                <div id="countdown-{{ $countdown->id }}">
+                                    <span id="days-{{ $countdown->id }}">0</span> Hari :
+                                    <span id="hours-{{ $countdown->id }}">00</span> Jam :
+                                    <span id="minutes-{{ $countdown->id }}">00</span> Menit :
+                                    <span id="seconds-{{ $countdown->id }}">00</span> Detik
+                                </div>
+                            </div> --}}
+
+                            <script>
+                                const target{{ $countdown->id }} = new Date("{{ $countdown->target_datetime }}");
+
+                                function updateCountdown{{ $countdown->id }}() {
+                                    const now = new Date();
+                                    const diff = target{{ $countdown->id }} - now;
+
+                                    if (diff <= 0) {
+                                        document.getElementById('countdown-{{ $countdown->id }}').innerHTML = "Countdown Selesai!";
+                                        return;
+                                    }
+
+                                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                                    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                                    const seconds = Math.floor((diff / 1000) % 60);
+
+                                    document.getElementById('days-{{ $countdown->id }}').textContent = days;
+                                    document.getElementById('hours-{{ $countdown->id }}').textContent = String(hours).padStart(2, '0');
+                                    document.getElementById('minutes-{{ $countdown->id }}').textContent = String(minutes).padStart(2, '0');
+                                    document.getElementById('seconds-{{ $countdown->id }}').textContent = String(seconds).padStart(2, '0');
+                                }
+
+                                updateCountdown{{ $countdown->id }}();
+                                setInterval(updateCountdown{{ $countdown->id }}, 1000);
+                            </script>
+                        @endforeach
+                    @else
+                        {{-- <p>Tidak ada countdown aktif saat ini.</p> --}}
+                    @endif
+
                     {{-- countdown 2 --}}
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10 col-md-12">
-                            <h5>PPAP dan PPAN</h5>
-                            <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
-                                style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff" id="kotak">
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="days2" class="value">0</span>
-                                    <span class="label">Hari</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="hours2" class="value">00</span>
-                                    <span class="label">Jam</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
-                                    <span id="minutes2" class="value">00</span>
-                                    <span class="label">Menit</span>
-                                </div>
-                                <div class="display-4 mx-2">:</div>
-                                <div class="d-flex flex-column countdown-unit text-center px-3">
-                                    <span id="seconds2" class="value">00</span>
-                                    <span class="label">Detik</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -360,29 +378,30 @@
     </section>
     <!-- End Blog Area -->
 
-    <script>
-        //Target Countdown
-        const targetDate = new Date(new Date().getFullYear(), 6, 10, 0, 0, 0);
+    {{-- <script>
+        const targetDate = new Date("{{ $activeCountdown->target_datetime }}");
 
         function updateCountdown() {
             const now = new Date();
             const diff = targetDate - now;
 
             if (diff <= 0) {
-                document.getElementById('kotak').innerHTML = "Hallo";
+                document.getElementById('countdown-container').innerHTML = "<h3>Countdown Selesai!</h3>";
+                return;
             }
-            const day = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / (1000)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-            document.getElementById('days').innerText = day;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
 
         updateCountdown();
-        setInterval(updateCountdown, 60);
-    </script>
+        setInterval(updateCountdown, 1000);
+    </script> --}}
 @endsection

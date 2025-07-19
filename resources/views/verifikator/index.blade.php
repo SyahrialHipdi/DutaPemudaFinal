@@ -26,8 +26,8 @@
                         <h3 class="card-title">Data Pendaftar Lomba</h3>
                     </div>
                     @if (session('success'))
-                                    <div class="alert alert-success">{{ session('success') }}</div>
-                                @endif
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
                     <div class="card-body">
                         <table id="pesertaTable" class="table table-bordered table-striped table-hover">
                             <thead>
@@ -48,7 +48,7 @@
                                         </td>
                                         <td>{{ $p->lomba->nama_lomba }}</td>
                                         <td class="text-center">
-                                            @if ($p->status == 'proses')
+                                            @if ($p->status !== 'pending')
                                                 <span class="badge badge-success">Terverifikasi</span>
                                             @elseif($p->status == 'ditolak')
                                                 <span class="badge badge-danger">Ditolak</span>
@@ -104,7 +104,7 @@
         </section>
     </div>
 
-    
+
 
 @endsection
 
@@ -120,7 +120,4 @@
             }).buttons().container().appendTo('#pesertaTable_wrapper .col-md-6:eq(0)');
         });
     </script>
-
-    
 @endpush
-

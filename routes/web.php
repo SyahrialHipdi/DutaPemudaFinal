@@ -11,12 +11,13 @@ use App\Http\Controllers\LombaPesertaController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController; // Tambahkan di atas
+use App\Http\Controllers\CountdownController; // Tambahkan di atas
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
 
-Route::get('/', [AuthController::class, 'index'])->name('home');
+// Route::get('/', [AuthController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('auth.login');
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -28,6 +29,7 @@ Route::get('/faq', function () {
     return view('faq');
 });
 
+Route::get('/', [AuthController::class, 'index'])->name('home');
 Route::get('/berita', [BeritaController::class, 'showPublic'])->name('berita.public.index');
 Route::get('/berita/{id}', [BeritaController::class, 'showDetail'])->name('berita.detail');
 
@@ -62,9 +64,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('/berita', BeritaController::class)->names('admin.berita');
     Route::resource('/kategori', KategoriController::class)->names('admin.kategori');
 
-
-
-
+    Route::resource('/countdown', CountdownController::class)->names('admin.countdown');
 });
 
 Route::middleware(['auth', 'role:juri'])->prefix('juri')->group(function () {

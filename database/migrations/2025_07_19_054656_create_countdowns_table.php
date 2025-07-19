@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lombas', function (Blueprint $table) {
+        Schema::create('countdowns', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_lomba');
-            $table->integer('tahun');
-            $table->text('deskripsi');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_berakhir');
-
-            //$table->json('syarat_lomba');
-            $table->json('komponen_penilaian');
+            $table->string('title'); // Judul Countdown
+            $table->dateTime('target_datetime'); // Target waktu
+            $table->string('status'); // Target waktu
             $table->timestamps();
         });
     }
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lombas');
+        Schema::dropIfExists('countdowns');
     }
 };
