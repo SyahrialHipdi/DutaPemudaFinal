@@ -189,25 +189,25 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-10 col-md-12">
                                     <h5>{{ $countdown->title }}</h5>
-                                    <div class="card p-5 p-md-5 d-flex flex-column flex-md-row justify-content-center align-items-center text-center text-md-left shadow"
+                                    <div class="card p-4 p-md-5 d-flex flex-row flex-wrap justify-content-center align-items-center text-center shadow"
                                         style=" background: linear-gradient(135deg, #1a76d1, #3a8dff); color: #fff"
                                         id="countdown-{{ $countdown->id }}">
-                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                        <div class="d-flex flex-column countdown-unit text-center px-2 mx-1">
                                             <span id="days-{{ $countdown->id }}" class="value">0</span>
                                             <span class="label">Hari</span>
                                         </div>
-                                        <div class="display-4 mx-2">:</div>
-                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                        <div class="display-4 mx-2 d-none d-sm-block">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-2 mx-1">
                                             <span id="hours-{{ $countdown->id }}" class="value">00</span>
                                             <span class="label">Jam</span>
                                         </div>
-                                        <div class="display-4 mx-2">:</div>
-                                        <div class="d-flex flex-column countdown-unit text-center px-3 mb-4 mb-md-0">
+                                        <div class="display-4 mx-2 d-none d-sm-block">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-2 mx-1">
                                             <span id="minutes-{{ $countdown->id }}" class="value">00</span>
                                             <span class="label">Menit</span>
                                         </div>
-                                        <div class="display-4 mx-2">:</div>
-                                        <div class="d-flex flex-column countdown-unit text-center px-3">
+                                        <div class="display-4 mx-2 d-none d-sm-block">:</div>
+                                        <div class="d-flex flex-column countdown-unit text-center px-2 mx-1">
                                             <span id="seconds-{{ $countdown->id }}" class="value">00</span>
                                             <span class="label">Detik</span>
                                         </div>
