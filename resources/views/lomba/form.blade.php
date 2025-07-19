@@ -85,8 +85,6 @@
 
                                     {{-- Field Email & Password (selalu di atas dan berdampingan) --}}
                                     @guest
-
-
                                         <div class="row">
                                             <div class="col-md-6 mb-6">
                                                 <label class="form-label fw-bold">NIK</label>
@@ -168,42 +166,70 @@
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
                                             </div>
                                             <div class="col-md-6 mb-4">
+                                                <label class="form-label fw-bold">Tanggal Lahir<span
+                                                        class="text-danger">*</span></label>
+                                                <div class="d-flex flex-sm-row gap-2">
+                                                    <div class="flex-fill mr-3">
+                                                        <select class="form-control w-100" id="tgl_lahir_dd"
+                                                            name="tgl_lahir_dd" required>
+                                                            <option value="">Pilih Tanggal</option>
+                                                            @for ($i = 1; $i <= 31; $i++)
+                                                                <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}">
+                                                                    {{ $i }}</option>
+                                                            @endfor
+                                                        </select>
+                                                        <div class="invalid-feedback"></div>
+                                                    </div>
+
+                                                    @php
+                                                        $bulanIndonesia = [
+                                                            '01' => 'Januari',
+                                                            '02' => 'Februari',
+                                                            '03' => 'Maret',
+                                                            '04' => 'April',
+                                                            '05' => 'Mei',
+                                                            '06' => 'Juni',
+                                                            '07' => 'Juli',
+                                                            '08' => 'Agustus',
+                                                            '09' => 'September',
+                                                            '10' => 'Oktober',
+                                                            '11' => 'November',
+                                                            '12' => 'Desember',
+                                                        ];
+                                                    @endphp
+
+                                                    <div class="flex-fill mr-3">
+                                                        <select class="form-control w-100" id="tgl_lahir_mm"
+                                                            name="tgl_lahir_mm" required>
+                                                            <option value="">Pilih Bulan</option>
+                                                            @foreach ($bulanIndonesia as $angka => $nama)
+                                                                <option value="{{ $angka }}">{{ $nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="flex-fill mr-3">
+                                                        <select class="form-control w-100" id="tgl_lahir_dd"
+                                                            name="tgl_lahir_yyyy" required>
+                                                            <option value="">Pilih Tahun</option>
+                                                            @for ($i = 1990; $i <= date('Y'); $i++)
+                                                                <option value="{{ $i }}">{{ $i }}
+                                                                </option>
+                                                            @endfor
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Tanggal Lahir</label>
                                                 <input class="form-control" type="date" name="lahir" required>
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
-                                            </div>
+                                            </div> --}}
                                         </div>
-                                        @if ($lomba->role == 'pemuda pelopor')
-                                            <div class="row">
-                                                <div class="col-12 mb-4">
-                                                    <label class="form-label fw-bold">Bidang Kepeloporan<span
-                                                            class="text-danger">*</span></label>
-                                                    <select id="bidang" name="bidang_pilihan_id"
-                                                        class="form-control nice-select wide">
-                                                        <option value="">-- Pilih Bidang --
-                                                        </option>
-                                                        <option value="">pendidikan
-                                                        </option>
-                                                        <option value="">Pengelolaan sumber daya alam
-                                                        </option>
-                                                        <option value="">lingkungan dan pariwisata
-                                                        </option>
-                                                        <option value="">pangan
-                                                        </option>
-                                                        <option value="">inovasi teknolgi
-                                                        </option>
-                                                        <option value="">sosial
-                                                        </option>
-                                                        <option value="">agama
-                                                        </option>
-                                                        <option value="">budaya
-                                                        </option>
-                                                    </select>
-                                                    <div class="invalid-feedback">BIdang wajib diisi.</div>
 
-                                                </div>
-                                            </div>
-                                        @endif
+
 
 
                                         <div class="row">
@@ -214,19 +240,64 @@
                                                     value="{{ old('email') }}" required>
                                                 <div class="invalid-feedback">Format email tidak valid.</div>
                                             </div>
-                                            <div class="col-md-6 mb-4">
+                                            {{-- <div class="col-md-6 mb-4">
                                                 <label class="form-label fw-bold">Password <span
                                                         class="text-danger">*</span></label>
                                                 <input class="form-control" type="password" name="password" required>
                                                 <div class="invalid-feedback">Password wajib diisi.</div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     @endguest
 
                                     {{-- Bagian persetujuan dan tombol submit --}}
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <label class="form-label fw-bold">Proposal <span
+                                                    class="text-danger">*</span></label>
+                                            <input class="form-control" type="text" name="proposal"
+                                                value="{{ old('proposal') }}" required>
+                                            <div class="invalid-feedback">Proposal tidak valid.</div>
+                                        </div>
+                                    </div>
+                                    @if ($lomba->role == 'pemuda pelopor')
+                                        <div class="row">
+                                            <div class="col-12 mb-4">
+                                                <label class="form-label fw-bold">Bidang Kepeloporan<span
+                                                        class="text-danger">*</span></label>
+                                                <select id="bidang" name="bidang_pilihan_id"
+                                                    class="form-control nice-select wide">
+                                                    <option value="">-- Pilih Bidang --
+                                                    </option>
+                                                    <option value="pendidikan">pendidikan
+                                                    </option>
+                                                    <option value="Pengelolaan sumber daya alam">Pengelolaan sumber
+                                                        daya
+                                                        alam
+                                                    </option>
+                                                    <option value="lingkungan dan pariwisata">lingkungan dan pariwisata
+                                                    </option>
+                                                    <option value="pangan">pangan
+                                                    </option>
+                                                    <option value="inovasi teknolgi">inovasi teknolgi
+                                                    </option>
+                                                    <option value="sosial">sosial
+                                                    </option>
+                                                    <option value="agama">agama
+                                                    </option>
+                                                    <option value="budaya">budaya
+                                                    </option>
+                                                </select>
+                                                <div class="invalid-feedback">Bidang wajib diisi.</div>
+
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <div class="form-check mb-4 text-center">
                                         <input class="form-check-input" type="checkbox" id="invalidCheck" required>
-                                        <label class="form-check-label" for="invalidCheck">Saya menyatakan semua data yang
+                                        <label class="form-check-label" for="invalidCheck">Saya menyatakan semua data
+                                            yang
                                             diisi
                                             adalah
                                             benar.</label>
