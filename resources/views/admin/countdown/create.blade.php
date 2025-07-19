@@ -43,10 +43,10 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label>Role</label>
-                                        <select name="role" id="role" class="form-control" required
+                                        <label>Status</label>
+                                        <select name="status" id="status" class="form-control" required
                                             onchange="toggleLombaSelect()">
-                                            <option value="">-- Pilih Role --</option>
+                                            <option value="">-- Pilih Status --</option>
                                             <option value="aktif">Aktif</option>
                                             <option value="mati">Mati</option>
                                         </select>
